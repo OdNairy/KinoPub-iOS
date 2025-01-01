@@ -16,7 +16,7 @@ PODS:
   - DGCollectionViewPaginableBehavior (1.0.4)
   - EasyAbout (1.1.3)
   - Eureka (4.0.1)
-  - EZPlayer (1.0.0)
+  - EZPlayer (1.2.0)
   - Fabric (1.7.3)
   - Firebase/Core (4.8.2):
     - FirebaseAnalytics (= 4.0.9)
@@ -33,10 +33,10 @@ PODS:
   - FirebaseAnalytics (4.0.9):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
   - FirebaseCore (4.0.14):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
   - FirebaseInstanceID (2.0.8):
     - FirebaseCore (~> 4.0)
   - FirebaseMessaging (2.0.8):
@@ -50,12 +50,12 @@ PODS:
     - FirebaseAnalytics (~> 4.0)
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - Protobuf (~> 3.1)
   - GoogleToolboxForMac/Defines (2.1.3)
   - GoogleToolboxForMac/Logger (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
-  - GoogleToolboxForMac/NSData+zlib (2.1.3):
+  - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - GradientLoadingBar (1.1.9)
   - InteractiveSideMenu (2.2.1)
@@ -72,7 +72,7 @@ PODS:
   - NotificationBannerSwift (1.6.1):
     - MarqueeLabel/Swift
     - SnapKit (~> 4.0)
-  - NTDownload (1.0.0)
+  - NTDownload (1.1.0)
   - ObjectMapper (3.1.0)
   - Protobuf (3.5.0)
   - R.swift (4.0.0):
@@ -95,7 +95,7 @@ PODS:
   - SwifterSwift/SwiftStdlib (4.1.1)
   - SwifterSwift/UIKit (4.1.1)
   - SwiftyUserDefaults (3.0.1)
-  - TMDBSwift (0.4.3)
+  - TMDBSwift (0.7.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -110,7 +110,7 @@ DEPENDENCIES:
   - DGCollectionViewPaginableBehavior
   - EasyAbout
   - Eureka
-  - EZPlayer (from `https://github.com/hintoz/EZPlayer.git`)
+  - EZPlayer (from `Dependencies/EZPlayer`)
   - Fabric
   - Firebase/Core
   - Firebase/Messaging
@@ -122,7 +122,7 @@ DEPENDENCIES:
   - LKAlertController
   - NDYoutubePlayer (from `https://github.com/hintoz/NDYoutubePlayer.git`)
   - NotificationBannerSwift
-  - NTDownload (from `https://github.com/hintoz/NTDownload.git`)
+  - NTDownload (from `Dependencies/NTDownload`)
   - R.swift
   - RevealingSplashView
   - SubtleVolume
@@ -130,15 +130,55 @@ DEPENDENCIES:
   - SwiftyUserDefaults
   - TMDBSwift (from `https://github.com/gkye/TheMovieDatabaseSwiftWrapper.git`)
 
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AlamofireImage
+    - AlamofireNetworkActivityLogger
+    - AlamofireObjectMapper
+    - Atributika
+    - CircleProgressView
+    - Crashlytics
+    - CustomLoader
+    - DGCollectionViewPaginableBehavior
+    - EasyAbout
+    - Eureka
+    - Fabric
+    - Firebase
+    - FirebaseABTesting
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
+    - FirebaseMessaging
+    - FirebaseRemoteConfig
+    - GoogleToolboxForMac
+    - GradientLoadingBar
+    - InteractiveSideMenu
+    - KeychainSwift
+    - Letters
+    - LKAlertController
+    - MarqueeLabel
+    - nanopb
+    - NotificationBannerSwift
+    - ObjectMapper
+    - Protobuf
+    - R.swift
+    - R.swift.Library
+    - RevealingSplashView
+    - SnapKit
+    - SubtleVolume
+    - SwifterSwift
+    - SwiftyUserDefaults
+
 EXTERNAL SOURCES:
   AZSearchView:
     :git: https://github.com/hintoz/AZSearchView.git
   EZPlayer:
-    :git: https://github.com/hintoz/EZPlayer.git
+    :path: Dependencies/EZPlayer
   NDYoutubePlayer:
     :git: https://github.com/hintoz/NDYoutubePlayer.git
   NTDownload:
-    :git: https://github.com/hintoz/NTDownload.git
+    :path: Dependencies/NTDownload
   TMDBSwift:
     :git: https://github.com/gkye/TheMovieDatabaseSwiftWrapper.git
 
@@ -146,17 +186,11 @@ CHECKOUT OPTIONS:
   AZSearchView:
     :commit: c4fe61049d3f234f0ca701834c110020812545f3
     :git: https://github.com/hintoz/AZSearchView.git
-  EZPlayer:
-    :commit: e5885c7553f81bddf9015b1ce8538688d07fea08
-    :git: https://github.com/hintoz/EZPlayer.git
   NDYoutubePlayer:
     :commit: 300084cdc96638d26010748b70ae52cc2e5fe80a
     :git: https://github.com/hintoz/NDYoutubePlayer.git
-  NTDownload:
-    :commit: 7beef1c454b27f4b7d586cc7d8a072f00b7e8b51
-    :git: https://github.com/hintoz/NTDownload.git
   TMDBSwift:
-    :commit: 83f136d0951bc5ca353a4251fdde73d9209b5f91
+    :commit: 6f2b3ad8ed05aa6f968a3c478c67c944d156a476
     :git: https://github.com/gkye/TheMovieDatabaseSwiftWrapper.git
 
 SPEC CHECKSUMS:
@@ -167,13 +201,13 @@ SPEC CHECKSUMS:
   Atributika: 87c2d3c0a9ccbab343b43d65ccf1f164f7a9570c
   AZSearchView: 4b0b61e576b07bc75b780bca44e80244b74bc436
   CircleProgressView: 66e4d663a2bc7a9086e37b518868be923cd0a23a
-  Crashlytics: a989ef242b66605577a425733797f810bd2725eb
+  Crashlytics: 96c5d29f65fa80db7351f82c93f89d1019c0eac1
   CustomLoader: 6f1688352f81400eed9aa801067302ef3f7b6a3c
   DGCollectionViewPaginableBehavior: be97bc2177b22e4afa1028ad39d376dc1b6bc940
   EasyAbout: cf6b9fa955715646ef3c836bf21b58230011bcb1
   Eureka: c8bd5cc07143b6f66268c208d28a246c99b41955
-  EZPlayer: 3f15911d44c3f4d8d4e1c52bd5e97c70d9481280
-  Fabric: bb495bb9a7a7677c6d03a1f8b83d95bc49b47e41
+  EZPlayer: 590a0e4afd0a58eeecdbaa3e80221bcd526917b2
+  Fabric: d8cca88ae57bcf148826f883fcd497b0e671cc5d
   Firebase: 7d3b8cd837ad9fcd391657734c0d56dab8e9a5a3
   FirebaseABTesting: d07d0ee833b842d5153549e4c7e2e2cb1c23a3f9
   FirebaseAnalytics: 388b630c15713f5dbf364071f5f3d6077fb52f4e
@@ -191,7 +225,7 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NDYoutubePlayer: 87aabd954c103f090601a2e09cdf9c31ec0440f0
   NotificationBannerSwift: 1fc2955381e6eb26d958ba32160fc41721b9b689
-  NTDownload: d272237475a73b33655a366fcd841fc2c051a5b1
+  NTDownload: 15b7d8a4a527ec36031e851909b7c8f009bcebfe
   ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
@@ -201,8 +235,8 @@ SPEC CHECKSUMS:
   SubtleVolume: f3a6117921d331fb9eae07820c68e39e4c62db18
   SwifterSwift: bfcae9d659dfd306d164f13f72cad09198f30723
   SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
-  TMDBSwift: 9b8990bf47ad97957a2a8fdfac1cc45c55e37e2b
+  TMDBSwift: 646e42e749b072e007ed936097ae25e0a3e510e4
 
-PODFILE CHECKSUM: fe5925b3ed4bc9a3c52c4fd20ecc0f154214e9cc
+PODFILE CHECKSUM: a8796936a49de2a41b2eff21f33da8b88d719bab
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.16.2

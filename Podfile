@@ -1,4 +1,3 @@
-source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 
 target 'KinoPub' do
@@ -18,15 +17,18 @@ target 'KinoPub' do
   pod 'SwifterSwift'
   pod 'DGCollectionViewPaginableBehavior'
   pod 'Atributika'
-  pod 'EZPlayer', :git => 'https://github.com/hintoz/EZPlayer.git'
+  # pod 'EZPlayer', :git => 'https://github.com/hintoz/EZPlayer.git'
+  pod 'EZPlayer', :path => 'Dependencies/EZPlayer'
   pod 'Letters'
   pod 'RevealingSplashView'
   pod 'TMDBSwift', :git => 'https://github.com/gkye/TheMovieDatabaseSwiftWrapper.git'
+  # pod 'TMDBSwift', :path => 'Dependencies/TheMovieDatabaseSwiftWrapper'
   pod 'SubtleVolume'
   pod 'CustomLoader'
   pod 'NotificationBannerSwift'
   pod 'Eureka'
-  pod 'NTDownload', :git => 'https://github.com/hintoz/NTDownload.git'
+  # pod 'NTDownload', :git => 'https://github.com/hintoz/NTDownload.git'
+  pod 'NTDownload', :path => 'Dependencies/NTDownload'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'Firebase/RemoteConfig'
@@ -35,17 +37,29 @@ target 'KinoPub' do
   pod 'GradientLoadingBar'
   pod 'EasyAbout'
   pod 'CircleProgressView'
-  
+
   pod 'R.swift'
 end
 
+# post_install do |installer|
+# 	myTargets = ['CustomLoader', 'DGCollectionViewPaginableBehavior']
+
+# 	installer.pods_project.targets.each do |target|
+# 		if myTargets.include? target.name
+# 			target.build_configurations.each do |config|
+# 				config.build_settings['SWIFT_VERSION'] = '3.2'
+# 			end
+# 		end
+# 	end
+# end
+
 post_install do |installer|
-	myTargets = ['CustomLoader', 'DGCollectionViewPaginableBehavior']
-	
+	myTargets = ['InteractiveSideMenu']
+
 	installer.pods_project.targets.each do |target|
 		if myTargets.include? target.name
 			target.build_configurations.each do |config|
-				config.build_settings['SWIFT_VERSION'] = '3.2'
+				config.build_settings['SWIFT_VERSION'] = '4.2'
 			end
 		end
 	end

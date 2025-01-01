@@ -13,7 +13,6 @@
 		6922F6A62013EADE003E3713 /* UIImage+KPAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6922F6A52013EADE003E3713 /* UIImage+KPAdditions.swift */; };
 		6922F6A8201443E2003E3713 /* SearchablePushRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6922F6A7201443E2003E3713 /* SearchablePushRow.swift */; };
 		692CF6C31F901969007E539D /* LogViewsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692CF6C21F901969007E539D /* LogViewsManager.swift */; };
-		692CF6C41F90207A007E539D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 695921F61F7D4FB200CE3224 /* Settings.bundle */; };
 		692CF6C51F902244007E539D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 695921F51F7D4FB200CE3224 /* GoogleService-Info.plist */; };
 		692EF3531F8D029000A4D824 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692EF3521F8D029000A4D824 /* Filter.swift */; };
 		692EF3571F8D33D800A4D824 /* LogViewsNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692EF3561F8D33D800A4D824 /* LogViewsNetworkingService.swift */; };
@@ -1057,7 +1056,6 @@
 				698D1AC5200935B200BDE07F /* ItemsTableViewCell.xib in Resources */,
 				692CF6C51F902244007E539D /* GoogleService-Info.plist in Resources */,
 				69D529CD1FF15EEC00431AC4 /* SearchCollectionReusableView.xib in Resources */,
-				692CF6C41F90207A007E539D /* Settings.bundle in Resources */,
 				69C4E18B202FA201003048D5 /* TVCollectionViewCell.xib in Resources */,
 				69C4F3211F7F053900BCD8F9 /* EpisodesCollectionViewCell.xib in Resources */,
 				69C4F31B1F7F053900BCD8F9 /* ActorCollectionViewCell.xib in Resources */,
@@ -1107,7 +1105,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-KinoPub/Pods-KinoPub-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-KinoPub/Pods-KinoPub-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AZSearchView/AZSearchView.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
@@ -1176,7 +1174,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KinoPub/Pods-KinoPub-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KinoPub/Pods-KinoPub-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6936A39C1F9E5998009D60D8 /* ShellScript */ = {
@@ -1198,7 +1196,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-KinoPub/Pods-KinoPub-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-KinoPub/Pods-KinoPub-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/EasyAbout/Settings.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1207,7 +1205,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KinoPub/Pods-KinoPub-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KinoPub/Pods-KinoPub-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FB7E3774B1EBE808B2D8DEB1 /* [CP] Check Pods Manifest.lock */ = {
@@ -1555,7 +1553,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = xyz.dats.KinoPub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "KinoPub Development";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -1578,7 +1576,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "94d70cf7-97d3-4d15-81f7-e0f8a5d76519";
 				PROVISIONING_PROFILE_SPECIFIER = "KinoPub Development";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
