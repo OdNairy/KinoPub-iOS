@@ -58,11 +58,11 @@ PODS:
   - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - GradientLoadingBar (1.1.9)
-  - InteractiveSideMenu (2.2.1)
+  - InteractiveSideMenu (2.3.2)
   - KeychainSwift (10.0.0)
   - Letters (2.1.1)
-  - LKAlertController (1.12.1)
-  - MarqueeLabel/Swift (3.1.4)
+  - LKAlertController (1.12.2)
+  - MarqueeLabel/Swift (3.2.1)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -73,13 +73,13 @@ PODS:
     - MarqueeLabel/Swift
     - SnapKit (~> 4.0)
   - NTDownload (1.1.0)
-  - ObjectMapper (3.1.0)
+  - ObjectMapper (3.5.3)
   - Protobuf (3.5.0)
   - R.swift (4.0.0):
     - R.swift.Library (~> 4.0.0)
   - R.swift.Library (4.0.0)
-  - RevealingSplashView (0.4.0)
-  - SnapKit (4.0.0)
+  - RevealingSplashView (0.6.0)
+  - SnapKit (4.2.0)
   - SubtleVolume (0.3.0)
   - SwifterSwift (4.1.1):
     - SwifterSwift/AppKit (= 4.1.1)
@@ -116,9 +116,9 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/RemoteConfig
   - GradientLoadingBar
-  - InteractiveSideMenu
+  - InteractiveSideMenu (from `Dependencies/InteractiveSideMenu`)
   - KeychainSwift
-  - Letters
+  - Letters (from `Dependencies/Swift-UIImageView-Letters`)
   - LKAlertController
   - NDYoutubePlayer (from `https://github.com/hintoz/NDYoutubePlayer.git`)
   - NotificationBannerSwift
@@ -153,9 +153,7 @@ SPEC REPOS:
     - FirebaseRemoteConfig
     - GoogleToolboxForMac
     - GradientLoadingBar
-    - InteractiveSideMenu
     - KeychainSwift
-    - Letters
     - LKAlertController
     - MarqueeLabel
     - nanopb
@@ -175,6 +173,10 @@ EXTERNAL SOURCES:
     :git: https://github.com/hintoz/AZSearchView.git
   EZPlayer:
     :path: Dependencies/EZPlayer
+  InteractiveSideMenu:
+    :path: Dependencies/InteractiveSideMenu
+  Letters:
+    :path: Dependencies/Swift-UIImageView-Letters
   NDYoutubePlayer:
     :git: https://github.com/hintoz/NDYoutubePlayer.git
   NTDownload:
@@ -217,26 +219,26 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfig: 3310f264fff78b6c2e78b24dcfc4c1b3d6766209
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   GradientLoadingBar: 903b340157956c72071d02c58f2bad44785f3bb9
-  InteractiveSideMenu: de494db0efadbd9c6c34391d4338885fd49029c0
+  InteractiveSideMenu: aab8d5423e688593ca2e9d64de7abdd05945084d
   KeychainSwift: f9f7910449a0c0fd2cabc889121530dd2c477c33
-  Letters: 34476b0d413813bcf9273b2760be7ff4cd75f5c7
-  LKAlertController: e229465c0b4543ea122bfe62567747e6213ee43f
-  MarqueeLabel: bf768455fe88d427f71476ebb23f9092b660f40b
+  Letters: 92053e18c2560e836069347cd438517c903c11e5
+  LKAlertController: 10c7e8627e5d4757d03b4f53469f35ded14c378f
+  MarqueeLabel: 2daf039bf916937c8a4c9adfc13577cc5e51b4ce
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   NDYoutubePlayer: 87aabd954c103f090601a2e09cdf9c31ec0440f0
   NotificationBannerSwift: 1fc2955381e6eb26d958ba32160fc41721b9b689
   NTDownload: 15b7d8a4a527ec36031e851909b7c8f009bcebfe
-  ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
+  ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
   Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
-  RevealingSplashView: 72be158ad5e1bc72713e8f78383dc3e1803ce4d1
-  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  RevealingSplashView: 40c5a770894459736acdc95655eeba0dd30ce91c
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SubtleVolume: f3a6117921d331fb9eae07820c68e39e4c62db18
   SwifterSwift: bfcae9d659dfd306d164f13f72cad09198f30723
   SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
   TMDBSwift: 646e42e749b072e007ed936097ae25e0a3e510e4
 
-PODFILE CHECKSUM: a8796936a49de2a41b2eff21f33da8b88d719bab
+PODFILE CHECKSUM: 2fc86904a611c60598ed6fbbd7d170c4e486ce19
 
 COCOAPODS: 1.16.2

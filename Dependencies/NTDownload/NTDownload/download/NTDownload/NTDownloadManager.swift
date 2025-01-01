@@ -10,8 +10,10 @@ import UIKit
 open class NTDownloadManager: URLSessionDownloadTask {
     
     public static let shared = NTDownloadManager()
-    open weak var delegate: NTDownloadManagerDelegate?
-    
+//    open weak var delegate: NTDownloadManagerDelegate?
+
+    open weak var managerDelegate: NTDownloadManagerDelegate?
+
     open var unFinishedList: [NTDownloadTask] {
         return taskList.filter { $0.status != .NTFinishedDownload }
     }
@@ -47,7 +49,7 @@ open class NTDownloadManager: URLSessionDownloadTask {
         task.status = status
         task.task = downloadTask
         self.taskList.append(task)
-        delegate?.addDownloadRequest?(downloadTask: task)
+        managerDelegate?.addDownloadRequest?(downloadTask: task)
         self.saveTaskList()
     }
     
@@ -62,7 +64,7 @@ open class NTDownloadManager: URLSessionDownloadTask {
         }
         task?.suspend()
         downloadTask.status = NTDownloadStatus(rawValue: (task?.state.rawValue)!)!.status
-        delegate?.downloadRequestDidPaused?(downloadTask: downloadTask)
+        managerDelegate?.downloadRequestDidPaused?(downloadTask: downloadTask)
     }
 
     public func resumeTask(downloadTask: NTDownloadTask) {
@@ -76,7 +78,7 @@ open class NTDownloadManager: URLSessionDownloadTask {
         }
         task?.resume()
         downloadTask.status = NTDownloadStatus(rawValue: (task?.state.rawValue)!)!.status
-        delegate?.downloadRequestDidStarted?(downloadTask: downloadTask)
+        managerDelegate?.downloadRequestDidStarted?(downloadTask: downloadTask)
     }
 
     public func resumeAllTask() {
@@ -189,7 +191,7 @@ extension NTDownloadManager: URLSessionDownloadDelegate {
                         task.status = .NTFailed
                         task.fileSize = nil
                         task.downloadedFileSize = nil
-                        delegate?.downloadRequestDidFailedWithError?(error: error!, downloadTask: task)
+                        managerDelegate?.downloadRequestDidFailedWithError?(error: error!, downloadTask: task)
                     }
                 }
             }
@@ -203,9 +205,9 @@ extension NTDownloadManager: URLSessionDownloadDelegate {
                 let destUrl = documentUrl.appendingPathComponent(task.fileName)
                 do {
                     try FileManager.default.moveItem(at: location, to: destUrl)
-                    delegate?.downloadRequestFinished?(downloadTask: task)
+                    managerDelegate?.downloadRequestFinished?(downloadTask: task)
                 } catch {
-                    delegate?.downloadRequestDidFailedWithError?(error: error, downloadTask: task)
+                    managerDelegate?.downloadRequestDidFailedWithError?(error: error, downloadTask: task)
                 }
             }
         }
@@ -217,7 +219,7 @@ extension NTDownloadManager: URLSessionDownloadDelegate {
                 task.fileSize = (NTCommonHelper.calculateFileSize(totalBytesExpectedToWrite), NTCommonHelper.calculateUnit(totalBytesExpectedToWrite))
                 task.downloadedFileSize = (NTCommonHelper.calculateFileSize(totalBytesWritten),NTCommonHelper.calculateUnit(totalBytesWritten))
                 task.progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
-                delegate?.downloadRequestUpdateProgress?(downloadTask: task)
+                managerDelegate?.downloadRequestUpdateProgress?(downloadTask: task)
             }
         }
     }
