@@ -29,7 +29,6 @@ PODS:
     - SnapKit (~> 4.2.0)
   - NTDownload (1.1.0)
   - ObjectMapper (3.5.3)
-  - R.swift (7.8.0)
   - RevealingSplashView (0.6.0)
   - SnapKit (4.2.0)
   - SubtleVolume (1.1.0)
@@ -78,7 +77,6 @@ DEPENDENCIES:
   - NDYoutubePlayer (from `https://github.com/hintoz/NDYoutubePlayer.git`)
   - NotificationBannerSwift
   - NTDownload (from `Dependencies/NTDownload`)
-  - R.swift
   - RevealingSplashView
   - SubtleVolume
   - SwifterSwift
@@ -104,7 +102,6 @@ SPEC REPOS:
     - MarqueeLabel
     - NotificationBannerSwift
     - ObjectMapper
-    - R.swift
     - RevealingSplashView
     - SnapKit
     - SubtleVolume
@@ -160,7 +157,6 @@ SPEC CHECKSUMS:
   NotificationBannerSwift: 4483919639202bec56d6bfe8f106ebc352d38bc7
   NTDownload: 15b7d8a4a527ec36031e851909b7c8f009bcebfe
   ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
-  R.swift: f573269ca45b2ab066c082e363dd4c2b297b0d71
   RevealingSplashView: 40c5a770894459736acdc95655eeba0dd30ce91c
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SubtleVolume: 101038d203018736bcd1df3ac95bcc0f6b8640ce
@@ -168,6 +164,6 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
   TMDBSwift: 646e42e749b072e007ed936097ae25e0a3e510e4
 
-PODFILE CHECKSUM: 401482cf2a3f791c1de5a331035a6ee1828667c0
+PODFILE CHECKSUM: 53d2aa08fb96a00f4d0c291640ced01b8dda7d37
 
 COCOAPODS: 1.16.2
