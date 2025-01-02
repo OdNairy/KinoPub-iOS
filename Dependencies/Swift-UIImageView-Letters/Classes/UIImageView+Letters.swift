@@ -94,7 +94,7 @@ extension UIImageView {
 extension UIColor {
     
     /// Returns random generated color.
-    open static var random: UIColor {
+    public static var random: UIColor {
         srandom(arc4random())
         var red: Double = 0
         
@@ -115,7 +115,7 @@ extension UIColor {
         return .init(red: CGFloat(red), green: CGFloat(green), blue: CGFloat(blue), alpha: 1.0)
     }
 
-    open static func colorHash(name: String?) -> UIColor {
+    public static func colorHash(name: String?) -> UIColor {
         guard let name = name else {
             return .red
         }

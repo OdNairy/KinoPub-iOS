@@ -1,7 +1,7 @@
 import Foundation
 import NotificationBannerSwift
 
-protocol FilterModelDelegate: class {
+protocol FilterModelDelegate: AnyObject {
     func didUpdateItems(model: FilterModel)
 }
 class FilterModel {

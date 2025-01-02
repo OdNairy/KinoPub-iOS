@@ -1,6 +1,6 @@
 import UIKit
 
-protocol ProfileModelDelegate: class {
+protocol ProfileModelDelegate: AnyObject {
     func didUpdateProfile(model: ProfileModel)
 }
 

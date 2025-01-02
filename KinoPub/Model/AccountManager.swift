@@ -3,7 +3,7 @@ import SwiftyUserDefaults
 import KeychainSwift
 import Alamofire
 
-protocol AccountManager: class {
+protocol AccountManager: AnyObject {
     var account: KinopubAccount? { get }
     var hasAccount: Bool { get }
     var requestFactory: RequestFactory { get }

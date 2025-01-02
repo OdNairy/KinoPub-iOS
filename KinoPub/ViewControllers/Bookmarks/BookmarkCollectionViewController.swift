@@ -147,7 +147,7 @@ class BookmarkCollectionViewController: ContentCollectionViewController {
 
 extension BookmarkCollectionViewController: ItemCollectionViewCellDelegate {
     func didPressDeleteButton(_ item: Item) {
-        guard let index = viewModel.items.index(where: { $0 === item }) else { return }
+        guard let index = viewModel.items.firstIndex(where: { $0 === item }) else { return }
         let indexPath = IndexPath(row: index, section: 0)
         Alert(message: "Удалить?")
             .tint(.kpBlack)
@@ -161,7 +161,7 @@ extension BookmarkCollectionViewController: ItemCollectionViewCellDelegate {
     }
     
     func didPressMoveButton(_ item: Item) {
-        guard let index = viewModel.items.index(where: { $0 === item }) else { return }
+        guard let index = viewModel.items.firstIndex(where: { $0 === item }) else { return }
         let indexPath = IndexPath(row: index, section: 0)
         showBookmarkFolders(indexPath)
     }
