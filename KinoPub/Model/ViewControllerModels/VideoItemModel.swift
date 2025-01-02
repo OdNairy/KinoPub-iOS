@@ -2,7 +2,7 @@ import Foundation
 import LKAlertController
 import NotificationBannerSwift
 
-protocol VideoItemModelDelegate: class {
+protocol VideoItemModelDelegate: AnyObject {
     func didUpdateSimilar()
 }
 

@@ -21,7 +21,7 @@ class Helper {
         viewController.tableView.separatorStyle = .none;
     }
     
-    static func hapticGenerate(style: UIImpactFeedbackStyle) {
+    static func hapticGenerate(style: UIImpactFeedbackGenerator.FeedbackStyle) {
         if #available(iOS 10.0, *) {
             let feedbackGenerator = UIImpactFeedbackGenerator(style: style)
             feedbackGenerator.prepare()

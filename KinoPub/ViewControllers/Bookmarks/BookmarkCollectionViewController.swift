@@ -23,7 +23,7 @@ class BookmarkCollectionViewController: ContentCollectionViewController {
         behavior.delegate = self
         collectionView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
         // Pull to refresh
-        control.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        control.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         control.tintColor = UIColor.kpOffWhite
         if #available(iOS 10.0, *) {
             collectionView?.refreshControl = control
@@ -93,7 +93,7 @@ class BookmarkCollectionViewController: ContentCollectionViewController {
     
     func showBookmarkFolders(_ indexPath: IndexPath) {
         let cell = collectionView?.cellForItem(at: indexPath) as! ItemCollectionViewCell
-        _ = LoadingView.system(withStyle: .white).show(inView: cell.moveFromBookmarkButton)
+        _ = LoadingView.system(withStyle: .medium).show(inView: cell.moveFromBookmarkButton)
         viewModel.loadBookmarks { [weak self] (bookmarks) in
             guard let strongSelf = self else { return }
             let action = ActionSheet(message: "Выберите папку").tint(.kpBlack)
@@ -147,7 +147,7 @@ class BookmarkCollectionViewController: ContentCollectionViewController {
 
 extension BookmarkCollectionViewController: ItemCollectionViewCellDelegate {
     func didPressDeleteButton(_ item: Item) {
-        guard let index = viewModel.items.index(where: { $0 === item }) else { return }
+        guard let index = viewModel.items.firstIndex(where: { $0 === item }) else { return }
         let indexPath = IndexPath(row: index, section: 0)
         Alert(message: "Удалить?")
             .tint(.kpBlack)
@@ -161,7 +161,7 @@ extension BookmarkCollectionViewController: ItemCollectionViewCellDelegate {
     }
     
     func didPressMoveButton(_ item: Item) {
-        guard let index = viewModel.items.index(where: { $0 === item }) else { return }
+        guard let index = viewModel.items.firstIndex(where: { $0 === item }) else { return }
         let indexPath = IndexPath(row: index, section: 0)
         showBookmarkFolders(indexPath)
     }

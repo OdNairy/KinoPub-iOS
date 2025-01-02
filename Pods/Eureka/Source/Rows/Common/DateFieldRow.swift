@@ -23,8 +23,9 @@
 // THE SOFTWARE.
 
 import Foundation
+import UIKit
 
-public protocol DatePickerRowProtocol: class {
+public protocol DatePickerRowProtocol: AnyObject {
     var minimumDate: Date? { get set }
     var maximumDate: Date? { get set }
     var minuteInterval: Int? { get set }
@@ -34,7 +35,7 @@ open class DateCell: Cell<Date>, CellType {
 
     public var datePicker: UIDatePicker
 
-    public required init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public required init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         datePicker = UIDatePicker()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
@@ -49,7 +50,13 @@ open class DateCell: Cell<Date>, CellType {
         accessoryType = .none
         editingAccessoryType =  .none
         datePicker.datePickerMode = datePickerMode()
-        datePicker.addTarget(self, action: #selector(DateCell.datePickerValueChanged(_:)), for: .valueChanged)
+        datePicker.addTarget(self, action: #selector(DateCell.datePickerValueDidChange(_:)), for: .valueChanged)
+
+        #if swift(>=5.2)
+            if #available(iOS 13.4, *) {
+                datePicker.preferredDatePickerStyle = .wheels
+            }
+        #endif
     }
 
     deinit {
@@ -82,12 +89,12 @@ open class DateCell: Cell<Date>, CellType {
         return datePicker
     }
 
-    @objc func datePickerValueChanged(_ sender: UIDatePicker) {
+    @objc(datePickerValueDidChange:) func datePickerValueDidChange(_ sender: UIDatePicker) {
         row.value = sender.date
         detailTextLabel?.text = row.displayValueFor?(row.value)
     }
 
-    private func datePickerMode() -> UIDatePickerMode {
+    private func datePickerMode() -> UIDatePicker.Mode {
         switch row {
         case is DateRow:
             return .date

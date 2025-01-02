@@ -1,7 +1,7 @@
 import Foundation
 import LKAlertController
 
-protocol AuthModelDelegate: class {
+protocol AuthModelDelegate: AnyObject {
     func authModelDidAuth(authModel: AuthModel)
     func updateCode(authModel: AuthModel)
 }

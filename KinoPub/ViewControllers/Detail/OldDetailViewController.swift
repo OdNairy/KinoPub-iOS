@@ -25,7 +25,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.estimatedRowHeight = 100
-            tableView.rowHeight = UITableViewAutomaticDimension
+            tableView.rowHeight = UITableView.automaticDimension
         }
     }
     @IBOutlet weak var mainView: UIView!
@@ -74,7 +74,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
         mediaManager.delegate = self
 
         // Pull to refresh
-        control.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        control.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         control.tintColor = .kpOffWhite
         if #available(iOS 10.0, *) {
             tableView.refreshControl = control
@@ -151,7 +151,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
     func configTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsets(top: headerView.frame.height, left: 0, bottom: 0, right: 0)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.register(UINib(nibName: String(describing:RatingTableViewCell.self), bundle: Bundle.main), forCellReuseIdentifier: String(describing:RatingTableViewCell.self))
         tableView.register(UINib(nibName: String(describing:DescTableViewCell.self), bundle: Bundle.main), forCellReuseIdentifier: String(describing:DescTableViewCell.self))
@@ -198,7 +198,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
         playButton.isHidden = true
         setButtonImage(playButton, "Play Filled-100")
         playButton.tintColor = UIColor.kpLightGreen
-        playButton.addTarget(self, action: #selector(playButtonAction), for: UIControlEvents.touchUpInside)
+        playButton.addTarget(self, action: #selector(playButtonAction), for: UIControl.Event.touchUpInside)
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(playButtonLongTap(_:)))
         playButton.addGestureRecognizer(longGesture)
         headerView.isUserInteractionEnabled = true
@@ -292,7 +292,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
                     make.right.equalTo(self.headerImageView.snp.right).offset(-5)
                     make.bottom.equalTo(self.headerImageView.snp.bottom).offset(-8)
                 })
-                networkLabel.text = series.networks.first?.name
+                networkLabel.text = series.networks?.first?.name
                 networkLabel.textColor = UIColor.white
                 networkLabel.font = networkLabel.font.withSize(18)
                 networkLabel.layer.borderWidth = 1.0
@@ -391,7 +391,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
             let action = ActionSheet(message: "Выберите папку")
             for folder in bookmarks! {
                 var folderTitle = folder.title!
-                var style: UIAlertActionStyle = .default
+                var style: UIAlertAction.Style = .default
                 for itemFolder in strongSelf.model.item.bookmarks! {
                     if itemFolder.title == folder.title {
                         folderTitle = "✓ " + folderTitle
@@ -649,7 +649,7 @@ extension OldDetailViewController: UIScrollViewDelegate {
         segmentedView.layer.transform = segmentTransform
         
         // Set scroll view insets just underneath the segment control
-        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(segmentedView.frame.maxY, 0, 0, 0)
+        tableView.scrollIndicatorInsets = UIEdgeInsets(top: segmentedView.frame.maxY, left: 0, bottom: 0, right: 0)
     }
 }
 

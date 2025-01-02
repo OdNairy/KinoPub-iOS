@@ -73,7 +73,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
     }
     
     func configBlur() {
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
+        if !UIAccessibility.isReduceTransparencyEnabled {
             ratingView.backgroundColor = .clear
             
             let blurEffect = UIBlurEffect(style: .dark)

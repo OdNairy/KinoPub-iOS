@@ -95,7 +95,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
      
      Defaults to `UIViewAnimationOptionCurveEaseInOut`.
      */
-    open var animationCurve: UIViewAnimationCurve = .linear
+    open var animationCurve: UIView.AnimationCurve = .linear
     
     /**
      A boolean property that sets whether the `MarqueeLabel` should behave like a normal `UILabel`.
@@ -139,8 +139,8 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
     @IBInspectable open var holdScrolling: Bool = false {
         didSet {
             if holdScrolling != oldValue {
-                if oldValue == true && !(awayFromHome || labelize || tapToScroll ) && labelShouldScroll() {
-                    updateAndScroll(true)
+                if oldValue == true && !(awayFromHome || labelize ) && labelShouldScroll() {
+                    updateAndScroll()
                 }
             }
         }
@@ -345,7 +345,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
     public var animationDuration: CGFloat {
         switch self.speed {
         case .rate(let rate):
-            return CGFloat(fabs(self.awayOffset) / rate)
+            return CGFloat(abs(self.awayOffset) / rate)
         case .duration(let duration):
             return duration
         }
@@ -497,8 +497,8 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(MarqueeLabel.labelizeForController(_:)), name: NSNotification.Name(rawValue: MarqueeKeys.Labelize.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MarqueeLabel.animateForController(_:)), name: NSNotification.Name(rawValue: MarqueeKeys.Animate.rawValue), object: nil)
         // UIApplication state notifications
-        NotificationCenter.default.addObserver(self, selector: #selector(MarqueeLabel.restartLabel), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MarqueeLabel.shutdownLabel), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MarqueeLabel.restartLabel), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MarqueeLabel.shutdownLabel), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     override open func awakeFromNib() {
@@ -546,7 +546,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
     override open func layoutSubviews() {
         super.layoutSubviews()
         
-        updateAndScroll(true)
+        updateAndScroll()
     }
 
     override open func willMove(toWindow newWindow: UIWindow?) {
@@ -564,10 +564,11 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
     }
     
     private func updateAndScroll() {
-        updateAndScroll(true)
+        // Do not automatically begin scroll if tapToScroll is true
+        updateAndScroll(overrideHold: false)
     }
     
-    private func updateAndScroll(_ shouldBeginScroll: Bool) {
+    private func updateAndScroll(overrideHold: Bool) {
         // Check if scrolling can occur
         if !labelReadyForScroll() {
             return
@@ -633,7 +634,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
             // Find when the lead label will be totally offscreen
             let offsetDistance = awayOffset
             let offscreenAmount = homeLabelFrame.size.width
-            let startFadeFraction = fabs(offscreenAmount / offsetDistance)
+            let startFadeFraction = abs(offscreenAmount / offsetDistance)
             // Find when the animation will hit that point
             let startFadeTimeFraction = timingFunctionForAnimationCurve(animationCurve).durationPercentageForPositionPercentage(startFadeFraction, duration: (animationDelay + animationDuration))
             let startFadeTime = startFadeTimeFraction * animationDuration
@@ -705,7 +706,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         // Configure gradient for current condition
         applyGradientMask(fadeLength, animated: !self.labelize)
         
-        if !tapToScroll && !holdScrolling && shouldBeginScroll {
+        if overrideHold || (!holdScrolling && !overrideHold) {
             beginScroll(sequence)
         }
     }
@@ -840,11 +841,6 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         #endif
         
         scrollCompletionBlock = { [weak self] (finished: Bool) -> () in
-            guard finished else {
-                // Do not continue into the next loop
-                return
-            }
-            
             guard (self != nil) else {
                 return
             }
@@ -853,15 +849,25 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
             self!.labelReturnedToHome(true)
             
             // Check to ensure that:
-            // 1) We don't double fire if an animation already exists
-            // 2) The instance is still attached to a window - this completion block is called for
+            
+            // 1) The instance is still attached to a window - this completion block is called for
             //    many reasons, including if the animation is removed due to the view being removed
             //    from the UIWindow (typically when the view controller is no longer the "top" view)
             guard self!.window != nil else {
                 return
             }
-            
+            // 2) We don't double fire if an animation already exists
             guard self!.sublabel.layer.animation(forKey: "position") == nil else {
+                return
+            }
+            // 3) We don't not start automatically if the animation was unexpectedly interrupted
+            guard finished else {
+                // Do not continue into the next loop
+                return
+            }
+            // 4) A completion block still exists for the NEXT loop. A notable case here is if
+            // returnLabelToHome() was called during a subclass's labelReturnToHome() function
+            guard (self!.scrollCompletionBlock != nil) else {
                 return
             }
             
@@ -878,7 +884,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         if type == .left || type == .right {
             // Make it stay at away permanently
             scroller.anim.isRemovedOnCompletion = false
-            scroller.anim.fillMode = kCAFillModeForwards
+            scroller.anim.fillMode = .forwards
         }
         sublabel.layer.add(scroller.anim, forKey: "position")
         
@@ -1079,7 +1085,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
             let colorAnimation = GradientSetupAnimation(keyPath: "colors")
             colorAnimation.fromValue = gradientMask.colors
             colorAnimation.toValue = adjustedColors
-            colorAnimation.fillMode = kCAFillModeForwards
+            colorAnimation.fillMode = .forwards
             colorAnimation.isRemovedOnCompletion = false
             colorAnimation.delegate = self
             gradientMask.add(colorAnimation, forKey: "setupFade")
@@ -1093,18 +1099,18 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         self.layer.mask = nil
     }
     
-    private func timingFunctionForAnimationCurve(_ curve: UIViewAnimationCurve) -> CAMediaTimingFunction {
-        let timingFunction: String?
+    private func timingFunctionForAnimationCurve(_ curve: UIView.AnimationCurve) -> CAMediaTimingFunction {
+        let timingFunction: CAMediaTimingFunctionName?
         
         switch curve {
         case .easeIn:
-            timingFunction = kCAMediaTimingFunctionEaseIn
+            timingFunction = .easeIn
         case .easeInOut:
-            timingFunction = kCAMediaTimingFunctionEaseInEaseOut
+            timingFunction = .easeInEaseOut
         case .easeOut:
-            timingFunction = kCAMediaTimingFunctionEaseOut
+            timingFunction = .easeOut
         default:
-            timingFunction = kCAMediaTimingFunctionLinear
+            timingFunction = .linear
         }
         
         return CAMediaTimingFunction(name: timingFunction!)
@@ -1250,6 +1256,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
      
      - SeeAlso: restartLabel
      */
+    @available(*, deprecated : 3.1.6, message : "Use the shutdownLabel function instead")
     public func resetLabel() {
         returnLabelToHome()
         homeLabelFrame = CGRect.null
@@ -1326,7 +1333,8 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
     
     @objc public func labelWasTapped(_ recognizer: UIGestureRecognizer) {
         if labelShouldScroll() && !awayFromHome {
-            updateAndScroll()
+            // Set shouldBeginScroll to true to begin single scroll due to tap
+            updateAndScroll(overrideHold: true)
         }
     }
     
@@ -1561,7 +1569,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         sublabel.tintColorDidChange()
     }
     
-    override open var contentMode: UIViewContentMode {
+    override open var contentMode: UIView.ContentMode {
         get {
             return sublabel.contentMode
         }
@@ -1572,6 +1580,11 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         }
     }
     
+    open override var isAccessibilityElement: Bool {
+        didSet {
+            sublabel.isAccessibilityElement = self.isAccessibilityElement
+        }
+    }
 
     //
     // MARK: - Support
@@ -1597,7 +1610,7 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
 //
 public protocol MarqueeStep {
     var timeStep: CGFloat { get }
-    var timingFunction: UIViewAnimationCurve { get }
+    var timingFunction: UIView.AnimationCurve { get }
     var edgeFades: EdgeFade { get }
 }
 
@@ -1636,7 +1649,7 @@ public struct ScrollStep: MarqueeStep {
      
      - Note: The animation curve value for the first `ScrollStep` in a sequence has no effect.
      */
-    public let timingFunction: UIViewAnimationCurve
+    public let timingFunction: UIView.AnimationCurve
     
     /**
      The position of the label for this scroll step.
@@ -1652,7 +1665,7 @@ public struct ScrollStep: MarqueeStep {
     */
     public let edgeFades: EdgeFade
     
-    public init(timeStep: CGFloat, timingFunction: UIViewAnimationCurve = .linear, position: Position, edgeFades: EdgeFade) {
+    public init(timeStep: CGFloat, timingFunction: UIView.AnimationCurve = .linear, position: Position, edgeFades: EdgeFade) {
         self.timeStep = timeStep
         self.position = position
         self.edgeFades = edgeFades
@@ -1686,7 +1699,7 @@ public struct FadeStep: MarqueeStep {
     /**
      The animation curve to utilize between the previous fade state in a sequence and this step.
      */
-    public let timingFunction: UIViewAnimationCurve
+    public let timingFunction: UIView.AnimationCurve
     
     /**
      The option set defining the edge fade state for this fade step.
@@ -1698,7 +1711,7 @@ public struct FadeStep: MarqueeStep {
      */
     public let edgeFades: EdgeFade
     
-    public init(timeStep: CGFloat, timingFunction: UIViewAnimationCurve = .linear, edgeFades: EdgeFade) {
+    public init(timeStep: CGFloat, timingFunction: UIView.AnimationCurve = .linear, edgeFades: EdgeFade) {
         self.timeStep = timeStep
         self.timingFunction = timingFunction
         self.edgeFades = edgeFades
@@ -1776,14 +1789,14 @@ fileprivate extension CAMediaTimingFunction {
             // Calculate f(t0)
             f0 = YforCurveAt(t0, controlPoints:controlPoints) - y_0
             // Check if this is close (enough)
-            if (fabs(f0) < epsilon) {
+            if (abs(f0) < epsilon) {
                 // Done!
                 return t0
             }
             // Else continue Newton's Method
             df0 = derivativeCurveYValueAt(t0, controlPoints:controlPoints)
             // Check if derivative is small or zero ( http://en.wikipedia.org/wiki/Newton's_method#Failure_analysis )
-            if (fabs(df0) < 1e-6) {
+            if (abs(df0) < 1e-6) {
                 break
             }
             // Else recalculate t1

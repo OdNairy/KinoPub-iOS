@@ -2,7 +2,7 @@ import Foundation
 import LKAlertController
 import NotificationBannerSwift
 
-protocol BookmarksModelDelegate: class {
+protocol BookmarksModelDelegate: AnyObject {
     func didUpdateBookmarks(model: BookmarksModel)
     func didUpdateItems(model: BookmarksModel)
     func didAddedBookmarks()

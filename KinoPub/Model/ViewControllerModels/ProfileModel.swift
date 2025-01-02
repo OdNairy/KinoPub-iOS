@@ -1,7 +1,6 @@
 import UIKit
-import Crashlytics
 
-protocol ProfileModelDelegate: class {
+protocol ProfileModelDelegate: AnyObject {
     func didUpdateProfile(model: ProfileModel)
 }
 
@@ -36,7 +35,7 @@ class ProfileModel {
     }
     
     private func logUser() {
-        Crashlytics.sharedInstance().setUserIdentifier(UIDevice.current.identifierForVendor?.uuidString)
-        Crashlytics.sharedInstance().setUserName(user?.username)
+//        Crashlytics.sharedInstance().setUserIdentifier(UIDevice.current.identifierForVendor?.uuidString)
+//        Crashlytics.sharedInstance().setUserName(user?.username)
     }
 }

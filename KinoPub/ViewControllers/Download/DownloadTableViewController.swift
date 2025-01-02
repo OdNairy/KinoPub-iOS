@@ -26,7 +26,7 @@ class DownloadTableViewController: UITableViewController, SideMenuItemContent {
 //        NTDownloadManager.shared.resumeAllTask()
         
         // Pull to refresh
-        control.addTarget(self, action: #selector(initdata), for: UIControlEvents.valueChanged)
+        control.addTarget(self, action: #selector(initdata), for: UIControl.Event.valueChanged)
         control.tintColor = UIColor.kpOffWhite
         if #available(iOS 10.0, *) {
             tableView?.refreshControl = control
@@ -46,7 +46,7 @@ class DownloadTableViewController: UITableViewController, SideMenuItemContent {
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
             navigationController?.navigationItem.largeTitleDisplayMode = .always
-            let attributes = [NSAttributedStringKey.foregroundColor : UIColor.kpOffWhite]
+            let attributes = [NSAttributedString.Key.foregroundColor : UIColor.kpOffWhite]
             navigationController?.navigationBar.largeTitleTextAttributes = attributes
         } else {
             // Fallback on earlier versions
@@ -54,12 +54,12 @@ class DownloadTableViewController: UITableViewController, SideMenuItemContent {
         
         tableView.backgroundColor = UIColor.kpBackground
         
-        NTDownloadManager.shared.delegate = self
+        NTDownloadManager.shared.managerDelegate = self
         tableView.register(UINib(nibName: String(describing: DownloadingTableViewCell.self), bundle: Bundle.main), forCellReuseIdentifier: DownloadingTableViewCell.reuseIdentifier)
         tableView.register(UINib(nibName: String(describing: DowloadedTableViewCell.self), bundle: Bundle.main), forCellReuseIdentifier: DowloadedTableViewCell.reuseIdentifier)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorColor = UIColor.kpOffWhiteSeparator
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         
@@ -200,7 +200,7 @@ extension DownloadTableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if indexPath.section == 1 {
-            let delete = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "Удалить") { (_, indexPath) in
+            let delete = UITableViewRowAction(style: UITableViewRowAction.Style.destructive, title: "Удалить") { (_, indexPath) in
                 NTDownloadManager.shared.removeTask(downloadTask: self.downed[indexPath.row])
                 self.downed.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
@@ -220,7 +220,7 @@ extension DownloadTableViewController {
             
             return [delete, share]
         } else if indexPath.section == 0 {
-            let delete = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "Удалить") { (_, indexPath) in
+            let delete = UITableViewRowAction(style: UITableViewRowAction.Style.destructive, title: "Удалить") { (_, indexPath) in
                 NTDownloadManager.shared.removeTask(downloadTask: self.downing[indexPath.row])
                 self.downing.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)

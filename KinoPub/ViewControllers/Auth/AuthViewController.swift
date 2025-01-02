@@ -45,7 +45,7 @@ class AuthViewController: UIViewController {
 //        if Config.shared.kinopubDomain == "" {
             codeLabel.text = "загрузка"
             activateButton.isEnabled = false
-        _ = LoadingView.system(withStyle: .gray).show(inView: activateButton)
+        _ = LoadingView.system(withStyle: .medium).show(inView: activateButton)
 //            URLLabel.text = "загрузка..."
 //        } else {
 //            URLLabel.text = "\(Config.shared.kinopubDomain)/device"

@@ -1,6 +1,6 @@
 EasyAbout
 ======================
-## Requirements: cocoapods version 1.0.0 or above.
+## Requirements: cocoapods version 1.4.0 or above.
 
 ## Why you should use
 
@@ -30,19 +30,9 @@ Add to each wanted podfile target :
 ```ruby
 
 pod 'EasyAbout'
-
+script_phase :name => 'EasyAbout Setup', :script => '${PODS_ROOT}/EasyAbout/settings-script.sh'
 ```
-
-Add a new run script to each target: 
-
-```ruby
-"${SRCROOT}/Pods/EasyAbout/settings-script.sh"
-```
-![](screenshots/addrunscript.png)
-
 
 ## License
 
 **EasyAbout** is available under the MIT license. See the [LICENSE](https://github.com/JARMourato/AcknowledgementsBundle/blob/master/LICENSE) file for more info.
-
-

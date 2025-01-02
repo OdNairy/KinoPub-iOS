@@ -35,7 +35,7 @@ enum NDYoutubeRequestError: Error {
 let yotubeURL = "https://www.youtube.com"
 
 open class NDYoutubeClient {
-    open static let shared: NDYoutubeClient = NDYoutubeClient()
+    public static let shared: NDYoutubeClient = NDYoutubeClient()
     fileprivate var languageIdentifier: String?
     fileprivate var eventLabels: [String] = []
     fileprivate var requestType: NDYouTubeRequestType!
@@ -97,7 +97,7 @@ open class NDYoutubeClient {
     
     fileprivate func startWatchPageRequest() {
         let query = [
-            "v": self.indentifier,
+            "v": self.indentifier!,
             "hl": "en",
             "has_verified": "1"
             ] as [String : Any]

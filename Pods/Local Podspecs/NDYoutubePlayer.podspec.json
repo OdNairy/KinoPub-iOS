@@ -1,6 +1,6 @@
 {
   "name": "NDYoutubePlayer",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "summary": "NDYoutubePlayer is subclass of AVPlayerLayer. NDYoutubePlayer help you play video from Youtube in your application.",
   "homepage": "https://github.com/dhnghia22/NDYoutubePlayer",
   "license": "MIT",
@@ -9,10 +9,11 @@
   },
   "source": {
     "git": "https://github.com/dhnghia22/NDYoutubePlayer.git",
-    "tag": "0.1.6"
+    "tag": "0.1.8"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "9.0",
+    "tvos": "9.0"
   },
   "source_files": "NDYoutubePlayer/NDYoutubePlayer/*.swift"
 }

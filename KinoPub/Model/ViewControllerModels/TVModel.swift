@@ -1,7 +1,7 @@
 import Foundation
 import NotificationBannerSwift
 
-protocol TVModelDelegate: class {
+protocol TVModelDelegate: AnyObject {
     func didUpdateChannels(model: TVModel)
 }
 

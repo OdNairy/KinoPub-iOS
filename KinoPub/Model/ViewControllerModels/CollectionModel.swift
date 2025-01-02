@@ -2,7 +2,7 @@ import Foundation
 import LKAlertController
 import NotificationBannerSwift
 
-protocol CollectionModelDelegate: class {
+protocol CollectionModelDelegate: AnyObject {
     func didUpdateItem(model: CollectionModel)
 }
 

@@ -102,7 +102,7 @@ class RatingTableViewCell: UITableViewCell {
         let action = ActionSheet(message: message).tint(.kpBlack)
         if let url = userinfo["url"] as? URL, let title = userinfo["buttonTitle"] as? String {
             action.addAction(title, style: .default, handler: { (_) in
-                UIApplication.shared.open(url: url)
+                UIApplication.shared.open(url)
             })
         }
         action.addAction("Отмена", style: .cancel)

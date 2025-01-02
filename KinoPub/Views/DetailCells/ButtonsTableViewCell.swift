@@ -87,7 +87,7 @@ class ButtonsTableViewCell: UITableViewCell {
             
             for folder in bookmarks! {
                 var folderTitle = folder.title!
-                var style: UIAlertActionStyle = .default
+                var style: UIAlertAction.Style = .default
                 for itemFolder in strongSelf.model.item.bookmarks! {
                     if itemFolder.title == folder.title {
                         folderTitle = "✓ " + folderTitle

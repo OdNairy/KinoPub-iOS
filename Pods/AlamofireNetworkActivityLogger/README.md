@@ -10,11 +10,11 @@ Network activity logger for Alamofire.
 
 - iOS 9.0+ / macOS 10.11+ / tvOS 9.0+ / watchOS 2.0+
 - Xcode 8.0+
-- Swift 3.0+
+- Swift 3.2+
 
 ## Dependencies
 
-- [Alamofire 4.0+](https://github.com/Alamofire/Alamofire)
+- [Alamofire 4.8+](https://github.com/Alamofire/Alamofire)
 
 ## Installation
 
@@ -26,7 +26,7 @@ Network activity logger for Alamofire.
 $ gem install cocoapods
 ```
 
-> CocoaPods 1.1.0+ is required.
+> CocoaPods 1.6.0+ is required.
 
 To integrate AlamofireNetworkActivityLogger into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
@@ -35,7 +35,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 
-pod 'AlamofireNetworkActivityLogger', '~> 2.0'
+pod 'AlamofireNetworkActivityLogger', '~> 2.4'
 ```
 
 Then, run the following command:
@@ -58,12 +58,18 @@ $ brew install carthage
 To integrate AlamofireNetworkActivityLogger into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "konkab/AlamofireNetworkActivityLogger" ~> 2.0
+github "konkab/AlamofireNetworkActivityLogger" ~> 2.4
 ```
 
 ---
 
 ## Usage
+
+Import the library:
+
+```swift
+import AlamofireNetworkActivityLogger
+```
 
 Add the following code to `AppDelegate.swift application:didFinishLaunchingWithOptions:`:
 
@@ -74,7 +80,9 @@ NetworkActivityLogger.shared.startLogging()
 Now all NSURLSessionTask objects created by an Alamofire.SessionManager will have their request and response logged to the console, a la:
 
 ```
+---------------------
 GET 'http://example.com/foo/bar.json'
+---------------------
 200 'http://example.com/foo/bar.json' [0.2535 s]
 ```
 
@@ -88,7 +96,7 @@ NetworkActivityLogger.shared.level = .error
 
 Konstantin Kabanov
 
-- konstantin@rktstudio.ru
+- kabanov_kv@me.com
 - Skype: konstantin_kabanov
 - [Linkedin](https://ru.linkedin.com/in/konstantinkabanov)
 

@@ -2,105 +2,123 @@
 //  GradientLoadingBarViewModel.swift
 //  GradientLoadingBar
 //
-//  Created by Felix Mau on 26.12.17.
+//  Created by Felix Mau on 12/26/17.
+//  Copyright © 2017 Felix Mau. All rights reserved.
 //
 
 import Foundation
-
-/// Classes implementing the `GradientLoadingBarViewModelDelegate` protocol get notified about visibility changes.
-protocol GradientLoadingBarViewModelDelegate: class {
-
-    /// Informs the delegate that the `keyWindow` is available.
-    ///
-    /// - Parameters:
-    ///   - viewModel: The view model related to the gradient view.
-    ///   - visible: The new key window that the gradient view should be added to.
-    func viewModel(_ viewModel: GradientLoadingBarViewModel, didUpdateKeyWindow keyWindow: UIView)
-
-    /// Informs the delegate about the new visible state of the gradient view.
-    ///
-    /// - Parameters:
-    ///   - viewModel: The view model related to the gradient view.
-    ///   - visible: The new visibility state of the gradient view.
-    func viewModel(_ viewModel: GradientLoadingBarViewModel, didUpdateVisibility visible: Bool)
-}
+import LightweightObservable
 
 /// The `GradientLoadingBarViewModel` class is responsible for the visibility state of the gradient view.
 class GradientLoadingBarViewModel {
+    // MARK: - Types
+
+    /// This struct contains all infomation regarding an animated visibility update of the loading bar.
+    struct AnimatedVisibilityUpdate: Equatable {
+        /// Initialize the struct with values set to zero / hidden.
+        static let immediatelyHidden = AnimatedVisibilityUpdate(duration: 0.0,
+                                                                isHidden: true)
+
+        /// The duration for the visibility update.
+        let duration: TimeInterval
+
+        /// Boolean flag, whether the view should be hidden.
+        let isHidden: Bool
+    }
 
     // MARK: - Public properties
 
-    weak var delegate: GradientLoadingBarViewModelDelegate?
+    /// Observable for animated visibility updates for the gradient-view.
+    var animatedVisibilityUpdate: Observable<AnimatedVisibilityUpdate> {
+        return animatedVisibilityUpdateSubject.asObservable
+    }
 
-    /// Boolean flag, true if gradient view is currently visible, otherwise false.
-    private(set) var isVisible = false {
-        didSet {
-            // Prevent calling delegate with same visibility state.
-            if isVisible != oldValue {
-                delegate?.viewModel(self, didUpdateVisibility: isVisible)
-            }
-        }
+    /// Observable for the superview of the gradient-view.
+    var superview: Observable<UIView?> {
+        return superviewSubject.asObservable
     }
 
     // MARK: - Private properties
 
-    /// Observer waiting for `keyWindow` to be ready
-    var keyWindowIsAvailableObserver: NSObjectProtocol?
+    private let animatedVisibilityUpdateSubject: Variable<AnimatedVisibilityUpdate> = Variable(.immediatelyHidden)
 
-    // Dependencies
-    let sharedApplication: UIApplicationProtocol
-    let notificationCenter: NotificationCenter
+    private let superviewSubject: Variable<UIView?> = Variable(nil)
 
-    init(sharedApplication: UIApplicationProtocol = UIApplication.shared,
-         notificationCenter: NotificationCenter = NotificationCenter.default
-    ) {
+    /// Configuration with durations for fade-in / fade-out animations.
+    private let durations: Durations
+
+    // MARK: - Dependencies
+
+    private let sharedApplication: UIApplicationProtocol
+    private let notificationCenter: NotificationCenter
+
+    // MARK: - Constructor
+
+    init(superview: UIView?,
+         durations: Durations,
+         sharedApplication: UIApplicationProtocol = UIApplication.shared,
+         notificationCenter: NotificationCenter = .default) {
+        self.durations = durations
         self.sharedApplication = sharedApplication
         self.notificationCenter = notificationCenter
-    }
 
-    deinit {
-        if let keyWindowIsAvailableObserver = keyWindowIsAvailableObserver {
-            notificationCenter.removeObserver(keyWindowIsAvailableObserver)
+        if let superview = superview {
+            // We have a custom superview.
+            superviewSubject.value = superview
+        } else if let keyWindow = sharedApplication.keyWindow {
+            // We have a valid key window.
+            superviewSubject.value = keyWindow
+        } else {
+            // The key window is not available yet. This can happen, if the initializer is called from
+            // `UIApplicationDelegate.application(_:didFinishLaunchingWithOptions:)`.
+            // Therefore we setup an observer to inform the view model when a `UIWindow` object becomes the key window.
+            notificationCenter.addObserver(self,
+                                           selector: #selector(didReceiveUIWindowDidBecomeKeyNotification(_:)),
+                                           name: UIWindow.didBecomeKeyNotification,
+                                           object: nil)
         }
     }
 
-    // MARK: - Handle `keyWindow` availability
+    // MARK: - Private methods
 
-    func setupObserverForKeyWindow() {
-        guard let keyWindow = sharedApplication.keyWindow else {
-            // If the controller initializer is called in `appDelegate` key window will not be available,
-            // so we setup an observer to inform the delegate when it's ready.
-            keyWindowIsAvailableObserver = notificationCenter.observeOnce(forName: .UIWindowDidBecomeKey) { _ in
-                self.setupObserverForKeyWindow()
-            }
+    @objc private func didReceiveUIWindowDidBecomeKeyNotification(_: Notification) {
+        guard let keyWindow = sharedApplication.keyWindow else { return }
 
-            return
-        }
+        // Prevent informing the listener multiple times.
+        notificationCenter.removeObserver(self)
 
-        delegate?.viewModel(self, didUpdateKeyWindow: keyWindow)
+        // Now that we have a valid key window, we can use it as superview.
+        superviewSubject.value = keyWindow
     }
 
-    // MARK: - Visibility methods
+    // MARK: - Public methods
 
-    /// Fade in the gradient loading bar.
+    /// Fades in the gradient loading bar.
     func show() {
-        isVisible = true
+        animatedVisibilityUpdateSubject.value = AnimatedVisibilityUpdate(duration: durations.fadeIn,
+                                                                         isHidden: false)
     }
 
-    /// Fade out the gradient loading bar.
+    /// Fades out the gradient loading bar.
     func hide() {
-        isVisible = false
+        animatedVisibilityUpdateSubject.value = AnimatedVisibilityUpdate(duration: durations.fadeOut,
+                                                                         isHidden: true)
     }
 
     /// Toggle visiblity of gradient loading bar.
     func toggle() {
-        isVisible = !isVisible
+        if animatedVisibilityUpdateSubject.value.isHidden {
+            show()
+        } else {
+            hide()
+        }
     }
 }
 
-// MARK: - Helper: Allow mocking `UIApplication` in tests
+// MARK: - Helper
 
-protocol UIApplicationProtocol {
+/// This allows mocking `UIApplication` in tests.
+protocol UIApplicationProtocol: AnyObject {
     var keyWindow: UIWindow? { get }
 }
 
