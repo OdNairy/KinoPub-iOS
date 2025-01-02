@@ -148,7 +148,7 @@ extension EZPlayerView {
         let velocityPoint = pan.velocity(in: self)
         
         switch pan.state {
-        case UIGestureRecognizerState.began:
+        case UIGestureRecognizer.State.began:
             
             let x = abs(velocityPoint.x)
             let y = abs(velocityPoint.y)
@@ -170,7 +170,7 @@ extension EZPlayerView {
                 }
             }
             
-        case UIGestureRecognizerState.changed:
+        case UIGestureRecognizer.State.changed:
             if self.isHorizontalPan{
                 self.horizontalMoved(velocityPoint.x)
                 
@@ -178,7 +178,7 @@ extension EZPlayerView {
                 self.verticalMoved(velocityPoint.y,player:player, type: self.trigger)
             }
             
-        case UIGestureRecognizerState.ended:
+        case UIGestureRecognizer.State.ended:
             if self.isHorizontalPan{
                 if let horizontalPanDelegate =  self.controlView as? EZPlayerHorizontalPan, player.canSlideProgress{
                     if let position = self.position , !position.isNaN {
