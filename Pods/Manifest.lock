@@ -7,7 +7,6 @@ PODS:
   - AlamofireObjectMapper (5.2.1):
     - Alamofire (~> 4.7)
     - ObjectMapper (~> 3.4)
-  - Atributika (4.10.1)
   - AZSearchView (1.0.3)
   - CircleProgressView (1.2.0)
   - CustomLoader (1.1.0)
@@ -61,7 +60,6 @@ DEPENDENCIES:
   - AlamofireImage
   - AlamofireNetworkActivityLogger
   - AlamofireObjectMapper
-  - Atributika
   - AZSearchView (from `Dependencies/AZSearchView`)
   - CircleProgressView
   - CustomLoader
@@ -89,7 +87,6 @@ SPEC REPOS:
     - AlamofireImage
     - AlamofireNetworkActivityLogger
     - AlamofireObjectMapper
-    - Atributika
     - CircleProgressView
     - CustomLoader
     - DGCollectionViewPaginableBehavior
@@ -138,7 +135,6 @@ SPEC CHECKSUMS:
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
   AlamofireNetworkActivityLogger: 6d3398c692d2c5d83b0c58793537860aca1e383d
   AlamofireObjectMapper: 1989f690e982b71921b9253f53a4f33a9bc00d88
-  Atributika: 47e778507cfb3cd2c996278b0285221a62e97d71
   AZSearchView: 4b0b61e576b07bc75b780bca44e80244b74bc436
   CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
   CustomLoader: 9a2d86bc12480d43a10776c59ca1e51474e2a847
@@ -164,6 +160,6 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
   TMDBSwift: 646e42e749b072e007ed936097ae25e0a3e510e4
 
-PODFILE CHECKSUM: 53d2aa08fb96a00f4d0c291640ced01b8dda7d37
+PODFILE CHECKSUM: 22aae7f4e264f1da07cee5973fe301c3560fa935
 
 COCOAPODS: 1.16.2

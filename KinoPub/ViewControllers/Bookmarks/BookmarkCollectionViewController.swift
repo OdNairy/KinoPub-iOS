@@ -93,7 +93,7 @@ class BookmarkCollectionViewController: ContentCollectionViewController {
     
     func showBookmarkFolders(_ indexPath: IndexPath) {
         let cell = collectionView?.cellForItem(at: indexPath) as! ItemCollectionViewCell
-        _ = LoadingView.system(withStyle: .white).show(inView: cell.moveFromBookmarkButton)
+        _ = LoadingView.system(withStyle: .medium).show(inView: cell.moveFromBookmarkButton)
         viewModel.loadBookmarks { [weak self] (bookmarks) in
             guard let strongSelf = self else { return }
             let action = ActionSheet(message: "Выберите папку").tint(.kpBlack)

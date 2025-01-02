@@ -17,7 +17,6 @@ target 'KinoPub' do
   # pod 'InteractiveSideMenu', :path => 'Dependencies/InteractiveSideMenu'
   pod 'SwifterSwift'
   pod 'DGCollectionViewPaginableBehavior'
-  pod 'Atributika'
   # pod 'EZPlayer', :git => 'https://github.com/hintoz/EZPlayer.git'
   pod 'EZPlayer', :path => 'Dependencies/EZPlayer'
   # pod 'Letters'

@@ -200,6 +200,7 @@
 		69FCF3361F939CED00638A77 /* DTSPlayerFullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FCF3351F939CED00638A77 /* DTSPlayerFullScreenViewController.swift */; };
 		69FCF3381F939DFB00638A77 /* AVPlayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FCF3371F939DFB00638A77 /* AVPlayerExtension.swift */; };
 		69FCF33A1F939E3800638A77 /* DTSPlayerNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69FCF3391F939E3800638A77 /* DTSPlayerNotification.swift */; };
+		FE35ABC52D26FA5A00FBE20A /* Atributika in Frameworks */ = {isa = PBXBuildFile; productRef = FE35ABC42D26FA5A00FBE20A /* Atributika */; };
 		FE3A83252D26EE5D001B99D9 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83242D26EE5D001B99D9 /* FirebaseCore */; };
 		FE3A83272D26EE5D001B99D9 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83262D26EE5D001B99D9 /* FirebaseRemoteConfig */; };
 		FEDEC9C120226ECF00250B61 /* PrivateKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEC9C020226ECF00250B61 /* PrivateKeys.swift */; };
@@ -415,6 +416,7 @@
 			files = (
 				FE3A83272D26EE5D001B99D9 /* FirebaseRemoteConfig in Frameworks */,
 				FE3A83252D26EE5D001B99D9 /* FirebaseCore in Frameworks */,
+				FE35ABC52D26FA5A00FBE20A /* Atributika in Frameworks */,
 				4C1BD9AD48AB10D0479622DB /* Pods_KinoPub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1039,6 +1041,7 @@
 			mainGroup = 69512B061F7D2EE400BF5A89;
 			packageReferences = (
 				FE3A83232D26EE5D001B99D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				FE35ABC32D26FA5A00FBE20A /* XCRemoteSwiftPackageReference "Atributika" */,
 			);
 			productRefGroup = 69512B101F7D2EE400BF5A89 /* Products */;
 			projectDirPath = "";
@@ -1114,7 +1117,6 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/Atributika/Atributika.framework",
 				"${BUILT_PRODUCTS_DIR}/CircleProgressView/CircleProgressView.framework",
 				"${BUILT_PRODUCTS_DIR}/CustomLoader/CustomLoader.framework",
 				"${BUILT_PRODUCTS_DIR}/DGCollectionViewPaginableBehavior/DGCollectionViewPaginableBehavior.framework",
@@ -1145,7 +1147,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireNetworkActivityLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Atributika.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CustomLoader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGCollectionViewPaginableBehavior.framework",
@@ -1596,6 +1597,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FE35ABC32D26FA5A00FBE20A /* XCRemoteSwiftPackageReference "Atributika" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/psharanda/Atributika.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		FE3A83232D26EE5D001B99D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1607,6 +1616,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FE35ABC42D26FA5A00FBE20A /* Atributika */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE35ABC32D26FA5A00FBE20A /* XCRemoteSwiftPackageReference "Atributika" */;
+			productName = Atributika;
+		};
 		FE3A83242D26EE5D001B99D9 /* FirebaseCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FE3A83232D26EE5D001B99D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
