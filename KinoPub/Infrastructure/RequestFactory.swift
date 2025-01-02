@@ -1,6 +1,6 @@
 import Foundation
 import Alamofire
-import Crashlytics
+//import Crashlytics
 
 class RequestFactory {
     var account: KinopubAccount? {
@@ -226,14 +226,14 @@ class RequestFactory {
 extension RequestFactory: OAuthHandlerDelegate {
     func handlerDidUpdate(accessToken token: String, refreshToken: String) {
         accountManager!.silentlyUpdateAccountWith(accessToken: token, refreshToken: refreshToken)
-        Answers.logLogin(withMethod: "token refresh", success: 1, customAttributes: nil)
-        Answers.logCustomEvent(withName: "Token Refresh", customAttributes: ["Method": "handlerDidUpdate"])
+//        Answers.logLogin(withMethod: "token refresh", success: 1, customAttributes: nil)
+//        Answers.logCustomEvent(withName: "Token Refresh", customAttributes: ["Method": "handlerDidUpdate"])
     }
 
     func handlerDidFailedToUpdateToken() {
         accountManager!.logoutAccount()
-        Answers.logLogin(withMethod: "token refresh", success: 0, customAttributes: nil)
-        Answers.logCustomEvent(withName: "Token Refresh", customAttributes: ["Method": "handlerDidFailedToUpdateToken"])
+//        Answers.logLogin(withMethod: "token refresh", success: 0, customAttributes: nil)
+//        Answers.logCustomEvent(withName: "Token Refresh", customAttributes: ["Method": "handlerDidFailedToUpdateToken"])
     }
 
     func refreshTokenRequest() -> DataRequest {

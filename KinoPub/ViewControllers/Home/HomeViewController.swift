@@ -41,7 +41,7 @@ class HomeViewController: UIViewController, SideMenuItemContent {
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
             navigationController?.navigationItem.largeTitleDisplayMode = .always
-            let attributes = [NSAttributedStringKey.foregroundColor : UIColor.kpOffWhite]
+            let attributes = [NSAttributedString.Key.foregroundColor : UIColor.kpOffWhite]
             navigationController?.navigationBar.largeTitleTextAttributes = attributes
         } else {
             // Fallback on earlier versions
@@ -51,13 +51,13 @@ class HomeViewController: UIViewController, SideMenuItemContent {
     func configTableView() {
         tableView.backgroundColor = .clear
         tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.register(UINib(nibName: String(describing: ItemsTableViewCell.self), bundle: Bundle.main), forCellReuseIdentifier: String(describing: ItemsTableViewCell.self))
     }
     
     func configPullToRefresh() {
-        control.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        control.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         control.tintColor = .kpOffWhite
         if #available(iOS 10.0, *) {
             tableView?.refreshControl = control

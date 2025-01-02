@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '13.0'
 
 target 'KinoPub' do
 
@@ -8,13 +8,13 @@ target 'KinoPub' do
   pod 'AlamofireObjectMapper'
   pod 'AlamofireNetworkActivityLogger'
   pod 'AlamofireImage'
-  pod 'Fabric'
-  pod 'Crashlytics'
-  pod 'SwiftyUserDefaults'
+  # pod 'Fabric'
+  # pod 'Crashlytics'
+  pod 'SwiftyUserDefaults', '~> 3.0'
   pod 'KeychainSwift'
   pod 'LKAlertController'
-  # pod 'InteractiveSideMenu'
-  pod 'InteractiveSideMenu', :path => 'Dependencies/InteractiveSideMenu'
+  pod 'InteractiveSideMenu', :git => 'https://github.com/handsomecode/InteractiveSideMenu.git', :branch => 'master'
+  # pod 'InteractiveSideMenu', :path => 'Dependencies/InteractiveSideMenu'
   pod 'SwifterSwift'
   pod 'DGCollectionViewPaginableBehavior'
   pod 'Atributika'
@@ -23,8 +23,8 @@ target 'KinoPub' do
   # pod 'Letters'
   pod 'Letters', :path => 'Dependencies/Swift-UIImageView-Letters'
   pod 'RevealingSplashView'
-  pod 'TMDBSwift', :git => 'https://github.com/gkye/TheMovieDatabaseSwiftWrapper.git'
-  # pod 'TMDBSwift', :path => 'Dependencies/TheMovieDatabaseSwiftWrapper'
+  # pod 'TMDBSwift', :git => 'https://github.com/gkye/TheMovieDatabaseSwiftWrapper.git', branch: 'master'
+  pod 'TMDBSwift', :path => 'Dependencies/TheMovieDatabaseSwiftWrapper'
   pod 'SubtleVolume'
   pod 'CustomLoader'
   pod 'NotificationBannerSwift'
@@ -32,11 +32,12 @@ target 'KinoPub' do
   # pod 'NTDownload', :git => 'https://github.com/hintoz/NTDownload.git'
   pod 'NTDownload', :path => 'Dependencies/NTDownload'
   pod 'Firebase/Core'
-  pod 'Firebase/Messaging'
+  # pod 'Firebase/Messaging'
   pod 'Firebase/RemoteConfig'
-  pod 'AZSearchView', :git => 'https://github.com/hintoz/AZSearchView.git'
+  pod 'AZSearchView', path: 'Dependencies/AZSearchView'
+  # pod 'AZSearchView', :git => 'https://github.com/hintoz/AZSearchView.git'
   pod 'NDYoutubePlayer', :git => 'https://github.com/hintoz/NDYoutubePlayer.git'
-  pod 'GradientLoadingBar'
+  pod 'GradientLoadingBar', '~> 1.0'
   pod 'EasyAbout'
   pod 'CircleProgressView'
 
@@ -64,5 +65,17 @@ post_install do |installer|
 				config.build_settings['SWIFT_VERSION'] = '4.2'
 			end
 		end
+
+    case target.name
+    when 'TMDBSwift'
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      end
+    end
+
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+    end
+
 	end
 end

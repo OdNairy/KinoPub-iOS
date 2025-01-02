@@ -17,7 +17,13 @@ class ActorCollectionViewCell: UICollectionViewCell {
         if name != "" {
             namePersonLabel.isHidden = false
             namePersonLabel.text = name
-            personImageView.setImage(string: name, color: .kpGreyishBrown, circular: true, textAttributes: [NSAttributedStringKey.foregroundColor: UIColor.kpOffWhite])
+            personImageView
+                .setImage(
+                    string: name,
+                    color: .kpGreyishBrown,
+                    circular: true,
+                    textAttributes: [NSAttributedString.Key.foregroundColor: UIColor.kpOffWhite]
+                )
         } else {
             namePersonLabel.isHidden = true
         }

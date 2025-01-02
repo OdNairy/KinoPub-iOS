@@ -8,7 +8,7 @@ protocol ConfigDelegate: class {
 
 class Config {
     static let shared = Config()
-    var remoteConfig: RemoteConfig!
+//    var remoteConfig: RemoteConfig!
     weak var delegate: ConfigDelegate?
     let hiddenMenusService: HiddenMenusService
     
@@ -17,7 +17,7 @@ class Config {
         "kinopubClientSecret" : Defaults[.kinopubClientSecret] as NSObject,
         "delayViewMarkTime" : Defaults[.delayViewMarkTime] as NSObject,
         "kinopubDomain" : Defaults[.kinopubDomain] as NSObject
-                         ]
+    ]
 
     var appVersion: String {
         if let dictionary = Bundle.main.infoDictionary {
@@ -29,19 +29,23 @@ class Config {
     }
     
     var kinopubClientId: String {
-        return remoteConfig["kinopubClientId"].stringValue ?? kinopub.clientId
+        Config.kinopub.clientId
+//        return remoteConfig["kinopubClientId"].stringValue //?? kinopub.clientId
     }
     
     var kinopubClientSecret: String {
-        return remoteConfig["kinopubClientSecret"].stringValue ?? kinopub.clientSecret
+        Config.kinopub.clientSecret
+//        return remoteConfig["kinopubClientSecret"].stringValue// ?? kinopub.clientSecret
     }
     
     var delayViewMarkTime: TimeInterval {
-        return remoteConfig["delayViewMarkTime"].numberValue as? TimeInterval ?? 180
+        180
+//        return remoteConfig["delayViewMarkTime"].numberValue as? TimeInterval ?? /*180*/
     }
     
     var kinopubDomain: String {
-        return remoteConfig["kinopubDomain"].stringValue ?? kinopub.domain
+        Config.kinopub.domain
+//        return remoteConfig["kinopubDomain"].stringValue //?? kinopub.domain
     }
     
     var clientTitle: String {
@@ -74,34 +78,35 @@ class Config {
     
     init() {
         hiddenMenusService = HiddenMenusService()
-        remoteConfig = RemoteConfig.remoteConfig()
-        remoteConfig.setDefaults(defaultValues)
-        fetchRemoteConfig()
+//        remoteConfig = RemoteConfig.remoteConfig()
+//        remoteConfig.setDefaults(defaultValues)
+//        fetchRemoteConfig()
     }
     
-    func fetchRemoteConfig() {
-        #if DEBUG
-            // FIXME: Remove before production!
-            let remoteConfigSettings = RemoteConfigSettings(developerModeEnabled: true)
-            remoteConfig.configSettings = remoteConfigSettings!
-        #endif
-        
-        remoteConfig.fetch(withExpirationDuration: 0) { [unowned self] (status, error) in
-            guard error == nil else {
-                print("Error fetch remote config: \(error?.localizedDescription ?? "unknown")")
-                return
-            }
-            self.writeInUserDefaults()
-            self.remoteConfig.activateFetched()
-            self.delegate?.configDidLoad()
-        }
-    }
-    
-    func writeInUserDefaults() {
-        Defaults[.kinopubClientId] = remoteConfig["kinopubClientId"].stringValue!
-        Defaults[.kinopubClientSecret] = remoteConfig["kinopubClientSecret"].stringValue!
-        Defaults[.delayViewMarkTime] = remoteConfig["delayViewMarkTime"].numberValue as! TimeInterval
-        Defaults[.kinopubDomain] = remoteConfig["kinopubDomain"].stringValue!
-    }
-    
+//    func fetchRemoteConfig() {
+//#if DEBUG
+//        // FIXME: Remove before production!
+//        let remoteConfigSettings = RemoteConfigSettings()
+//        remoteConfigSettings.minimumFetchInterval = 0
+//        remoteConfig.configSettings = remoteConfigSettings
+//#endif
+//
+//        remoteConfig.fetch(withExpirationDuration: 0) { [unowned self] (status, error) in
+//            guard error == nil else {
+//                print("Error fetch remote config: \(error?.localizedDescription ?? "unknown")")
+//                return
+//            }
+//            self.writeInUserDefaults()
+//            self.remoteConfig.activate()
+//            self.delegate?.configDidLoad()
+//        }
+//    }
+//    
+//    func writeInUserDefaults() {
+//        Defaults[.kinopubClientId] = remoteConfig["kinopubClientId"].stringValue
+//        Defaults[.kinopubClientSecret] = remoteConfig["kinopubClientSecret"].stringValue
+//        Defaults[.delayViewMarkTime] = remoteConfig["delayViewMarkTime"].numberValue as! TimeInterval
+//        Defaults[.kinopubDomain] = remoteConfig["kinopubDomain"].stringValue
+//    }
+//    
 }

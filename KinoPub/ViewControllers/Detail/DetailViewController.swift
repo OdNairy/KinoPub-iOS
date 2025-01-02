@@ -109,7 +109,7 @@ class DetailViewController: UIViewController, SideMenuItemContent {
             footerView.setNeedsLayout()
             footerView.layoutIfNeeded()
             
-            let height = footerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            let height = footerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
             var frame = footerView.frame
             frame.size.height = height
             footerView.frame = frame
@@ -144,7 +144,7 @@ class DetailViewController: UIViewController, SideMenuItemContent {
 
     func configTableView() {
         tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
 //        let fixWrapper = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 195))
 //        let tableFooterView: TableFooterView = TableFooterView.fromNib()
 //        tableFooterView.autoresizingMask = [.flexibleWidth]
@@ -169,7 +169,7 @@ class DetailViewController: UIViewController, SideMenuItemContent {
     }
     
     func configPullToRefresh() {
-        control.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        control.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         control.tintColor = .kpOffWhite
         if #available(iOS 10.0, *) {
             tableView.refreshControl = control
@@ -364,7 +364,7 @@ extension DetailViewController {
             guard let strongSelf = self else { return }
             if let series = series {
                 var networks = ""
-                for network in series.networks {
+                for network in series.networks ?? [] {
                     if networks != "" { networks += ", " }
                     networks += network.name!
                 }
@@ -661,7 +661,10 @@ extension DetailViewController: UITableViewDataSource {
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TrailerTableViewCell.self), for: indexPath) as! TrailerTableViewCell
             cell.selectionStyle = .none
-            cell.config(withId: (model.item.trailer?.id)!)
+#warning("Cannot parse the trailer data")
+            if let trailerId = model.item.trailer?.id {
+                cell.config(withId: trailerId)
+            }
             return cell
         case 7:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SimilarTableViewCell.self), for: indexPath) as! SimilarTableViewCell

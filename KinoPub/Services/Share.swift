@@ -63,10 +63,10 @@ class Share {
     func open(url rawUrl: String, player: PlayerApplication, pasteboardValue: String? = nil) {
         guard let url = player.convert(url: rawUrl) else { return }
         guard UIApplication.shared.canOpenURL(url) else {
-            return UIApplication.shared.open(url: player.appstoreURL())
+            return UIApplication.shared.open(player.appstoreURL())
         }
         
-        UIApplication.shared.open(url: url)
+        UIApplication.shared.open(url)
         pasteboardValue.map { self.pasteboard.string = $0}
     }
     

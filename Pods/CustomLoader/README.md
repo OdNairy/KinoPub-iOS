@@ -84,8 +84,16 @@ static var myLoader: LoadingView {
 ```swift
 LoadingView.appLoadingView.show(inView: view)
 ```
+
+or
+
 ```swift
 LoadingView.myLoader.show(inView: view)
 ```
+## Screenshot
+
+![Exemple](https://github.com/fritzgerald/screenshots/raw/master/CustomLoader/Capture4.png)
+![Exemple](https://github.com/fritzgerald/screenshots/raw/master/CustomLoader/Capture5.png)
+![Exemple](https://github.com/fritzgerald/screenshots/raw/master/CustomLoader/Capture6.png)
 
 

@@ -1,7 +1,7 @@
 import Foundation
 import Alamofire
 import AlamofireObjectMapper
-import Crashlytics
+//import Crashlytics
 
 protocol OAuthHandlerDelegate: class {
     func handlerDidUpdate(accessToken token: String, refreshToken: String)
@@ -45,7 +45,7 @@ class OAuthHandler: RequestAdapter, RequestRetrier {
     func should(_ manager: SessionManager, retry request: Request, with error: Error, completion: @escaping RequestRetryCompletion) {
         lock.lock() ; defer { lock.unlock() }
 
-        Answers.logCustomEvent(withName: "RequestRetrier", customAttributes: ["ERROR:": error, "Status Code": (request.task?.response as? HTTPURLResponse)?.statusCode ?? "unknown"])
+//        Answers.logCustomEvent(withName: "RequestRetrier", customAttributes: ["ERROR:": error, "Status Code": (request.task?.response as? HTTPURLResponse)?.statusCode ?? "unknown"])
 
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
             requestsToRetry.append(completion)
@@ -87,7 +87,7 @@ class OAuthHandler: RequestAdapter, RequestRetrier {
                     completion(true, tokens.accessToken, tokens.refreshToken)
                 case .failure:
                     completion(false, nil, nil)
-                    Answers.logCustomEvent(withName: "refreshTokens", customAttributes: ["Error": response.error ?? "unknown"])
+//                    Answers.logCustomEvent(withName: "refreshTokens", customAttributes: ["Error": response.error ?? "unknown"])
                 }
         }
     }

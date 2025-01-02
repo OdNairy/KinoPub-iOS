@@ -59,7 +59,7 @@ class ItemsCollectionViewController: ContentCollectionViewController, SideMenuIt
             navigationController?.navigationItem.largeTitleDisplayMode = .always
             
             let attributes = [
-                NSAttributedStringKey.foregroundColor : UIColor.kpOffWhite
+                NSAttributedString.Key.foregroundColor : UIColor.kpOffWhite
                 ]
             
             navigationController?.navigationBar.largeTitleTextAttributes = attributes
@@ -82,7 +82,7 @@ class ItemsCollectionViewController: ContentCollectionViewController, SideMenuIt
         behavior.delegate = self
         collectionView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
         // Pull to refresh
-        control.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        control.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         control.tintColor = UIColor.kpOffWhite
         if #available(iOS 10.0, *) {
             collectionView?.refreshControl = control
@@ -357,11 +357,11 @@ extension ItemsCollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var reusableView : UICollectionReusableView!
-        if (kind == UICollectionElementKindSectionHeader) {
+        if (kind == UICollectionView.elementKindSectionHeader) {
             let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderCell", for: indexPath)
             reusableView = cell
         }
-        if (kind == UICollectionElementKindSectionFooter) {
+        if (kind == UICollectionView.elementKindSectionFooter) {
             reusableView = nil
         }
         

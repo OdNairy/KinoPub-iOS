@@ -32,7 +32,7 @@ class SeasonTableViewController: UITableViewController {
         
         configTable()
         // Pull to refresh
-        control.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        control.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         control.tintColor = UIColor.kpOffWhite
         if #available(iOS 10.0, *) {
             tableView.refreshControl = control
@@ -62,7 +62,7 @@ class SeasonTableViewController: UITableViewController {
     
     func configTable() {
         tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.backgroundColor = UIColor.kpBackground
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.separatorColor = .kpGreyishBrown

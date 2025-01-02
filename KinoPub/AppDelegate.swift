@@ -1,8 +1,8 @@
 import UIKit
 import CoreData
 import AlamofireNetworkActivityLogger
-import Fabric
-import Crashlytics
+//import Fabric
+//import Crashlytics
 import Firebase
 import AVFoundation
 import SwifterSwift
@@ -14,26 +14,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let gcmMessageIDKey = Config.firebase.gcmMessageIDKey
     var window: UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         NetworkActivityLogger.shared.level = .debug
         NetworkActivityLogger.shared.startLogging()
         
-        Fabric.with([Crashlytics()])
-        Fabric.sharedSDK().debug = true
+//        Fabric.with([Crashlytics()])
+//        Fabric.sharedSDK().debug = true
         // TODO: Move this to where you establish a user session
         configAppearance()
         
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
         } catch let error as NSError {
             print(error.localizedDescription)
         }
         
         FirebaseApp.configure()
-        // [START set_messaging_delegate]
-        Messaging.messaging().delegate = self
-        // [END set_messaging_delegate]
+//        // [START set_messaging_delegate]
+//        Messaging.messaging().delegate = self
+//        // [END set_messaging_delegate]
         
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func configAppearance() {
         UINavigationBar.appearance().tintColor = .kpOffWhite
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.kpOffWhite]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.kpOffWhite]
         UIApplication.shared.statusBarStyle = .lightContent
         UITextField.appearance().keyboardAppearance = .dark
     }
@@ -202,19 +202,19 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 // [END ios_10_message_handling]
 
 
-extension AppDelegate : MessagingDelegate {
-    // [START refresh_token]
-    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
-        print("Firebase registration token: \(fcmToken)")
-    }
-    // [END refresh_token]
-    
-    // [START ios_10_data_message]
-    // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
-    // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
-    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-        print("Received data message: \(remoteMessage.appData)")
-    }
-    // [END ios_10_data_message]
-}
+//extension AppDelegate : MessagingDelegate {
+//    // [START refresh_token]
+//    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+//        print("Firebase registration token: \(fcmToken)")
+//    }
+//    // [END refresh_token]
+//    
+//    // [START ios_10_data_message]
+//    // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
+//    // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
+//    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+//        print("Received data message: \(remoteMessage.appData)")
+//    }
+//    // [END ios_10_data_message]
+//}
 

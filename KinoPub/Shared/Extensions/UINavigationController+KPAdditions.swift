@@ -1,7 +1,7 @@
 import UIKit
 
 extension UINavigationController {
-    open override func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
+    public func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
         return topViewController
     }
 }
