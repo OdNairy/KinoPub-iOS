@@ -8,7 +8,7 @@ import SubtleVolume
 import SwiftyUserDefaults
 import UIKit
 
-protocol MediaManagerDelegate: class {
+protocol MediaManagerDelegate: AnyObject {
     func playDidFinish(model: MediaManager)
 }
 
@@ -141,7 +141,7 @@ class MediaManager {
             strongSelf.fullScreenViewController?.player!.play()
             guard !strongSelf.isLive else { return }
             if let item = strongSelf.playerNative?.currentItem,
-                let index = strongSelf.playerItems.index(of: item),
+               let index = strongSelf.playerItems.firstIndex(of: item),
                 let timeToSeek = strongSelf.mediaItems[index].watchingTime {
                 Alert(message: "Продолжить с \(timeToSeek.timeIntervalAsString("hh:mm:ss"))?")
                     .tint(.kpBlack)
@@ -244,7 +244,7 @@ class MediaManager {
         guard Config.shared.logViews else { return }
         let _time = Date().timeIntervalSinceReferenceDate
         guard _time - self.time >= Config.shared.delayViewMarkTime || force else { return }
-        if let item = playerNative?.currentItem, let index = playerItems.index(of: item) {
+        if let item = playerNative?.currentItem, let index = playerItems.firstIndex(of: item) {
             if let id = mediaItems[index].id, let video = mediaItems[index].video {
                 logViewsManager.changeMarktime(
                     id: id, time: (playerNative?.currentTime)!, video: video,
@@ -291,7 +291,7 @@ class MediaManager {
     @objc func playerDidPlayToEnd(_ notifiaction: Notification) {
         changeMarkTime(force: true)
         self.releasePlayer()
-        if let item = playerNative?.currentItem, let index = playerItems.index(of: item),
+        if let item = playerNative?.currentItem, let index = playerItems.firstIndex(of: item),
             index >= playerItems.count - 1 {
             self.releaseNativePlayer()
         }

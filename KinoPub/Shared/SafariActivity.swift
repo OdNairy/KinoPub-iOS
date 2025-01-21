@@ -29,12 +29,11 @@ class SafariActivity: UIActivity {
     }
 
     override func perform() {
-        var completed = false
-
         if let url = url {
-            completed = UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url, completionHandler: activityDidFinish)
+        } else {
+            activityDidFinish(false)
         }
 
-        activityDidFinish(completed)
     }
 }

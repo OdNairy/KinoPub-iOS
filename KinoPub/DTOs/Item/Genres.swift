@@ -16,8 +16,8 @@ public class Genres: Mappable, Hashable, Equatable, CustomStringConvertible {
     public var title: String!
     public var type: String?
 
-    public var hashValue: Int {
-        return self.id!
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 
     public var description: String {

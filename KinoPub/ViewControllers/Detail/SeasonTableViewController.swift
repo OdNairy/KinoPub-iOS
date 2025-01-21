@@ -208,10 +208,8 @@ class SeasonTableViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath)
-        -> [UITableViewRowAction]? {
-        let watchAction = UITableViewRowAction(style: .default, title: "Отметить") {
-            [weak self] (_, indexPath) in
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let watchAction = UIContextualAction(style: .normal, title: "Отметить") { [weak self] (action, view, completionHandler) in
             guard let strongSelf = self else { return }
             let video =
                 strongSelf.model.getSeason(strongSelf.indexPathSeason)?.episodes?[indexPath.row]
@@ -220,11 +218,12 @@ class SeasonTableViewController: UITableViewController {
                 id: (strongSelf.model.item?.id)!, video: video,
                 season: strongSelf.model.getSeason(strongSelf.indexPathSeason)?.number ?? 0,
                 status: nil)
+            completionHandler(true)
         }
 
         watchAction.backgroundColor = .kpGreyishTwo
 
-        return [watchAction]
+        return UISwipeActionsConfiguration(actions: [watchAction])
     }
 
     // MARK: - StatusBar Style

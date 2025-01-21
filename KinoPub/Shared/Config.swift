@@ -2,7 +2,7 @@ import FirebaseRemoteConfig
 import SwiftyUserDefaults
 import UIKit
 
-protocol ConfigDelegate: class {
+protocol ConfigDelegate: AnyObject {
     func configDidLoad()
 }
 

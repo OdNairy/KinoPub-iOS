@@ -4,7 +4,7 @@ import Foundation
 
 // import Crashlytics
 
-protocol OAuthHandlerDelegate: class {
+protocol OAuthHandlerDelegate: AnyObject {
     func handlerDidUpdate(accessToken token: String, refreshToken: String)
     func handlerDidFailedToUpdateToken()
     func refreshTokenRequest() -> DataRequest

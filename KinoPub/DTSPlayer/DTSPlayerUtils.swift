@@ -7,9 +7,11 @@ public class DTSPlayerUtils {
     /// - Returns: current top viewController
     public static func activityViewController() -> UIViewController? {
         var result: UIViewController?
-        guard var window = UIApplication.shared.keyWindow else {
+
+        guard case var window?? = UIApplication.shared.delegate?.window else {
             return nil
         }
+        
         if window.windowLevel != UIWindow.Level.normal {
             let windows = UIApplication.shared.windows
             for tmpWin in windows {

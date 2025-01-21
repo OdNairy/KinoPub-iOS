@@ -55,8 +55,7 @@ class HostViewController: MenuContainerViewController {
 
         // Instantiate menu view controller by identifier
         self.menuViewController =
-            self.storyboard!.instantiateViewController(withIdentifier: "NavigationMenu")
-            as! MenuViewController
+            (self.storyboard!.instantiateViewController(withIdentifier: "NavigationMenu") as! MenuViewController)
 
         // Gather content items controllers
         self.contentViewControllers = contentControllers()

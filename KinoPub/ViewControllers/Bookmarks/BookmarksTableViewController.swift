@@ -161,20 +161,19 @@ extension BookmarksTableViewController {
 
 // MARK: able view delegate
 extension BookmarksTableViewController {
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath)
-        -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction(style: .default, title: "Удалить") {
-            [weak self] (_, indexPath) in
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { [weak self] (_, _, completionHandler) in
             guard let strongSelf = self else { return }
             guard let folder = strongSelf.viewModel.bookmarks[indexPath.row].id else { return }
             strongSelf.viewModel.bookmarks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             strongSelf.viewModel.removeBookmarkFolder(folder: String(folder))
+            completionHandler(true)
         }
 
         deleteAction.backgroundColor = .kpGreyishTwo
 
-        return [deleteAction]
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 
