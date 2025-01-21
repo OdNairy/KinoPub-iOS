@@ -40,11 +40,15 @@ class AuthModel {
     }
 
     func startTimerCheckCode(withInterval interval: Int?) {
-        timerCheck = Timer.scheduledTimer(timeInterval: TimeInterval(interval ?? 0), target: self, selector: #selector(checkCodeValidation), userInfo: nil, repeats: true)
+        timerCheck = Timer.scheduledTimer(
+            timeInterval: TimeInterval(interval ?? 0), target: self,
+            selector: #selector(checkCodeValidation), userInfo: nil, repeats: true)
     }
-    
+
     func startTimerLoadCode(withInterval interval: Int?) {
-        timerLoad = Timer.scheduledTimer(timeInterval: TimeInterval(interval ?? 0), target: self, selector: #selector(loadNewCode), userInfo: nil, repeats: true)
+        timerLoad = Timer.scheduledTimer(
+            timeInterval: TimeInterval(interval ?? 0), target: self,
+            selector: #selector(loadNewCode), userInfo: nil, repeats: true)
     }
 
     func invalidateTimer() {
@@ -63,7 +67,7 @@ class AuthModel {
     deinit {
         invalidateTimer()
     }
-    
+
     @objc func loadNewCode() {
         invalidateTimer()
         delegate?.updateCode(authModel: self)
@@ -82,7 +86,7 @@ class AuthModel {
 
 extension AuthModel: AccountManagerDelegate {
     func accountManagerDidAuth(accountManager: AccountManager, toAccount account: KinopubAccount) {
-        
+
         self.delegate?.authModelDidAuth(authModel: self)
     }
 }

@@ -13,7 +13,7 @@ public class Collections: Mappable {
         static let created = "created"
         static let title = "title"
     }
-    
+
     // MARK: Properties
     public var updated: Int!
     public var posters: Posters!
@@ -22,15 +22,15 @@ public class Collections: Mappable {
     public var id: Int!
     public var created: Int!
     public var title: String!
-    
+
     // MARK: ObjectMapper Initializers
     /// Map a JSON object to this class using ObjectMapper.
     ///
     /// - parameter map: A mapping from ObjectMapper.
-    public required init?(map: Map){
-        
+    public required init?(map: Map) {
+
     }
-    
+
     /// Map a JSON object to this class using ObjectMapper.
     ///
     /// - parameter map: A mapping from ObjectMapper.

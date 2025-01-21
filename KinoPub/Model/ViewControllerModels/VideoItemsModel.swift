@@ -9,7 +9,7 @@ protocol VideoItemsModelDelegate: AnyObject {
 class VideoItemsModel: AccountManagerDelegate {
     weak var delegate: VideoItemsModelDelegate?
     var videoItems = [Item]()
-    var parameters = [String : String]()
+    var parameters = [String: String]()
     var from: String?
     var page: Int = 1
     var totalPages: Int = 1
@@ -24,7 +24,7 @@ class VideoItemsModel: AccountManagerDelegate {
     var totalPagesOfSearch: Int = 1
     // Filters
     var filter = Filter.defaultFilter
-    
+
     // Main page
     var newFilms = [Item]()
     var newSeries = [Item]()
@@ -32,70 +32,76 @@ class VideoItemsModel: AccountManagerDelegate {
     var hotSeries = [Item]()
     var freshMovies = [Item]()
     var freshSeries = [Item]()
-    
+
     //
     let accountManager: AccountManager
     let networkingService: VideosNetworkingService
-    
+
     init(accountManager: AccountManager) {
         self.accountManager = accountManager
         networkingService = VideosNetworkingService(requestFactory: accountManager.requestFactory)
         accountManager.addDelegate(delegate: self)
     }
-    
-    func loadVideoItems(completed: @escaping (_ count: Int?) -> ()) {
-        if (accountManager.hasAccount) {
+
+    func loadVideoItems(completed: @escaping (_ count: Int?) -> Void) {
+        if accountManager.hasAccount {
             switch from {
-            case "watching"?:
-                loadWatchingSeries(completed: { (count) in
-                    completed(count)
-                })
-            case "used"?:
-                loadWatchingSeries(0, completed: { (count) in
-                    completed(count)
-                })
-            case "usedMovie"?:
-                loadWatchingMovie(completed: { (count) in
-                    completed(count)
-                })
-            case "collections"?:
-                loadItemsCollection(completed: { (count) in
-                    completed(count)
-                })
-            default:
-                loadVideos(completed: { (count) in
-                    completed(count)
-                })
+                case "watching"?:
+                    loadWatchingSeries(completed: { (count) in
+                        completed(count)
+                    })
+                case "used"?:
+                    loadWatchingSeries(
+                        0,
+                        completed: { (count) in
+                            completed(count)
+                        })
+                case "usedMovie"?:
+                    loadWatchingMovie(completed: { (count) in
+                        completed(count)
+                    })
+                case "collections"?:
+                    loadItemsCollection(completed: { (count) in
+                        completed(count)
+                    })
+                default:
+                    loadVideos(completed: { (count) in
+                        completed(count)
+                    })
             }
         }
     }
-    
+
     // Load Movies (all, fresh, hot popular), Series, Docu, TV Show, Concert
-    private func loadVideos(completed: @escaping (_ count: Int?) -> ()) {
+    private func loadVideos(completed: @escaping (_ count: Int?) -> Void) {
         parameters["page"] = "\(page)"
         var param = parameters
         if let parameters = filter.parameters {
             param.unionInPlace(parameters)
         }
-        networkingService.receiveItems(withParameters: param, from: from, completed: { [weak self] (response, error) in
-            guard let strongSelf = self else { return }
-            if let itemsData = response {
-                guard let items = itemsData.items else { return }
-                strongSelf.page += 1
-                strongSelf.videoItems.append(contentsOf: items)
-                strongSelf.delegate?.didUpdateItems(model: strongSelf)
-                completed(itemsData.items?.count)
-            } else {
-                debugPrint("[!ERROR]: \(String(describing: error?.localizedDescription))")
-                Alert(title: "Ошибка", message: error?.localizedDescription)
-                    .showOkay()
-                completed(nil)
-            }
-        })
+        networkingService.receiveItems(
+            withParameters: param, from: from,
+            completed: { [weak self] (response, error) in
+                guard let strongSelf = self else { return }
+                if let itemsData = response {
+                    guard let items = itemsData.items else { return }
+                    strongSelf.page += 1
+                    strongSelf.videoItems.append(contentsOf: items)
+                    strongSelf.delegate?.didUpdateItems(model: strongSelf)
+                    completed(itemsData.items?.count)
+                } else {
+                    debugPrint("[!ERROR]: \(String(describing: error?.localizedDescription))")
+                    Alert(title: "Ошибка", message: error?.localizedDescription)
+                        .showOkay()
+                    completed(nil)
+                }
+            })
     }
-    
+
     // Load Watchlist and Used Series
-     private func loadWatchingSeries(_ subscribed: Int = 1, completed: @escaping (_ count: Int?) -> ()) {
+    private func loadWatchingSeries(
+        _ subscribed: Int = 1, completed: @escaping (_ count: Int?) -> Void
+    ) {
         networkingService.receiveWatchingSeries(subscribed) { [weak self] (response, error) in
             guard let strongSelf = self else { return }
             if let itemsData = response {
@@ -111,9 +117,9 @@ class VideoItemsModel: AccountManagerDelegate {
             }
         }
     }
-    
+
     // Load Used Movies
-    private func loadWatchingMovie(completed: @escaping (_ count: Int?) -> ()) {
+    private func loadWatchingMovie(completed: @escaping (_ count: Int?) -> Void) {
         networkingService.receiveWatchingMovie { [weak self] (response, error) in
             guard let strongSelf = self else { return }
             if let itemsData = response {
@@ -129,47 +135,54 @@ class VideoItemsModel: AccountManagerDelegate {
             }
         }
     }
-    
+
     // Load items title search
-    func loadSearchItems(_ title: String, iOS11: Bool = false, _ completed: @escaping (_ count: Int?)->()) {
-        var parameters = [String : String]()
+    func loadSearchItems(
+        _ title: String, iOS11: Bool = false, _ completed: @escaping (_ count: Int?) -> Void
+    ) {
+        var parameters = [String: String]()
         parameters["title"] = title
-//        parameters["type"] = "50"
+        //        parameters["type"] = "50"
         iOS11 ? (parameters["page"] = "\(pageOfSearch)") : (parameters["perpage"] = "50")
-//        parameters["page"] = "\(pageOfSearch)"
-        networkingService.receiveItems(withParameters: parameters, from: nil, cancelPrevious: true, completed: { [weak self] (response, error) in
-            guard let strongSelf = self else { return }
-            if let itemsData = response {
-                guard let items = itemsData.items else { return }
-                strongSelf.pageOfSearch += 1
-                strongSelf.resultItems.append(contentsOf: items)
-                completed(itemsData.items?.count)
-            }
-        })
+        //        parameters["page"] = "\(pageOfSearch)"
+        networkingService.receiveItems(
+            withParameters: parameters, from: nil, cancelPrevious: true,
+            completed: { [weak self] (response, _) in
+                guard let strongSelf = self else { return }
+                if let itemsData = response {
+                    guard let items = itemsData.items else { return }
+                    strongSelf.pageOfSearch += 1
+                    strongSelf.resultItems.append(contentsOf: items)
+                    completed(itemsData.items?.count)
+                }
+            })
     }
-    
+
     // Load collection items
-    func loadItemsCollection(completed: @escaping (_ count: Int?) -> ()) {
-        networkingService.receiveItemsCollection(parameters: parameters) { [weak self] (response, error) in
+    func loadItemsCollection(completed: @escaping (_ count: Int?) -> Void) {
+        networkingService.receiveItemsCollection(parameters: parameters) {
+            [weak self] (response, error) in
             guard let strongSelf = self else { return }
             if let itemsData = response {
                 strongSelf.videoItems.append(contentsOf: itemsData)
                 strongSelf.delegate?.didUpdateItems(model: strongSelf)
                 completed(itemsData.count)
             } else {
-                let banner = NotificationBanner(title: "Ошибка", subtitle: "\(error?.localizedDescription ?? "")", style: .danger)
+                let banner = NotificationBanner(
+                    title: "Ошибка", subtitle: "\(error?.localizedDescription ?? "")",
+                    style: .danger)
                 banner.show(queuePosition: .front)
                 completed(nil)
             }
         }
     }
-    
+
     // Load New Films
     func loadNewFilms() {
         var param = parameters
         param["type"] = ItemType.movies.rawValue
         param["sort"] = "-created"
-//        let from = "fresh"
+        //        let from = "fresh"
         loadItems(with: param, from: from) { [weak self] (items) in
             guard let strongSelf = self else { return }
             if let _items = items {
@@ -177,13 +190,13 @@ class VideoItemsModel: AccountManagerDelegate {
             }
         }
     }
-    
+
     // Load New Series
     func loadNewSeries() {
         var param = parameters
         param["type"] = ItemType.shows.rawValue
         param["sort"] = "-created"
-//        let from = "fresh"
+        //        let from = "fresh"
         loadItems(with: param, from: from) { [weak self] (items) in
             guard let strongSelf = self else { return }
             if let _items = items {
@@ -191,7 +204,7 @@ class VideoItemsModel: AccountManagerDelegate {
             }
         }
     }
-    
+
     // Load Hot Films
     func loadHotFilms() {
         var param = parameters
@@ -204,7 +217,7 @@ class VideoItemsModel: AccountManagerDelegate {
             }
         }
     }
-    
+
     // Load Hot Series
     func loadHotSeries() {
         var param = parameters
@@ -217,7 +230,7 @@ class VideoItemsModel: AccountManagerDelegate {
             }
         }
     }
-    
+
     // Load Fresh Movies
     func loadFreshMovies() {
         var param = parameters
@@ -230,7 +243,7 @@ class VideoItemsModel: AccountManagerDelegate {
             }
         }
     }
-    
+
     // Load Fresh Series
     func loadFreshSeries() {
         var param = parameters
@@ -243,11 +256,15 @@ class VideoItemsModel: AccountManagerDelegate {
             }
         }
     }
-    
+
     // Load Items
-    private func loadItems(with parameters: [String : String], from: String?, completed: @escaping (_ items: [Item]?) -> ()) {
+    private func loadItems(
+        with parameters: [String: String], from: String?,
+        completed: @escaping (_ items: [Item]?) -> Void
+    ) {
         guard accountManager.hasAccount else { return }
-        networkingService.receiveItems(withParameters: parameters, from: from) { [weak self] (response, error) in
+        networkingService.receiveItems(withParameters: parameters, from: from) {
+            [weak self] (response, error) in
             guard let strongSelf = self else { return }
             if let itemsData = response {
                 completed(itemsData.items)
@@ -259,39 +276,39 @@ class VideoItemsModel: AccountManagerDelegate {
             }
         }
     }
-    
+
     func setParameter(_ key: String, value: String) {
         parameters[key] = value
     }
-    
+
     func configFrom(_ from: String?) {
         self.from = from
     }
-    
+
     func refresh() {
         page = 1
         videoItems.removeAll()
     }
-    
+
     func refreshSearch() {
         pageOfSearch = 1
         resultItems.removeAll()
     }
-    
+
     func countPerPage() -> Int {
         switch from {
-        case "watching"?, "used"?, "usedMovie"?:
-            return 51
-        case "collections"?:
-            return 100
-        default:
-            return 20
+            case "watching"?, "used"?, "usedMovie"?:
+                return 51
+            case "collections"?:
+                return 100
+            default:
+                return 20
         }
     }
-    
+
     func accountManagerDidAuth(accountManager: AccountManager, toAccount account: KinopubAccount) {
         loadVideoItems { (_) in
-            
+
         }
     }
 }

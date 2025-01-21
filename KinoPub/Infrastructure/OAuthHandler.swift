@@ -1,7 +1,8 @@
-import Foundation
 import Alamofire
 import AlamofireObjectMapper
-//import Crashlytics
+import Foundation
+
+// import Crashlytics
 
 protocol OAuthHandlerDelegate: class {
     func handlerDidUpdate(accessToken token: String, refreshToken: String)
@@ -10,7 +11,9 @@ protocol OAuthHandlerDelegate: class {
 }
 
 class OAuthHandler: RequestAdapter, RequestRetrier {
-    private typealias RefreshCompletion = (_ success: Bool, _ accessToken: String?, _ refreshToken: String?) -> Void
+    private typealias RefreshCompletion = (
+        _ success: Bool, _ accessToken: String?, _ refreshToken: String?
+    ) -> Void
 
     private let sessionManager: SessionManager = {
         let configuration = URLSessionConfiguration.default
@@ -42,10 +45,14 @@ class OAuthHandler: RequestAdapter, RequestRetrier {
     }
 
     // MARK: - RequestRetrier
-    func should(_ manager: SessionManager, retry request: Request, with error: Error, completion: @escaping RequestRetryCompletion) {
-        lock.lock() ; defer { lock.unlock() }
+    func should(
+        _ manager: SessionManager, retry request: Request, with error: Error,
+        completion: @escaping RequestRetryCompletion
+    ) {
+        lock.lock()
+        defer { lock.unlock() }
 
-//        Answers.logCustomEvent(withName: "RequestRetrier", customAttributes: ["ERROR:": error, "Status Code": (request.task?.response as? HTTPURLResponse)?.statusCode ?? "unknown"])
+        //        Answers.logCustomEvent(withName: "RequestRetrier", customAttributes: ["ERROR:": error, "Status Code": (request.task?.response as? HTTPURLResponse)?.statusCode ?? "unknown"])
 
         if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
             requestsToRetry.append(completion)
@@ -54,11 +61,13 @@ class OAuthHandler: RequestAdapter, RequestRetrier {
                 refreshTokens { [weak self] succeeded, accessToken, refreshToken in
                     guard let strongSelf = self else { return }
 
-                    strongSelf.lock.lock() ; defer { strongSelf.lock.unlock() }
+                    strongSelf.lock.lock()
+                    defer { strongSelf.lock.unlock() }
 
                     if let accessToken = accessToken, let refreshToken = refreshToken {
                         strongSelf.accessToken = accessToken
-                        strongSelf.delegate?.handlerDidUpdate(accessToken: accessToken, refreshToken: refreshToken)
+                        strongSelf.delegate?.handlerDidUpdate(
+                            accessToken: accessToken, refreshToken: refreshToken)
                     }
 
                     strongSelf.requestsToRetry.forEach { $0(succeeded, 0.0) }
@@ -82,13 +91,13 @@ class OAuthHandler: RequestAdapter, RequestRetrier {
         request.validate()
             .responseObject { (response: DataResponse<TokenResponse>) in
                 switch response.result {
-                case .success:
-                    let tokens = response.result.value!
-                    completion(true, tokens.accessToken, tokens.refreshToken)
-                case .failure:
-                    completion(false, nil, nil)
-//                    Answers.logCustomEvent(withName: "refreshTokens", customAttributes: ["Error": response.error ?? "unknown"])
+                    case .success:
+                        let tokens = response.result.value!
+                        completion(true, tokens.accessToken, tokens.refreshToken)
+                    case .failure:
+                        completion(false, nil, nil)
+                //                    Answers.logCustomEvent(withName: "refreshTokens", customAttributes: ["Error": response.error ?? "unknown"])
                 }
-        }
+            }
     }
 }

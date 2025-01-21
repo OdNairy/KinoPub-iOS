@@ -3,7 +3,7 @@ import UIKit
 class CastTableViewCell: UITableViewCell {
 
     static let reuseIdentifier = "CastTableViewCell"
-    
+
     var actors = [String]()
     var directors = [String]()
 
@@ -12,10 +12,11 @@ class CastTableViewCell: UITableViewCell {
 
     @IBOutlet weak var directorStackView: UIStackView!
     @IBOutlet weak var actorsStackView: UIStackView!
-    
+
     @IBOutlet weak var directorCollectionView: UICollectionView! {
         didSet {
-            directorCollectionView.contentInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+            directorCollectionView.contentInset = UIEdgeInsets(
+                top: 0, left: 15, bottom: 0, right: 15)
         }
     }
     @IBOutlet weak var actorCollectionView: UICollectionView! {
@@ -32,18 +33,16 @@ class CastTableViewCell: UITableViewCell {
         backgroundColor = UIColor.clear
         configureLabels()
 
-        directorCollectionView.register(UINib(nibName: String(describing: ActorCollectionViewCell.self), bundle: Bundle.main),
-                                        forCellWithReuseIdentifier: String(describing: ActorCollectionViewCell.self))
-        actorCollectionView.register(UINib(nibName: String(describing: ActorCollectionViewCell.self), bundle: Bundle.main),
-                                        forCellWithReuseIdentifier: String(describing: ActorCollectionViewCell.self))
-        directorCollectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapDirector(_:))))
-        actorCollectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapActor(_:))))
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        directorCollectionView.register(
+            UINib(nibName: String(describing: ActorCollectionViewCell.self), bundle: Bundle.main),
+            forCellWithReuseIdentifier: String(describing: ActorCollectionViewCell.self))
+        actorCollectionView.register(
+            UINib(nibName: String(describing: ActorCollectionViewCell.self), bundle: Bundle.main),
+            forCellWithReuseIdentifier: String(describing: ActorCollectionViewCell.self))
+        directorCollectionView.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(tapDirector(_:))))
+        actorCollectionView.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(tapActor(_:))))
     }
 
     func configure(with actors: String?, directors: String?) {
@@ -55,8 +54,8 @@ class CastTableViewCell: UITableViewCell {
 
     func configure(actors: String?) {
         guard actors != "" else {
-//            actorsTitleLabel.isHidden = true
-//            actorCellectionHeightConstraint.constant = 0
+            //            actorsTitleLabel.isHidden = true
+            //            actorCellectionHeightConstraint.constant = 0
             actorsStackView.isHidden = true
             return
         }
@@ -71,8 +70,8 @@ class CastTableViewCell: UITableViewCell {
 
     func configure(directors: String?) {
         guard directors != "" else {
-//            directorsTitleLabel.isHidden = true
-//            directorCollectionHeightConstraint.constant = 0
+            //            directorsTitleLabel.isHidden = true
+            //            directorCollectionHeightConstraint.constant = 0
             directorStackView.isHidden = true
             return
         }
@@ -86,22 +85,24 @@ class CastTableViewCell: UITableViewCell {
         actorsTitleLabel.textColor = .kpGreyishBrown
         directorsTitleLabel.textColor = .kpGreyishBrown
     }
-    
+
     @objc func tapDirector(_ sender: UITapGestureRecognizer) {
-        if let indexPath = self.directorCollectionView.indexPathForItem(at: sender.location(in: self.directorCollectionView)) {
-            let parameters = ["director" : directors[indexPath.row]]
+        if let indexPath = self.directorCollectionView.indexPathForItem(
+            at: sender.location(in: self.directorCollectionView)) {
+            let parameters = ["director": directors[indexPath.row]]
             showItemVC(withParameters: parameters)
         }
     }
-    
+
     @objc func tapActor(_ sender: UITapGestureRecognizer) {
-        if let indexPath = self.actorCollectionView.indexPathForItem(at: sender.location(in: self.actorCollectionView)) {
-            let parameters = ["actor" : actors[indexPath.row]]
+        if let indexPath = self.actorCollectionView.indexPathForItem(
+            at: sender.location(in: self.actorCollectionView)) {
+            let parameters = ["actor": actors[indexPath.row]]
             showItemVC(withParameters: parameters)
         }
     }
-    
-    func showItemVC(withParameters parameters: [String : String]) {
+
+    func showItemVC(withParameters parameters: [String: String]) {
         if let itemVC = ActorCollectionViewController.storyboardInstance() {
             itemVC.viewModel.parameters = parameters
             itemVC.title = parameters["director"] ?? parameters["actor"]
@@ -116,7 +117,8 @@ extension CastTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
         return 1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int)
+        -> Int {
         if collectionView == self.directorCollectionView {
             return directors.count
         }
@@ -124,13 +126,20 @@ extension CastTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
 
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath)
+        -> UICollectionViewCell {
         if collectionView == directorCollectionView {
-            let cell = directorCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ActorCollectionViewCell.self), for: indexPath) as! ActorCollectionViewCell
+            let cell =
+                directorCollectionView.dequeueReusableCell(
+                    withReuseIdentifier: String(describing: ActorCollectionViewCell.self),
+                    for: indexPath) as! ActorCollectionViewCell
             cell.configure(with: directors[indexPath.row])
             return cell
         } else {
-            let cell = actorCollectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ActorCollectionViewCell.self), for: indexPath) as! ActorCollectionViewCell
+            let cell =
+                actorCollectionView.dequeueReusableCell(
+                    withReuseIdentifier: String(describing: ActorCollectionViewCell.self),
+                    for: indexPath) as! ActorCollectionViewCell
             cell.configure(with: actors[indexPath.row])
             return cell
         }
@@ -138,29 +147,37 @@ extension CastTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
 }
 
 extension CastTableViewCell: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
-//        let screenwith  = ScreenSize.SCREEN_WIDTH
-//        let colum:Float = 2.0, spacing:Float = 8.0;
-//        let value = floorf((Float(screenwith) - (colum - 1) * spacing) / colum)
-//        let cellHeight = screenwith*0.48
-//        let cellWidth = CGFloat(value + (value / 1.3 ))
-        
-        
-//        return  CGSize(width: 320, height: 50)
-//    }
+    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    //        let screenwith  = ScreenSize.SCREEN_WIDTH
+    //        let colum:Float = 2.0, spacing:Float = 8.0;
+    //        let value = floorf((Float(screenwith) - (colum - 1) * spacing) / colum)
+    //        let cellHeight = screenwith*0.48
+    //        let cellWidth = CGFloat(value + (value / 1.3 ))
+
+    //        return  CGSize(width: 320, height: 50)
+    //    }
+
+    func collectionView(
+        _ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> UIEdgeInsets {
 
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(
+        _ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
 
         return 10
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(
+        _ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAt section: Int
+    ) -> CGFloat {
 
         return 0
     }

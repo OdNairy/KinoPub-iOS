@@ -1,5 +1,5 @@
-import UIKit
 import Letters
+import UIKit
 
 class ActorCollectionViewCell: UICollectionViewCell {
 

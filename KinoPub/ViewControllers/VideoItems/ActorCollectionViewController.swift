@@ -1,10 +1,10 @@
-import UIKit
 import DGCollectionViewPaginableBehavior
 import InteractiveSideMenu
+import UIKit
 
 class ActorCollectionViewController: ContentCollectionViewController, SideMenuItemContent {
     let viewModel = Container.ViewModel.videoItems()
-    
+
     let behavior = DGCollectionViewPaginableBehavior()
     let control = UIRefreshControl()
     var refreshing: Bool = false
@@ -14,7 +14,7 @@ class ActorCollectionViewController: ContentCollectionViewController, SideMenuIt
         configNavBar()
         configCollectionView()
     }
-    
+
     func configNavBar() {
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .always
@@ -28,8 +28,9 @@ class ActorCollectionViewController: ContentCollectionViewController, SideMenuIt
         collectionView?.delegate = behavior
         collectionView?.dataSource = self
         behavior.delegate = self
-        collectionView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
-        
+        collectionView?.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(tap)))
+
         // Pull to refresh
         control.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         control.tintColor = UIColor.kpOffWhite
@@ -39,7 +40,7 @@ class ActorCollectionViewController: ContentCollectionViewController, SideMenuIt
             collectionView?.addSubview(control)
         }
     }
-    
+
     @objc func refresh() {
         refreshing = true
         viewModel.refresh()
@@ -50,15 +51,17 @@ class ActorCollectionViewController: ContentCollectionViewController, SideMenuIt
         }
         control.endRefreshing()
     }
-    
+
     // MARK: - Navigation
     static func storyboardInstance() -> ActorCollectionViewController? {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? ActorCollectionViewController
+        return storyboard.instantiateViewController(withIdentifier: String(describing: self))
+            as? ActorCollectionViewController
     }
-    
+
     @objc func tap(sender: UITapGestureRecognizer) {
-        if let indexPath = self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) {
+        if let indexPath = self.collectionView?.indexPathForItem(
+            at: sender.location(in: self.collectionView)) {
             if let cell = collectionView?.cellForItem(at: indexPath) as? ItemCollectionViewCell {
                 if let image = cell.posterImageView.image {
                     showDetailVC(with: viewModel.videoItems[indexPath.row], andImage: image)
@@ -66,7 +69,7 @@ class ActorCollectionViewController: ContentCollectionViewController, SideMenuIt
             }
         }
     }
-    
+
     func showDetailVC(with item: Item, andImage image: UIImage) {
         if let detailViewController = DetailViewController.storyboardInstance() {
             detailViewController.image = image
@@ -82,22 +85,34 @@ extension ActorCollectionViewController {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+    override func collectionView(
+        _ collectionView: UICollectionView, numberOfItemsInSection section: Int
+    ) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return viewModel.videoItems.count + (self.behavior.sectionStatus(forSection: section).done ? 0 : 1)
+        return viewModel.videoItems.count
+            + (self.behavior.sectionStatus(forSection: section).done ? 0 : 1)
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+    override func collectionView(
+        _ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
         guard indexPath.row < viewModel.videoItems.count else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoadingItemCollectionViewCell.reuseIdentifier, for: indexPath) as! LoadingItemCollectionViewCell
+            let cell =
+                collectionView.dequeueReusableCell(
+                    withReuseIdentifier: LoadingItemCollectionViewCell.reuseIdentifier,
+                    for: indexPath) as! LoadingItemCollectionViewCell
             if !self.refreshing {
-                cell.set(moreToLoad: !self.behavior.sectionStatus(forSection: indexPath.section).done)
+                cell.set(
+                    moreToLoad: !self.behavior.sectionStatus(forSection: indexPath.section).done)
             }
             return cell
         }
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ItemCollectionViewCell.self), for: indexPath) as! ItemCollectionViewCell
+
+        let cell =
+            collectionView.dequeueReusableCell(
+                withReuseIdentifier: String(describing: ItemCollectionViewCell.self), for: indexPath
+            ) as! ItemCollectionViewCell
         cell.set(item: viewModel.videoItems[indexPath.row])
         return cell
     }
@@ -105,28 +120,40 @@ extension ActorCollectionViewController {
 
 // MARK: DGCollectionViewPaginableBehaviorDelegate
 extension ActorCollectionViewController: DGCollectionViewPaginableBehaviorDelegate {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
         var constant: CGFloat
         let orientation = UIApplication.shared.statusBarOrientation
-        if (orientation == .landscapeLeft || orientation == .landscapeRight), UIDevice.current.userInterfaceIdiom == .pad {
+        if orientation == .landscapeLeft || orientation == .landscapeRight,
+            UIDevice.current.userInterfaceIdiom == .pad {
             constant = 6.0
-        } else if (orientation == .portrait || orientation == .portraitUpsideDown), UIDevice.current.userInterfaceIdiom == .pad {
+        } else if orientation == .portrait || orientation == .portraitUpsideDown,
+            UIDevice.current.userInterfaceIdiom == .pad {
             constant = 4.0
         } else if orientation == .landscapeLeft || orientation == .landscapeRight {
             constant = 4.0
         } else {
             constant = 2.0
         }
-        let width = (collectionView.bounds.width - (collectionView.contentInset.left + collectionView.contentInset.right)) / constant
+        let width =
+            (collectionView.bounds.width
+                - (collectionView.contentInset.left + collectionView.contentInset.right)) / constant
         let height = width * 1.569
         return CGSize(width: width, height: height)
     }
-    
-    func paginableBehavior(_ paginableBehavior: DGCollectionViewPaginableBehavior, countPerPageInSection section: Int) -> Int {
+
+    func paginableBehavior(
+        _ paginableBehavior: DGCollectionViewPaginableBehavior, countPerPageInSection section: Int
+    ) -> Int {
         return viewModel.countPerPage()
     }
-    
-    func paginableBehavior(_ paginableBehavior: DGCollectionViewPaginableBehavior, fetchDataFrom indexPath: IndexPath, count: Int, completion: @escaping (Error?, Int) -> Void) {
+
+    func paginableBehavior(
+        _ paginableBehavior: DGCollectionViewPaginableBehavior, fetchDataFrom indexPath: IndexPath,
+        count: Int, completion: @escaping (Error?, Int) -> Void
+    ) {
         viewModel.loadVideoItems { (resultCount) in
             completion(nil, resultCount ?? 0)
         }

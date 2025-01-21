@@ -10,19 +10,20 @@ class CollectionModel {
     weak var delegate: CollectionModelDelegate?
     var collections = [Collections]()
     var page: Int = 1
-    
+
     let accountManager: AccountManager
     let networkingService: CollectionsNetworkingService
-    
+
     init(accountManager: AccountManager) {
         self.accountManager = accountManager
-        networkingService = CollectionsNetworkingService(requestFactory: accountManager.requestFactory)
+        networkingService = CollectionsNetworkingService(
+            requestFactory: accountManager.requestFactory)
         //        accountManager.addDelegate(delegate: self)
     }
-    
-    func loadCollections(completed: @escaping (_ count: Int?) -> ()) {
+
+    func loadCollections(completed: @escaping (_ count: Int?) -> Void) {
         networkingService.receiveCollections(page: page.string) { [weak self] (response, error) in
-        guard let strongSelf = self else { return }
+            guard let strongSelf = self else { return }
             if let itemsData = response {
                 guard let items = itemsData.items else { return }
                 strongSelf.page += 1
@@ -36,7 +37,7 @@ class CollectionModel {
             }
         }
     }
-    
+
     func refresh() {
         page = 1
         collections.removeAll()

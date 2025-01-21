@@ -1,5 +1,5 @@
-import UIKit
 import InteractiveSideMenu
+import UIKit
 
 class NavigationController: UINavigationController, SideMenuItemContent {
 
@@ -7,7 +7,7 @@ class NavigationController: UINavigationController, SideMenuItemContent {
         super.viewDidLoad()
 
         navigationBar.barStyle = .black
-        
+
         if #available(iOS 11.0, *) {
             navigationItem.largeTitleDisplayMode = .always
         } else {
@@ -20,23 +20,23 @@ class NavigationController: UINavigationController, SideMenuItemContent {
         if self.topViewController != nil {
             return self.topViewController!.shouldAutorotate
         } else {
-            return  super.shouldAutorotate
+            return super.shouldAutorotate
         }
     }
 
-    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
-        if self.topViewController != nil{
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if self.topViewController != nil {
             return self.topViewController!.supportedInterfaceOrientations
-        }else{
-            return  super.supportedInterfaceOrientations
+        } else {
+            return super.supportedInterfaceOrientations
         }
     }
-    
+
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        if self.topViewController != nil{
+        if self.topViewController != nil {
             return self.topViewController!.preferredInterfaceOrientationForPresentation
-        }else{
-            return  super.preferredInterfaceOrientationForPresentation
+        } else {
+            return super.preferredInterfaceOrientationForPresentation
         }
     }
 

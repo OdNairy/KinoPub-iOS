@@ -1,19 +1,19 @@
-import UIKit
 import CustomLoader
+import UIKit
 
 class AuthViewController: UIViewController {
     fileprivate let viewModel = Container.ViewModel.auth()
-    
+
     let pasteboard = UIPasteboard.general
 
-//    @IBOutlet weak var URLLabel: UILabel!
+    //    @IBOutlet weak var URLLabel: UILabel!
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var codeTitleLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var activateButton: UIButton!
-    
+
     @IBAction func activateButtonTapped(_ sender: Any) {
         openSafariVC()
     }
@@ -30,7 +30,7 @@ class AuthViewController: UIViewController {
         super.viewDidDisappear(animated)
         viewModel.invalidateTimer()
     }
-    
+
     func config() {
         view.backgroundColor = .kpBackground
         titleLabel.textColor = .kpOffWhite
@@ -40,27 +40,27 @@ class AuthViewController: UIViewController {
         activateButton.backgroundColor = .kpMarigold
         activateButton.setTitleColor(.kpBlack, for: .normal)
         activateButton.setTitle("", for: .disabled)
-        
+
         loadCode()
-//        if Config.shared.kinopubDomain == "" {
-            codeLabel.text = "загрузка"
-            activateButton.isEnabled = false
+        //        if Config.shared.kinopubDomain == "" {
+        codeLabel.text = "загрузка"
+        activateButton.isEnabled = false
         _ = LoadingView.system(withStyle: .medium).show(inView: activateButton)
-//            URLLabel.text = "загрузка..."
-//        } else {
-//            URLLabel.text = "\(Config.shared.kinopubDomain)/device"
-//            let tapURLLabel = UITapGestureRecognizer(target: self, action: #selector(openSafariVC(_:)))
-//            URLLabel.isUserInteractionEnabled = true
-//            URLLabel.addGestureRecognizer(tapURLLabel)
-//            activateButton.isEnabled = true
-//        }
+        //            URLLabel.text = "загрузка..."
+        //        } else {
+        //            URLLabel.text = "\(Config.shared.kinopubDomain)/device"
+        //            let tapURLLabel = UITapGestureRecognizer(target: self, action: #selector(openSafariVC(_:)))
+        //            URLLabel.isUserInteractionEnabled = true
+        //            URLLabel.addGestureRecognizer(tapURLLabel)
+        //            activateButton.isEnabled = true
+        //        }
     }
-    
+
     func configButton() {
         activateButton.removeLoadingViews(animated: true)
         activateButton.isEnabled = true
     }
-    
+
     func loadCode() {
         viewModel.loadDeviceCode { [weak self] (authResponse) in
             guard let strongSelf = self else { return }
@@ -72,9 +72,12 @@ class AuthViewController: UIViewController {
     func openSafariVC() {
         if let code = viewModel.userCode {
             if #available(iOS 10.0, *) {
-                UIApplication.shared.open(URL(string: "\(Config.shared.kinopubDomain)/device?code=\(code)")!, options: [:], completionHandler: nil)
+                UIApplication.shared.open(
+                    URL(string: "\(Config.shared.kinopubDomain)/device?code=\(code)")!,
+                    options: [:], completionHandler: nil)
             } else {
-                UIApplication.shared.openURL(URL(string: "\(Config.shared.kinopubDomain)/device?code=\(code)")!)
+                UIApplication.shared.openURL(
+                    URL(string: "\(Config.shared.kinopubDomain)/device?code=\(code)")!)
             }
         }
     }
@@ -97,7 +100,7 @@ extension AuthViewController: AuthModelDelegate {
         self.dismiss(animated: true, completion: nil)
         authModel.invalidateTimer()
     }
-    
+
     func updateCode(authModel: AuthModel) {
         loadCode()
     }

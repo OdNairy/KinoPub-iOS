@@ -4,7 +4,7 @@ struct Container {
         static let account: AccountManager = AccountManagerImp()
         static let logViews: LogViewsManager = LogViewsManagerImp()
     }
-    
+
     struct ViewModel {
         static let auth = { AuthModel(accountManager: Manager.account) }
         static let videoItem = { VideoItemModel(accountManager: Manager.account) }

@@ -18,7 +18,7 @@ extension DefaultsKeys {
     static let showRatringInPoster = DefaultsKey<Bool>("showRatringInPoster")
     static let clientTitle = DefaultsKey<String>("clientTitle")
     static let menuItem = DefaultsKey<Int>("menuItem")
-    
+
     // Config
     static let kinopubClientId = DefaultsKey<String>("kinopubClientId")
     static let kinopubClientSecret = DefaultsKey<String>("kinopubClientSecret")

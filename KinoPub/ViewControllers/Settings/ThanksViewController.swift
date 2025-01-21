@@ -11,7 +11,7 @@ class ThanksViewController: UIViewController {
             setup()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,31 +22,25 @@ class ThanksViewController: UIViewController {
         titleLabel.text = titleText
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         DispatchQueue.global().async {
             do {
                 self.names = try String(contentsOf: URL(string: self.url!)!)
-            }
-            catch {
+            } catch {
                 print(error.localizedDescription)
             }
         }
     }
-    
+
     func setup() {
         DispatchQueue.main.sync {
-//            let md = SwiftyMarkdown(string: names!)
-//            md.body.color = UIColor.white
-//            md.h1.color = UIColor.kpLightGreen
-//            md.h2.color = UIColor.lightGray
-//            usersTextView.attributedText = md.attributedString()
+            //            let md = SwiftyMarkdown(string: names!)
+            //            md.body.color = UIColor.white
+            //            md.h1.color = UIColor.kpLightGreen
+            //            md.h2.color = UIColor.lightGray
+            //            usersTextView.attributedText = md.attributedString()
             usersTextView.text = names
         }
     }
@@ -55,7 +49,8 @@ class ThanksViewController: UIViewController {
 
     static func storyboardInstance() -> ThanksViewController? {
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? ThanksViewController
+        return storyboard.instantiateViewController(withIdentifier: String(describing: self))
+            as? ThanksViewController
     }
 
 }

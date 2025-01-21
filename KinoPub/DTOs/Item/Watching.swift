@@ -3,26 +3,24 @@ import ObjectMapper
 
 public class Watching: Mappable {
 
-  // MARK: Declaration for string constants to be used to decode and also serialize.
-  private struct SerializationKeys {
-    static let status = "status"
-    static let time = "time"
-  }
+    // MARK: Declaration for string constants to be used to decode and also serialize.
+    private struct SerializationKeys {
+        static let status = "status"
+        static let time = "time"
+    }
 
-  // MARK: Properties
-  public var status: Status!
-  public var time: Double?
+    // MARK: Properties
+    public var status: Status!
+    public var time: Double?
 
-  
-  public required init?(map: Map) {
+    public required init?(map: Map) {
 
-  }
+    }
 
-  
-  public func mapping(map: Map) {
-    status <- map[SerializationKeys.status]
-    time <- map[SerializationKeys.time]
-  }
+    public func mapping(map: Map) {
+        status <- map[SerializationKeys.status]
+        time <- map[SerializationKeys.time]
+    }
 }
 
 public class WatchingToggle: Mappable {

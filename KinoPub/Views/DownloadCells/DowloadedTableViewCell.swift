@@ -1,9 +1,9 @@
-import UIKit
-import NTDownload
 import AlamofireImage
+import NTDownload
+import UIKit
 
 class DowloadedTableViewCell: UITableViewCell {
-    
+
     static let reuseIdentifier = "DowloadedTableViewCell"
 
     @IBOutlet weak var posterImageView: UIImageView!
@@ -12,10 +12,11 @@ class DowloadedTableViewCell: UITableViewCell {
     @IBOutlet weak var qualityLabel: UILabel!
     @IBOutlet weak var enNameLabel: UILabel!
     @IBOutlet weak var seasonLabel: UILabel!
-    
+
     var fileInfo: NTDownloadTask? {
         didSet {
-            let title = fileInfo?.fileName.replacingOccurrences(of: ".mp4", with: "").components(separatedBy: "; ")
+            let title = fileInfo?.fileName.replacingOccurrences(of: ".mp4", with: "").components(
+                separatedBy: "; ")
             nameLabel.text = title?[0]
             if title!.count > 1, title!.count > 2 {
                 enNameLabel.text = title?[1]
@@ -42,12 +43,13 @@ class DowloadedTableViewCell: UITableViewCell {
                     qualityLabel.isHidden = false
                 }
             }
-            
-            posterImageView.af_setImage(withURL: URL(string: (fileInfo?.fileImage)!)!,
-                                        placeholderImage: UIImage(named: "poster-placeholder.png"),
-                                        imageTransition: .crossDissolve(0.2),
-                                        runImageTransitionIfCached: false)
-//            fileInfo?.delegate = self
+
+            posterImageView.af_setImage(
+                withURL: URL(string: (fileInfo?.fileImage)!)!,
+                placeholderImage: UIImage(named: "poster-placeholder.png"),
+                imageTransition: .crossDissolve(0.2),
+                runImageTransitionIfCached: false)
+            //            fileInfo?.delegate = self
             guard let fileSize = fileInfo?.fileSize else {
                 return
             }
@@ -55,31 +57,25 @@ class DowloadedTableViewCell: UITableViewCell {
             progressLabel.text = String(format: "  \(size) %@  ", fileSize.size, fileSize.unit)
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         configView()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
     func configView() {
         enNameLabel.isHidden = true
         seasonLabel.isHidden = true
         qualityLabel.isHidden = true
-        
+
         backgroundColor = .clear
         nameLabel.textColor = .kpOffWhite
         enNameLabel.textColor = .kpGreyishBrown
         seasonLabel.textColor = .kpGreyishTwo
-        
+
         qualityLabel.textColor = .kpBlack
         qualityLabel.backgroundColor = .kpGreyishTwo
-        
+
         progressLabel.textColor = .kpBlack
         progressLabel.backgroundColor = .kpGreyishTwo
         progressLabel.text = ""

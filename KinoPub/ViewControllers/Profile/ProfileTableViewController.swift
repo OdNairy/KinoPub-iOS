@@ -1,8 +1,8 @@
-import UIKit
 import AlamofireImage
-import LKAlertController
 import InteractiveSideMenu
+import LKAlertController
 import SafariServices
+import UIKit
 
 class ProfileViewController: UITableViewController, ProfileModelDelegate, SideMenuItemContent {
     fileprivate let model = Container.ViewModel.profile()
@@ -19,7 +19,7 @@ class ProfileViewController: UITableViewController, ProfileModelDelegate, SideMe
     @IBOutlet weak var deviceNameDetailLabel: UILabel!
     @IBOutlet weak var hardwareDetailLabel: UILabel!
     @IBOutlet weak var softwareDatailLabel: UILabel!
-    
+
     @IBOutlet weak var goToSiteButton: UIButton!
 
     override func viewDidLoad() {
@@ -28,46 +28,44 @@ class ProfileViewController: UITableViewController, ProfileModelDelegate, SideMe
         confugureNavBar()
         configureVC()
 
-//        configureVersionInfo()
+        //        configureVersionInfo()
 
         model.delegate = self
         model.loadProfile()
         model.loadCurrentDevice()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     func confugureNavBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "Kinopub (Menu)")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(showMenu))
-//        navigationItem.leftBarButtonItem?.tintColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Выход", style: .done, target: self, action: #selector(logOutButtonTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(
+            image: UIImage(named: "Kinopub (Menu)")?.withRenderingMode(.alwaysTemplate),
+            style: .plain, target: self, action: #selector(showMenu))
+        //        navigationItem.leftBarButtonItem?.tintColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(
+            title: "Выход", style: .done, target: self, action: #selector(logOutButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.kpMarigold
         navigationController?.navigationBar.barStyle = .black
-//        navigationController?.navigationBar.tintColor = UIColor.white
+        //        navigationController?.navigationBar.tintColor = UIColor.white
     }
 
     func configureVC() {
         navigationController?.navigationBar.clean(true)
         view.backgroundColor = .kpBackground
-        
+
         tableView.backgroundColor = .kpBackground
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         tableView.separatorColor = UIColor.kpOffWhiteSeparator
         tableView.separatorStyle = .singleLine
-        
+
         profileNameLabel.text = "Загрузка пользователя"
         profileNameLabel.textColor = .kpOffWhite
         usernameLabel.text = "подбираем ваш пароль..."
         usernameLabel.textColor = .kpGreyishTwo
-//        profileImageView.layer.borderWidth = 1.0
+        //        profileImageView.layer.borderWidth = 1.0
         profileImageView.layer.masksToBounds = false
-//        profileImageView.layer.borderColor = UIColor.white.cgColor
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
+        //        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         profileImageView.clipsToBounds = true
-        
+
         goToSiteButton.tintColor = .kpGreyishTwo
         goToSiteButton.borderColor = .kpGreyishBrown
     }
@@ -91,11 +89,12 @@ class ProfileViewController: UITableViewController, ProfileModelDelegate, SideMe
             eroticDetailLabel.text = isErotic ? "Вкл." : "Выкл."
         }
         if let days = model.user?.subscription?.days, days != 0.0 {
-            let tapDaysLabel = UITapGestureRecognizer(target: self, action: #selector(openSafariVC(_:)))
+            let tapDaysLabel = UITapGestureRecognizer(
+                target: self, action: #selector(openSafariVC(_:)))
             daySubscriptionDetailLabel.isUserInteractionEnabled = true
             daySubscriptionDetailLabel.addGestureRecognizer(tapDaysLabel)
-//            daySubscriptionDetailLabel.underlineTextStyle()
-//            daySubscriptionDetailLabel.textColor = UIColor.kpLightGreen
+            //            daySubscriptionDetailLabel.underlineTextStyle()
+            //            daySubscriptionDetailLabel.textColor = UIColor.kpLightGreen
             daySubscriptionDetailLabel.text = String(days)
         } else if model.user?.subscription?.endTime == 0 {
             daySubscriptionDetailLabel.text = "∞"
@@ -105,7 +104,8 @@ class ProfileViewController: UITableViewController, ProfileModelDelegate, SideMe
         if let endTime = model.user?.subscription?.endTime, endTime != 0 {
             let format = DateFormatter()
             format.dateFormat = "dd.MM.yyyy"
-            endTimeDetailLabel.text = format.string(from: Date(timeIntervalSince1970: TimeInterval(exactly: endTime)!))
+            endTimeDetailLabel.text = format.string(
+                from: Date(timeIntervalSince1970: TimeInterval(exactly: endTime)!))
         } else if model.user?.subscription?.endTime == 0 {
             endTimeDetailLabel.text = "∞"
         }
@@ -124,30 +124,33 @@ class ProfileViewController: UITableViewController, ProfileModelDelegate, SideMe
     }
 
     func configureVersionInfo() {
-        let tableViewFooter = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 52))
+        let tableViewFooter = UIView(
+            frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 52))
         tableViewFooter.backgroundColor = .clear
         let label = UILabel(frame: CGRect(x: 8, y: 15, width: tableView.frame.width, height: 20))
         label.font = label.font.withSize(12)
-        label.text = "Изменить информацио о профиле и настройки, а также оплатить сервис можно только на официальном сайте."
+        label.text =
+            "Изменить информацио о профиле и настройки, а также оплатить сервис можно только на официальном сайте."
         label.textColor = UIColor.lightGray
         label.textAlignment = .center
 
         tableViewFooter.addSubview(label)
 
-        tableView.tableFooterView  = tableViewFooter
+        tableView.tableFooterView = tableViewFooter
     }
-    
+
     @IBAction func goToSiteButtonPressed(_ sender: Any) {
         openUserProfile()
     }
-    
+
     @objc func openSafariVC(_ sender: UITapGestureRecognizer) {
         let svc = SFSafariViewController(url: URL(string: "\(Config.shared.kinopubDomain)/donate")!)
         self.present(svc, animated: true, completion: nil)
     }
-    
+
     func openUserProfile() {
-        let svc = SFSafariViewController(url: URL(string: "\(Config.shared.kinopubDomain)/user/settings/profile")!)
+        let svc = SFSafariViewController(
+            url: URL(string: "\(Config.shared.kinopubDomain)/user/settings/profile")!)
         self.present(svc, animated: true, completion: nil)
     }
 
@@ -155,11 +158,14 @@ class ProfileViewController: UITableViewController, ProfileModelDelegate, SideMe
         Alert(message: "Отвязать устройство?")
             .tint(.kpBlack)
             .addAction("Нет", style: .cancel)
-            .addAction("Да", style: .default, handler: { (action) in
-                self.accountManager.logoutAccount()
-            }).show(animated: true)
-//        Alert(message: "Скоро")
-//        .showOkay()
+            .addAction(
+                "Да", style: .default,
+                handler: { (_) in
+                    self.accountManager.logoutAccount()
+                }
+            ).show(animated: true)
+        //        Alert(message: "Скоро")
+        //        .showOkay()
     }
 
     // MARK: - Profile Model Delegate
@@ -182,8 +188,10 @@ class ProfileViewController: UITableViewController, ProfileModelDelegate, SideMe
         }
         return 3
     }
-    
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+
+    override func tableView(
+        _ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int
+    ) {
         view.tintColor = UIColor.kpBackground
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.kpGreyishBrown
