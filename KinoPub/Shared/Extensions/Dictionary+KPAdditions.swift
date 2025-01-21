@@ -2,7 +2,7 @@ import Foundation
 
 extension Dictionary {
     mutating func swap(_ key1: Key, _ key2: Key) {
-        if  let value = self[key1], let existingValue = self[key2] {
+        if let value = self[key1], let existingValue = self[key2] {
             self[key1] = existingValue
             self[key2] = value
         }
@@ -18,8 +18,8 @@ extension Dictionary {
         return value
     }
     mutating func unionInPlace(_ dictionary: Dictionary) {
-        for (key,value) in dictionary {
-            self.updateValue(value, forKey:key)
+        for (key, value) in dictionary {
+            self.updateValue(value, forKey: key)
         }
     }
 }

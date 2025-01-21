@@ -9,12 +9,12 @@ class TableFooterView: UIView {
         // Drawing code
     }
     */
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         configView()
     }
-    
+
     func configView() {
     }
 

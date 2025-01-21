@@ -15,7 +15,7 @@ class InfoTableViewCell: UITableViewCell {
     @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var qualityTitleLabel: UILabel!
     @IBOutlet weak var networksTitleLabel: UILabel!
-    
+
     @IBOutlet weak var voiceStasckView: UIStackView!
     @IBOutlet weak var networksStasckView: UIStackView!
 
@@ -28,14 +28,13 @@ class InfoTableViewCell: UITableViewCell {
 
     func configure(with item: Item) {
         if let genres = item.genres {
-            genreLabel.text = genres.compactMap{$0.title}.joined(separator: ", ")
+            genreLabel.text = genres.compactMap { $0.title }.joined(separator: ", ")
         }
-        
+
         var epDuration = ""
         var allDuration = ""
-        if item.type == ItemType.shows.rawValue ||
-            item.type == ItemType.docuserial.rawValue ||
-            item.type == ItemType.tvshows.rawValue {
+        if item.type == ItemType.shows.rawValue || item.type == ItemType.docuserial.rawValue
+            || item.type == ItemType.tvshows.rawValue {
             epDuration = "Серия: "
             allDuration = "Сериал: "
         }
@@ -43,7 +42,7 @@ class InfoTableViewCell: UITableViewCell {
         if let duration = item.duration?.average {
             let formatter = DateComponentsFormatter()
             formatter.unitsStyle = .full
-            
+
             var string = "\(epDuration)"
             let formattedString = formatter.string(from: TimeInterval(duration))!
             string += formattedString
@@ -63,7 +62,7 @@ class InfoTableViewCell: UITableViewCell {
         } else {
             voiceStasckView.isHidden = true
         }
-        
+
         if let networks = item.networks {
             networksStasckView.isHidden = false
             networksLabel.text = networks

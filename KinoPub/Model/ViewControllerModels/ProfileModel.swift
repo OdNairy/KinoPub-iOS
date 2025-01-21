@@ -14,7 +14,8 @@ class ProfileModel {
 
     init(accountManager: AccountManager) {
         self.accountManager = accountManager
-        accountNetworkingService = AccountNetworkingService(requestFactory: accountManager.requestFactory)
+        accountNetworkingService = AccountNetworkingService(
+            requestFactory: accountManager.requestFactory)
     }
 
     func loadProfile() {
@@ -33,9 +34,9 @@ class ProfileModel {
             strongSelf.delegate?.didUpdateProfile(model: strongSelf)
         }
     }
-    
+
     private func logUser() {
-//        Crashlytics.sharedInstance().setUserIdentifier(UIDevice.current.identifierForVendor?.uuidString)
-//        Crashlytics.sharedInstance().setUserName(user?.username)
+        //        Crashlytics.sharedInstance().setUserIdentifier(UIDevice.current.identifierForVendor?.uuidString)
+        //        Crashlytics.sharedInstance().setUserName(user?.username)
     }
 }

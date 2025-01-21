@@ -1,7 +1,7 @@
-import Foundation
-import SwiftyUserDefaults
-import KeychainSwift
 import Alamofire
+import Foundation
+import KeychainSwift
+import SwiftyUserDefaults
 
 protocol AccountManager: AnyObject {
     var account: KinopubAccount? { get }
@@ -16,7 +16,8 @@ protocol AccountManager: AnyObject {
 protocol AccountManagerDelegate {
     func accountManagerDidAuth(accountManager: AccountManager, toAccount account: KinopubAccount)
     func accountManagerDidLogout(accountManager: AccountManager)
-    func accountManagerDidUpdateToken(accountManager: AccountManager, forAccount account: KinopubAccount)
+    func accountManagerDidUpdateToken(
+        accountManager: AccountManager, forAccount account: KinopubAccount)
 }
 
 extension AccountManagerDelegate {
@@ -28,7 +29,9 @@ extension AccountManagerDelegate {
 
     }
 
-    func accountManagerDidUpdateToken(accountManager: AccountManager, forAccount account: KinopubAccount) {
+    func accountManagerDidUpdateToken(
+        accountManager: AccountManager, forAccount account: KinopubAccount
+    ) {
 
     }
 }
@@ -58,7 +61,8 @@ class AccountManagerImp: AccountManager {
     func createAccount(tokenData: TokenResponse) {
         keychain.set(tokenData.accessToken!, forKey: "accessToken")
         keychain.set(tokenData.refreshToken!, forKey: "refreshToken")
-        self.account = KinopubAccount(accessToken: tokenData.accessToken!, refreshToken: tokenData.refreshToken!)
+        self.account = KinopubAccount(
+            accessToken: tokenData.accessToken!, refreshToken: tokenData.refreshToken!)
         self.authAndNotifyDelegates()
     }
 
@@ -67,7 +71,8 @@ class AccountManagerImp: AccountManager {
         keychain.set(refreshToken, forKey: "refreshToken")
         self.account = KinopubAccount(accessToken: token, refreshToken: refreshToken)
         delegatesStorage.enumerateDelegatesWithBlock { [unowned self] (delegate) in
-            (delegate as! AccountManagerDelegate).accountManagerDidUpdateToken(accountManager: self, forAccount: self.account!)
+            (delegate as! AccountManagerDelegate).accountManagerDidUpdateToken(
+                accountManager: self, forAccount: self.account!)
         }
     }
 
@@ -77,7 +82,8 @@ class AccountManagerImp: AccountManager {
 
     private func checkIfAccountExist() {
         if let accessToken = keychain.get("accessToken") {
-            self.account = KinopubAccount(accessToken: accessToken, refreshToken: keychain.get("refreshToken"))
+            self.account = KinopubAccount(
+                accessToken: accessToken, refreshToken: keychain.get("refreshToken"))
             self.authAndNotifyDelegates()
         }
     }
@@ -85,7 +91,8 @@ class AccountManagerImp: AccountManager {
     private func authAndNotifyDelegates() {
         requestFactory.accountManager = self
         delegatesStorage.enumerateDelegatesWithBlock { [unowned self] (delegate) in
-            (delegate as! AccountManagerDelegate).accountManagerDidAuth(accountManager: self, toAccount: self.account!)
+            (delegate as! AccountManagerDelegate).accountManagerDidAuth(
+                accountManager: self, toAccount: self.account!)
         }
         self.notifyAboutDeviceIfRequired()
     }

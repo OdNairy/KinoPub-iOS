@@ -15,38 +15,40 @@ class VideoItemModel {
     var parameters = [String: String]()
     var watchingTime: Double = 0
     var similarItems = [Item]()
-    
+
     let accountManager: AccountManager
     let networkingService: VideosNetworkingService
-    
+
     init(accountManager: AccountManager) {
         self.accountManager = accountManager
         networkingService = VideosNetworkingService(requestFactory: accountManager.requestFactory)
     }
-    
+
     func getSeason(_ index: Int) -> Seasons? {
         return item?.seasons?[index]
     }
-    
+
     func getEpisode(_ index: Int, forSeason seasonIndex: Int) -> Episodes? {
         return item.videos?[index] ?? item.seasons?[seasonIndex].episodes?[index]
     }
-    
+
     func loadItemsInfo() {
-        networkingService.receiveItems(withParameters: parameters, from: item.id?.string) { [weak self] (response, error) in
+        networkingService.receiveItems(withParameters: parameters, from: item.id?.string) {
+            [weak self] (response, error) in
             guard let strongSelf = self else { return }
             if let itemData = response {
                 strongSelf.item = itemData.item
                 strongSelf.setLinks()
                 strongSelf.checkDefaults()
-                NotificationCenter.default.post(name: .VideoItemDidUpdate, object: self, userInfo:nil)
+                NotificationCenter.default.post(
+                    name: .VideoItemDidUpdate, object: self, userInfo: nil)
             } else {
                 Alert(title: "Ошибка", message: error?.localizedDescription)
                     .showOkay()
             }
         }
     }
-    
+
     func checkDefaults() {
         if Config.shared.canSortSeasons, let seasons = item.seasons {
             item.seasons = seasons.sorted { $0.number! > $1.number! }
@@ -60,7 +62,7 @@ class VideoItemModel {
             item.seasons = seasons
         }
     }
-    
+
     func loadSimilarsVideo() {
         guard let idString = item.id?.string else { return }
         networkingService.receiveSimilarItems(id: idString) { [weak self] (response, error) in
@@ -74,7 +76,7 @@ class VideoItemModel {
             }
         }
     }
-    
+
     private func setLinks() {
         var mediaItem = MediaItem()
         mediaItem.id = item.id
@@ -90,22 +92,28 @@ class VideoItemModel {
             mediaItems.append(mediaItem)
         } else {
             print("No unwrapping url")
-            if let type = item.type, type == ItemType.movies.rawValue
-                || type == ItemType.documovie.rawValue
-                || type == ItemType.concerts.rawValue,
+            if let type = item.type,
+                type == ItemType.movies.rawValue
+                    || type == ItemType.documovie.rawValue
+                    || type == ItemType.concerts.rawValue,
                 item.subtype != ItemType.ItemSubtype.multi.rawValue {
-                Alert(title: "Ошибка", message: "Не удалось получить ссылку на поток. Возможно, видео находится в обработке. Попробуйте позже.")
-                    .showOkay()
+                Alert(
+                    title: "Ошибка",
+                    message:
+                        "Не удалось получить ссылку на поток. Возможно, видео находится в обработке. Попробуйте позже."
+                )
+                .showOkay()
             }
         }
-        
+
         if item.subtype == ItemType.ItemSubtype.multi.rawValue {
             guard let videos = item.videos else { return }
             for episode in videos {
                 if episode.watching?.status == Status.watching {
                     mediaItem.watchingTime = episode.watching?.time ?? 0
                 }
-                if episode.watching?.status == Status.unwatched ||  episode.watching?.status == Status.watching {
+                if episode.watching?.status == Status.unwatched
+                    || episode.watching?.status == Status.watching {
                     guard let url = episode.files?.first?.url?.hls4 else { return }
                     if var title = episode.title, let number = episode.number {
                         if title == "" {
@@ -121,19 +129,22 @@ class VideoItemModel {
                 }
             }
         }
-        
-        if item.type == ItemType.shows.rawValue || item.type == ItemType.docuserial.rawValue || item.type == ItemType.tvshows.rawValue {
+
+        if item.type == ItemType.shows.rawValue || item.type == ItemType.docuserial.rawValue
+            || item.type == ItemType.tvshows.rawValue {
             var foundSeason = false
             guard let seasons = item.seasons else { return }
             for season in seasons {
-                if season.watching?.status == Status.watching || season.watching?.status == Status.unwatched {
+                if season.watching?.status == Status.watching
+                    || season.watching?.status == Status.unwatched {
                     foundSeason = true
                     guard let episodes = season.episodes else { return }
                     for episode in episodes {
                         if episode.watching?.status == Status.watching {
                             mediaItem.watchingTime = episode.watching?.time ?? 0
                         }
-                        if episode.watching?.status == Status.unwatched ||  episode.watching?.status == Status.watching {
+                        if episode.watching?.status == Status.unwatched
+                            || episode.watching?.status == Status.watching {
                             guard let url = episode.files?.first?.url?.hls4 else { return }
                             if var title = episode.title, let number = episode.number {
                                 if title == "" {

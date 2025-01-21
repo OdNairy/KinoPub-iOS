@@ -7,16 +7,16 @@ protocol TVModelDelegate: AnyObject {
 
 class TVModel {
     var sportChannels = [Channels]()
-    
+
     let accountManager: AccountManager
     let networkingService: TVNetworkingService
     weak var delegate: TVModelDelegate?
-    
+
     init(accountManager: AccountManager) {
         self.accountManager = accountManager
         networkingService = TVNetworkingService(requestFactory: accountManager.requestFactory)
     }
-    
+
     func loadSportChannels() {
         networkingService.receiveTVChanels { [weak self] (response, error) in
             guard let strongSelf = self else { return }
@@ -24,7 +24,9 @@ class TVModel {
                 strongSelf.sportChannels = responseData
                 strongSelf.delegate?.didUpdateChannels(model: strongSelf)
             } else {
-                let banner = NotificationBanner(title: "Ошибка", subtitle: "\(error?.localizedDescription ?? "")", style: .danger)
+                let banner = NotificationBanner(
+                    title: "Ошибка", subtitle: "\(error?.localizedDescription ?? "")",
+                    style: .danger)
                 banner.show(queuePosition: .front)
             }
         }

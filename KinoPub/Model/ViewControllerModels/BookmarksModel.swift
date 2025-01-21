@@ -10,13 +10,13 @@ protocol BookmarksModelDelegate: AnyObject {
 
 extension BookmarksModelDelegate {
     func didUpdateBookmarks(model: BookmarksModel) {
-        
+
     }
     func didUpdateItems(model: BookmarksModel) {
-        
+
     }
     func didAddedBookmarks() {
-        
+
     }
 }
 
@@ -26,16 +26,16 @@ class BookmarksModel {
     var items = [Item]()
     var folder: Bookmarks?
     var page: Int = 1
-    
+
     let accountManager: AccountManager
     let networkingService: BookmarksNetworkService
-    
+
     init(accountManager: AccountManager) {
         self.accountManager = accountManager
         networkingService = BookmarksNetworkService(requestFactory: accountManager.requestFactory)
         //        accountManager.addDelegate(delegate: self)
     }
-    
+
     func loadBookmarks(completed: @escaping (() -> Void)) {
         networkingService.receiveBookmarks { [weak self] (bookmarks, error) in
             guard let strongSelf = self else { return }
@@ -50,7 +50,7 @@ class BookmarksModel {
             }
         }
     }
-    
+
     func loadBookmarks(completed: @escaping (([Bookmarks]?) -> Void)) {
         networkingService.receiveBookmarks { [weak self] (bookmarks, error) in
             guard let strongSelf = self else { return }
@@ -65,9 +65,10 @@ class BookmarksModel {
             }
         }
     }
-    
-    func loadBookmarkItems(completed: @escaping (_ count: Int?) -> ()) {
-        networkingService.receiveBookmarkItems(id: (folder?.id?.string)!, page: page.string) { [weak self] (response, error) in
+
+    func loadBookmarkItems(completed: @escaping (_ count: Int?) -> Void) {
+        networkingService.receiveBookmarkItems(id: (folder?.id?.string)!, page: page.string) {
+            [weak self] (response, error) in
             guard let strongSelf = self else { return }
             if let itemsData = response {
                 guard let items = itemsData.items else { return }
@@ -83,35 +84,43 @@ class BookmarksModel {
             }
         }
     }
-    
+
     func createBookmarkFolder(title: String) {
         networkingService.createBookmarkFolder(title: title) { [weak self] (response, error) in
             guard let strongSelf = self else { return }
             if let responseData = response, responseData.status == 200 {
-                let banner = StatusBarNotificationBanner(title: "Папка \"\(title)\" успешно создана", style: .success)
+                let banner = StatusBarNotificationBanner(
+                    title: "Папка \"\(title)\" успешно создана", style: .success)
                 banner.duration = 1
                 banner.show(queuePosition: .front)
                 strongSelf.delegate?.didUpdateBookmarks(model: strongSelf)
             } else {
-                let banner = NotificationBanner(title: "Ошибка", subtitle: "Невозможно создать папку. \(error?.localizedDescription ?? "")", style: .danger)
+                let banner = NotificationBanner(
+                    title: "Ошибка",
+                    subtitle: "Невозможно создать папку. \(error?.localizedDescription ?? "")",
+                    style: .danger)
                 banner.show(queuePosition: .front)
             }
         }
     }
-    
+
     func removeBookmarkFolder(folder: String) {
         networkingService.removeBookmarkFolder(folder: folder) { (response, error) in
             if let responseData = response, responseData.status == 200 {
-                let banner = StatusBarNotificationBanner(title: "Папка успешно удалена.", style: .success)
+                let banner = StatusBarNotificationBanner(
+                    title: "Папка успешно удалена.", style: .success)
                 banner.duration = 1
                 banner.show(queuePosition: .front)
             } else {
-                let banner = NotificationBanner(title: "Ошибка", subtitle: "Невозможно удалить папку. \(error?.localizedDescription ?? "")", style: .danger)
+                let banner = NotificationBanner(
+                    title: "Ошибка",
+                    subtitle: "Невозможно удалить папку. \(error?.localizedDescription ?? "")",
+                    style: .danger)
                 banner.show(queuePosition: .front)
             }
         }
     }
-    
+
     func removeItemFromFolder(item: String, folder: String) {
         networkingService.removeItemFromFolder(item: item, folder: folder) { (response, error) in
             if let responseData = response, responseData.status == 200 {
@@ -119,29 +128,38 @@ class BookmarksModel {
                 banner.duration = 1
                 banner.show(queuePosition: .front)
             } else {
-                let banner = NotificationBanner(title: "Ошибка", subtitle: "Невозможно удалить. \(error?.localizedDescription ?? "")", style: .danger)
+                let banner = NotificationBanner(
+                    title: "Ошибка",
+                    subtitle: "Невозможно удалить. \(error?.localizedDescription ?? "")",
+                    style: .danger)
                 banner.show(queuePosition: .front)
             }
         }
     }
-    
+
     func addItemToFolder(item: String, folder: String) {
-        networkingService.addItemToFolder(item: item, folder: folder) { [weak self] (response, error) in
+        networkingService.addItemToFolder(item: item, folder: folder) {
+            [weak self] (response, error) in
             guard let strongSelf = self else { return }
             if let responseData = response, responseData.status == 200 {
-                let banner = StatusBarNotificationBanner(title: "Успешно добавлен.", style: .success)
+                let banner = StatusBarNotificationBanner(
+                    title: "Успешно добавлен.", style: .success)
                 banner.duration = 1
                 banner.show(queuePosition: .front)
                 strongSelf.delegate?.didAddedBookmarks()
             } else {
-                let banner = NotificationBanner(title: "Ошибка", subtitle: "Невозможно добавить. \(error?.localizedDescription ?? "")", style: .danger)
+                let banner = NotificationBanner(
+                    title: "Ошибка",
+                    subtitle: "Невозможно добавить. \(error?.localizedDescription ?? "")",
+                    style: .danger)
                 banner.show(queuePosition: .front)
             }
         }
     }
-    
+
     func toggleItemToFolder(item: String, folder: String) {
-        networkingService.toggleItemToFolder(item: item, folder: folder) { [weak self] (response, error) in
+        networkingService.toggleItemToFolder(item: item, folder: folder) {
+            [weak self] (response, error) in
             guard let strongSelf = self else { return }
             if let responseData = response, responseData.status == 200 {
                 let str = responseData.exists! ? "Закладка добавлена." : "Закладка удалена."
@@ -150,26 +168,30 @@ class BookmarksModel {
                 banner.show(queuePosition: .front)
                 strongSelf.delegate?.didAddedBookmarks()
             } else {
-                let banner = NotificationBanner(title: "Ошибка", subtitle: "\(error?.localizedDescription ?? "")", style: .danger)
+                let banner = NotificationBanner(
+                    title: "Ошибка", subtitle: "\(error?.localizedDescription ?? "")",
+                    style: .danger)
                 banner.show(queuePosition: .front)
             }
         }
     }
-    
+
     func getItemFolders(item: String, completed: @escaping (([Bookmarks]?) -> Void)) {
         networkingService.receiveItemFolders(item: item) { (response, error) in
             if let responseData = response {
                 completed(responseData)
             } else {
-                let banner = NotificationBanner(title: "Ошибка", subtitle: "\(error?.localizedDescription ?? "")", style: .danger)
+                let banner = NotificationBanner(
+                    title: "Ошибка", subtitle: "\(error?.localizedDescription ?? "")",
+                    style: .danger)
                 banner.show(queuePosition: .front)
             }
         }
     }
-    
+
     func refresh() {
         page = 1
         items.removeAll()
     }
-    
+
 }

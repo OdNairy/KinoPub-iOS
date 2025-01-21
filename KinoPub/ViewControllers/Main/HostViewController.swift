@@ -16,11 +16,11 @@
 // limitations under the License.
 //
 
-import UIKit
-import RevealingSplashView
 import InteractiveSideMenu
-import SwiftyUserDefaults
 import LKAlertController
+import RevealingSplashView
+import SwiftyUserDefaults
+import UIKit
 
 /*
  HostViewController is container view controller, contains menu controller and the list of relevant view controllers.
@@ -30,7 +30,7 @@ import LKAlertController
  */
 class HostViewController: MenuContainerViewController {
     fileprivate let accountManager = Container.Manager.account
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -38,21 +38,25 @@ class HostViewController: MenuContainerViewController {
     override var prefersStatusBarHidden: Bool {
         return false
     }
-    
+
     let menu = MenuItems.all
 
     override func viewDidLoad() {
         super.viewDidLoad()
         registerSettingsBundle()
         setDefaults()
-        
+
         accountManager.addDelegate(delegate: self)
 
         let screenSize: CGRect = UIScreen.main.bounds
-        self.transitionOptions = TransitionOptions(duration: 0.4, contentScale: 1, visibleContentWidth: screenSize.width / Config.shared.menuVisibleContentWidth)
+        self.transitionOptions = TransitionOptions(
+            duration: 0.4, contentScale: 1,
+            visibleContentWidth: screenSize.width / Config.shared.menuVisibleContentWidth)
 
         // Instantiate menu view controller by identifier
-        self.menuViewController = self.storyboard!.instantiateViewController(withIdentifier: "NavigationMenu") as! MenuViewController
+        self.menuViewController =
+            self.storyboard!.instantiateViewController(withIdentifier: "NavigationMenu")
+            as! MenuViewController
 
         // Gather content items controllers
         self.contentViewControllers = contentControllers()
@@ -61,23 +65,26 @@ class HostViewController: MenuContainerViewController {
         if Config.shared.menuItem > contentViewControllers.count - 1 {
             Defaults[.menuItem] = MenuItems.userMenu.count
         }
-        if let navVC = contentViewControllers[Config.shared.menuItem] as? NavigationController, let iVC = navVC.viewControllers.first as? ItemsCollectionViewController {
+        if let navVC = contentViewControllers[Config.shared.menuItem] as? NavigationController,
+            let iVC = navVC.viewControllers.first as? ItemsCollectionViewController {
             self.selectContentViewController(contentViewControllers[Config.shared.menuItem])
             iVC.itemsTag = menu[Config.shared.menuItem].tag!
         } else {
             self.selectContentViewController(contentViewControllers[Config.shared.menuItem])
         }
-        
+
         showSplashView()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         chechAccount()
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(
+        to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator
+    ) {
         super.viewWillTransition(to: size, with: coordinator)
 
         /*
@@ -87,21 +94,21 @@ class HostViewController: MenuContainerViewController {
 
         // Animation duration
         options.duration = size.width < size.height ? 0.4 : 0.6
-        
+
         options.contentScale = 1
 
         // Part of item content remaining visible on right when menu is shown
         options.visibleContentWidth = size.width / Config.shared.menuVisibleContentWidth
         self.transitionOptions = options
     }
-    
+
     func chechAccount() {
         if !accountManager.hasAccount {
             showAuthViewController()
         } else {
         }
     }
-    
+
     func showAuthViewController() {
         if let authViewController = AuthViewController.storyboardInstance() {
             present(authViewController, animated: true, completion: nil)
@@ -110,52 +117,53 @@ class HostViewController: MenuContainerViewController {
                 .showOkay()
         }
     }
-    
+
     func registerSettingsBundle() {
         let appDefaults = [String: AnyObject]()
         UserDefaults.standard.register(defaults: appDefaults)
     }
-    
+
     func setDefaults() {
         if UserDefaults.standard.object(forKey: "showRatringInPoster") == nil {
             Defaults[.showRatringInPoster] = true
         }
-        
+
         if UserDefaults.standard.object(forKey: "logViews") == nil {
             Defaults[.logViews] = true
         }
-        
+
         if UserDefaults.standard.object(forKey: "leftSlideTrigger") == nil {
             Defaults[.leftSlideTrigger] = "none"
         }
-        
+
         if UserDefaults.standard.object(forKey: "rightSlideTrigger") == nil {
             Defaults[.rightSlideTrigger] = "none"
         }
-        
+
         if UserDefaults.standard.object(forKey: "streamType") == nil {
             Defaults[.streamType] = "hls4"
         }
-        
+
         if UserDefaults.standard.object(forKey: "clientTitle") == nil {
             Defaults[.clientTitle] = UIDevice().name
         }
-        
+
         if UserDefaults.standard.object(forKey: "menuItem") == nil {
             Defaults[.menuItem] = MenuItems.userMenu.count
         }
     }
-    
+
     func showSplashView() {
-        //Initialize a revealing Splash with with the iconImage, the initial size and the background color
-        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "Icon-App-iTunes")!,
-                                                      iconInitialSize: CGSize(width: 192, height: 192),
-                                                      backgroundColor: UIColor.kpBackground)
-        
-        //Adds the revealing splash view as a sub view
+        // Initialize a revealing Splash with with the iconImage, the initial size and the background color
+        let revealingSplashView = RevealingSplashView(
+            iconImage: UIImage(named: "Icon-App-iTunes")!,
+            iconInitialSize: CGSize(width: 192, height: 192),
+            backgroundColor: UIColor.kpBackground)
+
+        // Adds the revealing splash view as a sub view
         contentViewControllers[Config.shared.menuItem].view.addSubview(revealingSplashView)
-        
-        //Starts animation
+
+        // Starts animation
         revealingSplashView.startAnimation {
             print("Completed")
         }
@@ -168,14 +176,15 @@ class HostViewController: MenuContainerViewController {
          Instantiate items controllers from storyboard.
          */
         for menuItem in menu {
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: menuItem.id) {
+            if let viewController = self.storyboard?.instantiateViewController(
+                withIdentifier: menuItem.id) {
                 contentList.append(viewController)
             }
         }
 
         return contentList
     }
-    
+
     // MARK: - Orientations
     override var shouldAutorotate: Bool {
         return true
@@ -187,4 +196,3 @@ extension HostViewController: AccountManagerDelegate {
         showAuthViewController()
     }
 }
-

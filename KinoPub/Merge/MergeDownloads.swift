@@ -1,16 +1,18 @@
 import Foundation
 
 class MergeDownloads {
-    private let plistPath = "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/NTDownload.plist"
-    private let documentUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    
+    private let plistPath =
+        "\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])/NTDownload.plist"
+    private let documentUrl = FileManager.default.urls(
+        for: .documentDirectory, in: .userDomainMask)[0]
+
     init() {
-//        if UserDefaults.standard.object(forKey: "mergedDownloads") == nil {
-//            mergeBuild33()
-//            UserDefaults.standard.set(true, forKey: "mergedDownloads")
-//        }
+        //        if UserDefaults.standard.object(forKey: "mergedDownloads") == nil {
+        //            mergeBuild33()
+        //            UserDefaults.standard.set(true, forKey: "mergedDownloads")
+        //        }
     }
-    
+
     func merge() {
         let newJsonArray = NSMutableArray()
         guard let jsonArray = NSArray(contentsOfFile: plistPath) else {
@@ -20,7 +22,9 @@ class MergeDownloads {
             let newJsonItem = NSMutableDictionary()
             guard let item = jsonItem as? NSDictionary else { return }
             if (item["fileName"] as? String) != nil { return }
-            guard let name = item["name"] as? String, let urlString = item["url"] as? String else { return }
+            guard let name = item["name"] as? String, let urlString = item["url"] as? String else {
+                return
+            }
             let nameToSave = name.replacingOccurrences(of: "/ ", with: "") + ".mp4"
             let fromFile = documentUrl.appendingPathComponent(urlString.lastPathComponent)
             let toFile = documentUrl.appendingPathComponent(nameToSave)

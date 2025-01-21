@@ -1,8 +1,8 @@
-import UIKit
 import Eureka
+import UIKit
 
 class MenuSectionViewController: FormViewController {
-    
+
     var hiddenMenuItems = Config.shared.hiddenMenusService.getHiddenMenuItems()
 
     override func viewDidLoad() {
@@ -20,25 +20,29 @@ class MenuSectionViewController: FormViewController {
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
             navigationController?.navigationItem.largeTitleDisplayMode = .always
-            let attributes = [NSAttributedString.Key.foregroundColor : UIColor.kpOffWhite]
+            let attributes = [NSAttributedString.Key.foregroundColor: UIColor.kpOffWhite]
             navigationController?.navigationBar.largeTitleTextAttributes = attributes
         }
-        
+
         tableView.tintColor = .kpGreyishBrown
     }
-    
+
     func configTableView() {
-        SwitchCustomRow.defaultCellUpdate = { cell, row in
+        SwitchCustomRow.defaultCellUpdate = { cell, _ in
             cell.titleLabel?.textColor = .kpOffWhite
             cell.switchControl.onTintColor = .kpMarigold
             cell.switchControl.tintColor = .kpGreyishBrown
         }
-        
-        form +++
-        Section(footer: "Здесь можно убрать разделы, которые вам не хочется видеть в боковом меню приложения.\nИзменения вступят в силу поле перезапуска приложения.")
+
+        form
+            +++ Section(
+                footer:
+                    "Здесь можно убрать разделы, которые вам не хочется видеть в боковом меню приложения.\nИзменения вступят в силу поле перезапуска приложения."
+            )
         for item in MenuItems.configurableMenuItems {
-            form.last! <<< SwitchCustomRow() {
-                $0.value = !hiddenMenuItems.contains(item)
+            form.last!
+                <<< SwitchCustomRow {
+                    $0.value = !hiddenMenuItems.contains(item)
                 }.onChange({ (row) in
                     if row.value! {
                         self.hiddenMenuItems.remove(at: self.hiddenMenuItems.index(of: item)!)
@@ -46,26 +50,31 @@ class MenuSectionViewController: FormViewController {
                         self.hiddenMenuItems.append(item)
                     }
                     Config.shared.hiddenMenusService.saveConfigMenu(self.hiddenMenuItems)
-                }).cellSetup({ (cell, row) in
+                }).cellSetup({ (cell, _) in
                     cell.iconImageView.image = UIImage(named: item.icon)
                     cell.titleLabel.text = item.name
                 })
-            }
+        }
     }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+
+    func tableView(
+        _ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath
+    ) {
         cell.backgroundColor = .clear
     }
-    
-    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+
+    func tableView(
+        _ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int
+    ) {
         if let view = view as? UITableViewHeaderFooterView {
             view.textLabel?.textColor = .kpGreyishBrown
         }
     }
-    
+
     // MARK: - Navigation
     static func storyboardInstance() -> MenuSectionViewController {
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as! MenuSectionViewController
+        return storyboard.instantiateViewController(withIdentifier: String(describing: self))
+            as! MenuSectionViewController
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 import ObjectMapper
 
 public class Episodes: Mappable {
-    
+
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
         static let files = "files"
@@ -16,7 +16,7 @@ public class Episodes: Mappable {
         static let watched = "watched"
         static let watching = "watching"
     }
-    
+
     // MARK: Properties
     public var id: Int!
     public var title: String!
@@ -28,13 +28,11 @@ public class Episodes: Mappable {
     public var duration: Double!
     public var watched: Int!
     public var watching: Watching!
-    
-    
+
     public required init?(map: Map) {
-        
+
     }
-    
-    
+
     public func mapping(map: Map) {
         files <- map[SerializationKeys.files]
         subtitles <- map[SerializationKeys.subtitles]

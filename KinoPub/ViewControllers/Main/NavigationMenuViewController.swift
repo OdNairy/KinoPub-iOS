@@ -16,8 +16,8 @@
 // limitations under the License.
 //
 
-import UIKit
 import InteractiveSideMenu
+import UIKit
 
 /*
  Menu controller is responsible for creating its content and showing/hiding menu using 'menuContainerViewController' property.
@@ -37,46 +37,56 @@ class NavigationMenuViewController: MenuViewController {
     override var prefersStatusBarHidden: Bool {
         return false
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         model.delegate = self
         model.loadProfile()
         configView()
         configTableView()
     }
-    
+
     func configView() {
         userNameLabel.textColor = .kpOffWhite
         daysLabel.textColor = .kpGreyishTwo
         profileView.backgroundColor = .kpBackground
         profileImageView.layer.masksToBounds = false
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         profileImageView.clipsToBounds = true
-        profileView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openProfile)))
+        profileView.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(openProfile)))
     }
-    
+
     func configTableView() {
-        let tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 15))
+        let tableFooterView = UIView(
+            frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 15))
         tableFooterView.backgroundColor = .clear
         tableView.tableFooterView = tableFooterView
         tableView.backgroundColor = .kpBackground
         view.backgroundColor = .kpBackground
-        tableView.register(UINib(nibName: String(describing: MenuTableViewCell.self), bundle: Bundle.main), forCellReuseIdentifier: String(describing: MenuTableViewCell.self))
-        
-        //Select the initial row
+        tableView.register(
+            UINib(nibName: String(describing: MenuTableViewCell.self), bundle: Bundle.main),
+            forCellReuseIdentifier: String(describing: MenuTableViewCell.self))
+
+        // Select the initial row
         if Config.shared.menuItem > menu.count - 1 {
-            tableView.selectRow(at: IndexPath(row: 0, section: 1), animated: false, scrollPosition: UITableView.ScrollPosition.none)
+            tableView.selectRow(
+                at: IndexPath(row: 0, section: 1), animated: false,
+                scrollPosition: UITableView.ScrollPosition.none)
         } else {
             var row: Int
             var section: Int
             section = Config.shared.menuItem > MenuItems.userMenu.count - 1 ? 1 : 0
-            row = Config.shared.menuItem > MenuItems.userMenu.count - 1 ? Config.shared.menuItem - MenuItems.userMenu.count : Config.shared.menuItem
-            tableView.selectRow(at: IndexPath(row: row, section: section), animated: false, scrollPosition: UITableView.ScrollPosition.none)
+            row =
+                Config.shared.menuItem > MenuItems.userMenu.count - 1
+                ? Config.shared.menuItem - MenuItems.userMenu.count : Config.shared.menuItem
+            tableView.selectRow(
+                at: IndexPath(row: row, section: section), animated: false,
+                scrollPosition: UITableView.ScrollPosition.none)
         }
     }
-    
+
     func configureProfile() {
         if let imageUrl = model.user?.profile?.avatar {
             profileImageView.af_setImage(withURL: URL(string: imageUrl + "?s=200&d=identicon")!)
@@ -86,23 +96,26 @@ class NavigationMenuViewController: MenuViewController {
         }
 
         if let days = model.user?.subscription?.days, days != 0.0 {
-            daysLabel.text = "Подписка на \(Int(days)) " + Int(days).getNumEnding(fromArray: ["день", "дня", "дней"])
+            daysLabel.text =
+                "Подписка на \(Int(days)) "
+                + Int(days).getNumEnding(fromArray: ["день", "дня", "дней"])
         } else if model.user?.subscription?.endTime == 0 {
             daysLabel.text = "Бесконечная подписка"
         } else if model.user?.subscription?.days == 0.0 {
             daysLabel.text = "Нет подписки"
         }
     }
-    
+
     @objc func openProfile() {
         guard let menuContainerViewController = self.menuContainerViewController else { return }
-        menuContainerViewController.selectContentViewController((self.storyboard?.instantiateViewController(withIdentifier: "ProfileNavVC"))!)
+        menuContainerViewController.selectContentViewController(
+            (self.storyboard?.instantiateViewController(withIdentifier: "ProfileNavVC"))!)
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: true)
         }
         menuContainerViewController.hideSideMenu()
     }
-    
+
     // MARK: - StatusBar Style
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -120,24 +133,29 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:
-            return MenuItems.userMenu.count
-        case 1:
-            return MenuItems.contentMenu.count
-        case 2:
-            return MenuItems.settingsMenu.count
-        default:
-            return 0
+            case 0:
+                return MenuItems.userMenu.count
+            case 1:
+                return MenuItems.contentMenu.count
+            case 2:
+                return MenuItems.settingsMenu.count
+            default:
+                return 0
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MenuTableViewCell.self), for: indexPath) as! MenuTableViewCell
-        
+        let cell =
+            tableView.dequeueReusableCell(
+                withIdentifier: String(describing: MenuTableViewCell.self), for: indexPath)
+            as! MenuTableViewCell
+
         var indexPathRow = indexPath.row
         if indexPath.section == 1 { indexPathRow += MenuItems.userMenu.count }
-        if indexPath.section == 2 { indexPathRow += MenuItems.userMenu.count + MenuItems.contentMenu.count }
-        
+        if indexPath.section == 2 {
+            indexPathRow += MenuItems.userMenu.count + MenuItems.contentMenu.count
+        }
+
         cell.config(withMenuItem: menu[indexPathRow])
 
         return cell
@@ -145,44 +163,54 @@ extension NavigationMenuViewController: UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let menuContainerViewController = self.menuContainerViewController else { return }
-        
+
         var indexPathRow = indexPath.row
         if indexPath.section == 1 { indexPathRow += MenuItems.userMenu.count }
-        if indexPath.section == 2 { indexPathRow += MenuItems.userMenu.count + MenuItems.contentMenu.count }
+        if indexPath.section == 2 {
+            indexPathRow += MenuItems.userMenu.count + MenuItems.contentMenu.count
+        }
 
-        if let navVC = menuContainerViewController.contentViewControllers[indexPathRow] as? NavigationController, let iVC = navVC.viewControllers.first as? ItemsCollectionViewController {
-            menuContainerViewController.selectContentViewController(menuContainerViewController.contentViewControllers[indexPathRow])
+        if let navVC = menuContainerViewController.contentViewControllers[indexPathRow]
+            as? NavigationController,
+            let iVC = navVC.viewControllers.first as? ItemsCollectionViewController {
+            menuContainerViewController.selectContentViewController(
+                menuContainerViewController.contentViewControllers[indexPathRow])
             iVC.itemsTag = menu[indexPathRow].tag!
         } else {
-           menuContainerViewController.selectContentViewController(menuContainerViewController.contentViewControllers[indexPathRow])
+            menuContainerViewController.selectContentViewController(
+                menuContainerViewController.contentViewControllers[indexPathRow])
         }
         menuContainerViewController.hideSideMenu()
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let screenSize = UIScreen.main.bounds.width
         let headerView = UIView()
-        let separator = UIView(frame: CGRect(x: 15, y: 0, width: screenSize - 30 - screenSize / Config.shared.menuVisibleContentWidth , height: 0.5))
+        let separator = UIView(
+            frame: CGRect(
+                x: 15, y: 0,
+                width: screenSize - 30 - screenSize / Config.shared.menuVisibleContentWidth,
+                height: 0.5))
         separator.backgroundColor = .kpOffWhiteSeparator
         headerView.backgroundColor = .clear
         headerView.addSubview(separator)
         return headerView
     }
-    
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = UIView()
         footerView.backgroundColor = .clear
         return footerView
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 7.5
     }
-    
+
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 7.5
     }
-    
+
     // MARK: - Orientations
     override var shouldAutorotate: Bool {
         return true

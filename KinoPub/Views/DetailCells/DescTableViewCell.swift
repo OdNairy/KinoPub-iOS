@@ -1,5 +1,5 @@
-import UIKit
 import Atributika
+import UIKit
 
 class DescTableViewCell: UITableViewCell {
 
@@ -22,18 +22,19 @@ class DescTableViewCell: UITableViewCell {
             let labelDanger = Style("span").font(.systemFont(ofSize: 15)).foregroundColor(.red)
             let labelInfo = Style("div").font(.systemFont(ofSize: 15)).foregroundColor(.red)
             let strDanger = Style("danger").font(.systemFont(ofSize: 15)).foregroundColor(.red)
-            
+
             var descStr = ""
             var warn = ""
-            
+
             if item.advert! {
                 warn += "<danger>Присутствуют голосовые или текстовые вставки рекламы!</danger>"
             }
             if item.poorQuality! {
                 if warn != "" { warn += "\n\n" }
-                warn += "<danger>Фильм с сомнительным качеством картинки или звука, возможно наличие вшитых субтитров!</danger>"
+                warn +=
+                    "<danger>Фильм с сомнительным качеством картинки или звука, возможно наличие вшитых субтитров!</danger>"
             }
-            
+
             if desc.count > 1 {
                 for _desc in desc {
                     if _desc.first == "<" {
@@ -48,12 +49,12 @@ class DescTableViewCell: UITableViewCell {
                 descStr += desc[0]
             }
 
-
             if warn != "" {
-                warnLabel.attributedText = warn.style(tags: [labelDanger, labelInfo, strDanger]).attributedString
+                warnLabel.attributedText =
+                    warn.style(tags: [labelDanger, labelInfo, strDanger]).attributedString
                 warnStasckView.isHidden = false
             }
-            
+
             if descStr != "" {
                 descLabel.text = descStr
             }

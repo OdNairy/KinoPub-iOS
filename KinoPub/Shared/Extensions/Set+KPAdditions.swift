@@ -1,4 +1,3 @@
-
 extension Set {
     public var toString: String {
         var value = ""
