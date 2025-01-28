@@ -29,27 +29,37 @@ PODS:
   - RevealingSplashView (0.6.0)
   - SnapKit (4.2.0)
   - SubtleVolume (1.1.0)
-  - SwifterSwift (5.1.0):
-    - SwifterSwift/AppKit (= 5.1.0)
-    - SwifterSwift/CoreGraphics (= 5.1.0)
-    - SwifterSwift/CoreLocation (= 5.1.0)
-    - SwifterSwift/Dispatch (= 5.1.0)
-    - SwifterSwift/Foundation (= 5.1.0)
-    - SwifterSwift/MapKit (= 5.1.0)
-    - SwifterSwift/SceneKit (= 5.1.0)
-    - SwifterSwift/SpriteKit (= 5.1.0)
-    - SwifterSwift/SwiftStdlib (= 5.1.0)
-    - SwifterSwift/UIKit (= 5.1.0)
-  - SwifterSwift/AppKit (5.1.0)
-  - SwifterSwift/CoreGraphics (5.1.0)
-  - SwifterSwift/CoreLocation (5.1.0)
-  - SwifterSwift/Dispatch (5.1.0)
-  - SwifterSwift/Foundation (5.1.0)
-  - SwifterSwift/MapKit (5.1.0)
-  - SwifterSwift/SceneKit (5.1.0)
-  - SwifterSwift/SpriteKit (5.1.0)
-  - SwifterSwift/SwiftStdlib (5.1.0)
-  - SwifterSwift/UIKit (5.1.0)
+  - SwifterSwift (7.0.0):
+    - SwifterSwift/AppKit (= 7.0.0)
+    - SwifterSwift/CoreAnimation (= 7.0.0)
+    - SwifterSwift/CoreGraphics (= 7.0.0)
+    - SwifterSwift/CoreLocation (= 7.0.0)
+    - SwifterSwift/CryptoKit (= 7.0.0)
+    - SwifterSwift/Dispatch (= 7.0.0)
+    - SwifterSwift/Foundation (= 7.0.0)
+    - SwifterSwift/HealthKit (= 7.0.0)
+    - SwifterSwift/MapKit (= 7.0.0)
+    - SwifterSwift/SceneKit (= 7.0.0)
+    - SwifterSwift/SpriteKit (= 7.0.0)
+    - SwifterSwift/StoreKit (= 7.0.0)
+    - SwifterSwift/SwiftStdlib (= 7.0.0)
+    - SwifterSwift/UIKit (= 7.0.0)
+    - SwifterSwift/WebKit (= 7.0.0)
+  - SwifterSwift/AppKit (7.0.0)
+  - SwifterSwift/CoreAnimation (7.0.0)
+  - SwifterSwift/CoreGraphics (7.0.0)
+  - SwifterSwift/CoreLocation (7.0.0)
+  - SwifterSwift/CryptoKit (7.0.0)
+  - SwifterSwift/Dispatch (7.0.0)
+  - SwifterSwift/Foundation (7.0.0)
+  - SwifterSwift/HealthKit (7.0.0)
+  - SwifterSwift/MapKit (7.0.0)
+  - SwifterSwift/SceneKit (7.0.0)
+  - SwifterSwift/SpriteKit (7.0.0)
+  - SwifterSwift/StoreKit (7.0.0)
+  - SwifterSwift/SwiftStdlib (7.0.0)
+  - SwifterSwift/UIKit (7.0.0)
+  - SwifterSwift/WebKit (7.0.0)
   - SwiftyUserDefaults (3.0.1)
   - TMDBSwift (0.7.0)
 
@@ -152,10 +162,10 @@ SPEC CHECKSUMS:
   RevealingSplashView: 40c5a770894459736acdc95655eeba0dd30ce91c
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SubtleVolume: 101038d203018736bcd1df3ac95bcc0f6b8640ce
-  SwifterSwift: a9e8e144832638c2850b43da5feaf9598c6ad65b
+  SwifterSwift: e9caf990fc72e835432280755d1f4c43f2a483d5
   SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
   TMDBSwift: 646e42e749b072e007ed936097ae25e0a3e510e4
 
-PODFILE CHECKSUM: 4c1661da6af6b4044f3133b170af6b68c165e0d3
+PODFILE CHECKSUM: d827eb4b4cf8524a06625e2fd8756dae50cc4060
 
 COCOAPODS: 1.16.2

@@ -67,7 +67,7 @@ class ProfileViewController: UITableViewController, ProfileModelDelegate, SideMe
         profileImageView.clipsToBounds = true
 
         goToSiteButton.tintColor = .kpGreyishTwo
-        goToSiteButton.borderColor = .kpGreyishBrown
+        goToSiteButton.layerBorderColor = .kpGreyishBrown
     }
 
     func configureProfile() {

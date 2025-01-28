@@ -1,10 +1,4 @@
-//
-//  UIApplicationExtensions.swift
-//  SwifterSwift
-//
-//  Created by Omar Albeik on 3/30/19.
-//  Copyright © 2019 SwifterSwift
-//
+// UIApplicationExtensions.swift - Copyright 2024 SwifterSwift
 
 #if canImport(UIKit)
 import UIKit
@@ -12,18 +6,17 @@ import UIKit
 #if os(iOS) || os(tvOS)
 
 public extension UIApplication {
-
     /// SwifterSwift: Application running environment.
     ///
     /// - debug: Application is running in debug mode.
     /// - testFlight: Application is installed from Test Flight.
     /// - appStore: Application is installed from the App Store.
     enum Environment {
-        /// Application is running in debug mode.
+        /// SwifterSwift: Application is running in debug mode.
         case debug
-        /// Application is installed from Test Flight.
+        /// SwifterSwift: Application is installed from Test Flight.
         case testFlight
-        /// Application is installed from the App Store.
+        /// SwifterSwift: Application is installed from the App Store.
         case appStore
     }
 
@@ -70,7 +63,6 @@ public extension UIApplication {
     var version: String? {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     }
-
 }
 
 #endif

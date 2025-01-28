@@ -49,7 +49,7 @@ class AboutViewController: UIViewController {
         designerNameLabel.textColor = .kpMarigold
         designerInfoLabel.textColor = .kpGreyishTwo
 
-        donateButton.borderColor = .kpGreyishBrown
+        donateButton.layerBorderColor = .kpGreyishBrown
         donateButton.tintColor = .kpGreyishTwo
 
         copyLabel.textColor = .kpGreyishBrown

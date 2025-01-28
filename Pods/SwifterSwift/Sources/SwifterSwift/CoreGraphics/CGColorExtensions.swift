@@ -1,10 +1,4 @@
-//
-//  CGColorExtensions.swift
-//  SwifterSwift
-//
-//  Created by Omar Albeik on 03/02/2017.
-//  Copyright © 2017 SwifterSwift
-//
+// CGColorExtensions.swift - Copyright 2024 SwifterSwift
 
 #if canImport(CoreGraphics)
 import CoreGraphics
@@ -13,13 +7,13 @@ import CoreGraphics
 import UIKit
 #endif
 
-#if canImport(Cocoa)
-import Cocoa
+#if canImport(AppKit)
+import AppKit
 #endif
 
 // MARK: - Properties
-public extension CGColor {
 
+public extension CGColor {
     #if canImport(UIKit)
     /// SwifterSwift: UIColor.
     var uiColor: UIColor? {
@@ -27,13 +21,12 @@ public extension CGColor {
     }
     #endif
 
-    #if canImport(Cocoa)
+    #if canImport(AppKit) && !targetEnvironment(macCatalyst)
     /// SwifterSwift: NSColor.
     var nsColor: NSColor? {
         return NSColor(cgColor: self)
     }
     #endif
-
 }
 
 #endif

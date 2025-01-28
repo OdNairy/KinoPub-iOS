@@ -19,8 +19,8 @@ class ButtonsTableViewCell: UITableViewCell {
     func configView() {
         bookmarkButton.setTitleColor(.kpGreyishTwo, for: .normal)
         watchlistAndDownloadButton.setTitleColor(.kpGreyishTwo, for: .normal)
-        bookmarkButton.borderColor = .kpGreyishBrown
-        watchlistAndDownloadButton.borderColor = .kpGreyishBrown
+        bookmarkButton.layerBorderColor = .kpGreyishBrown
+        watchlistAndDownloadButton.layerBorderColor = .kpGreyishBrown
     }
 
     func config(withModel model: VideoItemModel, bookmarksModel: BookmarksModel) {
@@ -34,11 +34,11 @@ class ButtonsTableViewCell: UITableViewCell {
         if let _itemFolders = model.item.bookmarks, _itemFolders.count > 0 {
             bookmarkButton.setImage(UIImage(named: "Ok"), for: .normal)
             bookmarkButton.setTitle(_itemFolders[0].title!, for: .normal)
-            bookmarkButton.borderColor = .kpMarigold
+            bookmarkButton.layerBorderColor = .kpMarigold
         } else {
             bookmarkButton.setImage(nil, for: .normal)
             bookmarkButton.setTitle("В закладки", for: .normal)
-            bookmarkButton.borderColor = .kpGreyishBrown
+            bookmarkButton.layerBorderColor = .kpGreyishBrown
         }
         bookmarkButton.addTarget(self, action: #selector(showBookmarkFolders), for: .touchUpInside)
     }
@@ -52,21 +52,21 @@ class ButtonsTableViewCell: UITableViewCell {
             if model.item.inWatchlist! {
                 watchlistAndDownloadButton.setImage(UIImage(named: "Ok"), for: .normal)
                 watchlistAndDownloadButton.setTitle("Смотрю", for: .normal)
-                watchlistAndDownloadButton.borderColor = .kpMarigold
+                watchlistAndDownloadButton.layerBorderColor = .kpMarigold
             } else {
                 watchlistAndDownloadButton.setImage(nil, for: .normal)
                 watchlistAndDownloadButton.setTitle("Буду смотреть", for: .normal)
-                watchlistAndDownloadButton.borderColor = .kpGreyishBrown
+                watchlistAndDownloadButton.layerBorderColor = .kpGreyishBrown
             }
         } else {
             watchlistAndDownloadButton.addTarget(
                 self, action: #selector(showWatchAction), for: .touchUpInside)
             if model.item.videos?.first?.watched == 0 {
                 watchlistAndDownloadButton.setTitle("Смотрю", for: .normal)
-                watchlistAndDownloadButton.borderColor = .kpMarigold
+                watchlistAndDownloadButton.layerBorderColor = .kpMarigold
             } else {
                 watchlistAndDownloadButton.setTitle("Буду смотреть", for: .normal)
-                watchlistAndDownloadButton.borderColor = .kpGreyishBrown
+                watchlistAndDownloadButton.layerBorderColor = .kpGreyishBrown
             }
         }
     }

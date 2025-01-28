@@ -327,9 +327,9 @@ class FilterViewController: FormViewController {
                 self?.resetFilter(row)
             }).cellUpdate({ (cell, _) in
                 cell.textLabel?.textColor = .kpGreyishTwo
-                cell.textLabel?.borderWidth = 1
-                cell.textLabel?.borderColor = .kpGreyishBrown
-                cell.textLabel?.cornerRadius = 6
+                cell.textLabel?.layerBorderWidth = 1
+                cell.textLabel?.layerBorderColor = .kpGreyishBrown
+                cell.textLabel?.layerCornerRadius = 6
             })
     }
 

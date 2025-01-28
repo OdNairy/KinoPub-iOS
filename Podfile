@@ -6,22 +6,13 @@ target 'KinoPub' do
   inhibit_all_warnings!
   # pod 'Crashlytics'
   # pod 'Fabric'
+
   pod 'Alamofire', '~> 4.0'
   pod 'AlamofireImage'
   pod 'AlamofireNetworkActivityLogger'
   pod 'AlamofireObjectMapper'
-  pod 'CircleProgressView'
-  pod 'CustomLoader'
-  pod 'DGCollectionViewPaginableBehavior'
-  pod 'EasyAbout'
-  pod 'Eureka'
-  pod 'InteractiveSideMenu', :git => 'https://github.com/handsomecode/InteractiveSideMenu.git', :branch => 'master'
-  pod 'KeychainSwift'
-  pod 'LKAlertController'
   pod 'NDYoutubePlayer', :git => 'https://github.com/hintoz/NDYoutubePlayer.git'
-  pod 'NotificationBannerSwift'
-  pod 'RevealingSplashView'
-  pod 'SubtleVolume'
+  pod 'NotificationBannerSwift' # outdated
   pod 'SwifterSwift'
   pod 'SwiftyUserDefaults', '~> 3.0'
 
@@ -33,6 +24,16 @@ target 'KinoPub' do
   pod 'Letters', :path => 'Dependencies/Swift-UIImageView-Letters'
 
   # Updated
+  pod 'SubtleVolume'
+  pod 'RevealingSplashView'
+  pod 'LKAlertController'
+  pod 'KeychainSwift'
+  pod 'InteractiveSideMenu', :git => 'https://github.com/handsomecode/InteractiveSideMenu.git', :branch => 'master'
+  pod 'CircleProgressView'
+  pod 'CustomLoader'
+  pod 'DGCollectionViewPaginableBehavior'
+  pod 'EasyAbout'
+  pod 'Eureka'
   pod 'GradientLoadingBar'
 
 end
