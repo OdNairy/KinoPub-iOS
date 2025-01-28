@@ -129,11 +129,14 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
     }
 
     func configOffset() {
+        guard let statusBarFrame = view.window?.windowScene?.statusBarManager?.statusBarFrame else {
+            return
+        }
         if let navBarHeight = navigationController?.navigationBar.frame.height {
             offsetHeaderStop =
-                headerView.height - (navBarHeight + UIApplication.shared.statusBarFrame.height)
+                headerView.height - (navBarHeight + statusBarFrame.height)
         }
-        distanceWLabelHeader = UIApplication.shared.statusBarFrame.height + 10
+        distanceWLabelHeader = statusBarFrame.height + 10
     }
 
     @objc func refresh() {
@@ -145,7 +148,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
 
     func beginLoad() {
         refreshing = true
-        _ = LoadingView.system(withStyle: .whiteLarge).show(inView: headerImageView)
+        _ = LoadingView.system(withStyle: .large).show(inView: headerImageView)
     }
 
     func endLoad() {
@@ -427,7 +430,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
     }
 
     func showBookmarkFolders() {
-        _ = LoadingView.system(withStyle: .white).show(inView: bookmarkButton)
+        _ = LoadingView.system(withStyle: .medium).show(inView: bookmarkButton)
         bookmarksModel.loadBookmarks { [weak self] (bookmarks) in
             guard let strongSelf = self else { return }
             let action = ActionSheet(message: "Выберите папку")
@@ -609,33 +612,25 @@ extension OldDetailViewController: UITableViewDataSource {
         switch indexPath.section {
             case 0:
                 ratingCell =
-                    tableView.dequeueReusableCell(
-                        withIdentifier: String(describing: RatingTableViewCell.self), for: indexPath
-                    ) as! RatingTableViewCell
+                    (tableView.dequeueReusableCell(withIdentifier: String(describing: RatingTableViewCell.self), for: indexPath) as! RatingTableViewCell)
                 ratingCell.selectionStyle = .none
                 ratingCell.configure(withItem: model.item!)
                 return ratingCell
             case 1:
                 descCell =
-                    tableView.dequeueReusableCell(
-                        withIdentifier: String(describing: DescTableViewCell.self), for: indexPath)
-                    as! DescTableViewCell
+                    (tableView.dequeueReusableCell(withIdentifier: String(describing: DescTableViewCell.self), for: indexPath) as! DescTableViewCell)
                 descCell.selectionStyle = .none
                 descCell.configure(withItem: model.item!)
                 return descCell
             case 2:
                 infoCell =
-                    tableView.dequeueReusableCell(
-                        withIdentifier: String(describing: InfoTableViewCell.self), for: indexPath)
-                    as! InfoTableViewCell
+                    (tableView.dequeueReusableCell(withIdentifier: String(describing: InfoTableViewCell.self), for: indexPath) as! InfoTableViewCell)
                 infoCell.selectionStyle = .none
                 infoCell.configure(with: model.item!)
                 return infoCell
             case 3:
                 castCell =
-                    tableView.dequeueReusableCell(
-                        withIdentifier: CastTableViewCell.reuseIdentifier, for: indexPath)
-                    as! CastTableViewCell
+                    (tableView.dequeueReusableCell(withIdentifier: CastTableViewCell.reuseIdentifier, for: indexPath) as! CastTableViewCell)
                 castCell.selectionStyle = .none
                 castCell.configure(with: model.item?.cast, directors: model.item?.director)
                 return castCell

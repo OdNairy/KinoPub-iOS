@@ -76,7 +76,7 @@ class ButtonsTableViewCell: UITableViewCell {
     }
 
     @objc func showBookmarkFolders() {
-        _ = LoadingView.system(withStyle: .white).show(inView: bookmarkButton)
+        _ = LoadingView.system(withStyle: .medium).show(inView: bookmarkButton)
         bookmarksModel.loadBookmarks { [weak self] (bookmarks) in
             guard let strongSelf = self else { return }
             let action = ActionSheet(message: "Выберите папку").tint(.kpBlack)

@@ -177,12 +177,16 @@ class DetailViewController: UIViewController, SideMenuItemContent {
     }
 
     func configOffset() {
+        guard let statusBarFrame = view.window?.windowScene?.statusBarManager?.statusBarFrame else {
+            return
+        }
+
         if let navBarHeight = navigationController?.navigationBar.frame.height {
             offsetHeaderStop =
                 headerView.bounds.height
-                - (navBarHeight + UIApplication.shared.statusBarFrame.height)
+                - (navBarHeight + statusBarFrame.height)
         }
-        distanceWLabelHeader = UIApplication.shared.statusBarFrame.height + 10
+        distanceWLabelHeader = statusBarFrame.height + 10
     }
 
     func configPullToRefresh() {

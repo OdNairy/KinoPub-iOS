@@ -107,19 +107,20 @@ extension SportCollectionViewController: UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
+        let windowScene = collectionView.window?.windowScene
+
         var constant: CGFloat
-        let orientation = UIApplication.shared.statusBarOrientation
-        if orientation == .landscapeLeft || orientation == .landscapeRight,
-            UIDevice.current.userInterfaceIdiom == .pad {
-            constant = 6.0
-        } else if orientation == .portrait || orientation == .portraitUpsideDown,
-            UIDevice.current.userInterfaceIdiom == .pad {
-            constant = 4.0
-        } else if orientation == .landscapeLeft || orientation == .landscapeRight {
-            constant = 4.0
-        } else {
-            constant = 2.0
+
+        switch (windowScene?.interfaceOrientation, UIDevice.current.userInterfaceIdiom) {
+        case (.landscapeLeft, .pad), (.landscapeRight, .pad):
+            constant = 6
+        case (.portrait, .pad), (.portraitUpsideDown, .pad),
+             (.landscapeLeft, _), (.landscapeRight, _):
+            constant = 4
+        default:
+            constant = 2
         }
+
         let width =
             (collectionView.bounds.width
                 - (collectionView.contentInset.left + collectionView.contentInset.right)) / constant

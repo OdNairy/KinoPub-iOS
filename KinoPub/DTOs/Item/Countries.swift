@@ -13,8 +13,8 @@ public class Countries: Mappable, Hashable, Equatable, CustomStringConvertible {
     public var id: Int!
     public var title: String!
 
-    public var hashValue: Int {
-        return self.id!
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     public var description: String {
         return title!

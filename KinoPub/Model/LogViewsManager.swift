@@ -2,7 +2,7 @@ import Foundation
 import LKAlertController
 import NotificationBannerSwift
 
-protocol LogViewsManager: class {
+protocol LogViewsManager: AnyObject {
     func addDelegate(delegate: LogViewsManagerDelegate)
     func changeWatchingStatus(id: Int, video: Int?, season: Int, status: Int?)
     func changeMarktime(id: Int, time: TimeInterval, video: Int, season: Int?)

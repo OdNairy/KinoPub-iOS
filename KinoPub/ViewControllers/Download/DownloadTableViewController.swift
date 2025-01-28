@@ -209,46 +209,37 @@ extension DownloadTableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath)
-        -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section == 1 {
-            let delete = UITableViewRowAction(
-                style: UITableViewRowAction.Style.destructive, title: "Удалить"
-            ) { (_, indexPath) in
+            let delete = UIContextualAction(style: .destructive, title: "Удалить") { (_, _, completionHandler) in
                 NTDownloadManager.shared.removeTask(downloadTask: self.downed[indexPath.row])
                 self.downed.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
+                completionHandler(true)
             }
 
-            let share = UITableViewRowAction(
-                style: .default, title: "Поделиться",
-                handler: { (_, indexPath) in
-                    let fileUrl = URL(
-                        fileURLWithPath: "\(NTDocumentPath)/\(self.downed[indexPath.row].fileName)")
-                    //                let str = self.downed[indexPath.row].fileName
-
-                    let activityViewController = UIActivityViewController(
-                        activityItems: [fileUrl], applicationActivities: nil)
-                    activityViewController.popoverPresentationController?.sourceView = self
-                        .tableView.cellForRow(at: indexPath)
-                    self.present(activityViewController, animated: true, completion: nil)
-                })
+            let share = UIContextualAction(style: .normal, title: "Поделиться") { (_, _, completionHandler) in
+                let fileUrl = URL(fileURLWithPath: "\(NTDocumentPath)/\(self.downed[indexPath.row].fileName)")
+                let activityViewController = UIActivityViewController(activityItems: [fileUrl], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.tableView.cellForRow(at: indexPath)
+                self.present(activityViewController, animated: true, completion: nil)
+                completionHandler(true)
+            }
 
             delete.backgroundColor = .kpGreyishTwo
             share.backgroundColor = .kpMarigold
 
-            return [delete, share]
+            return UISwipeActionsConfiguration(actions: [delete, share])
         } else if indexPath.section == 0 {
-            let delete = UITableViewRowAction(
-                style: UITableViewRowAction.Style.destructive, title: "Удалить"
-            ) { (_, indexPath) in
+            let delete = UIContextualAction(style: .destructive, title: "Удалить") { (_, _, completionHandler) in
                 NTDownloadManager.shared.removeTask(downloadTask: self.downing[indexPath.row])
                 self.downing.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
+                completionHandler(true)
             }
 
             delete.backgroundColor = .kpGreyishTwo
-            return [delete]
+            return UISwipeActionsConfiguration(actions: [delete])
         } else {
             return nil
         }

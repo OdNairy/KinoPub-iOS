@@ -45,7 +45,7 @@ class MenuSectionViewController: FormViewController {
                     $0.value = !hiddenMenuItems.contains(item)
                 }.onChange({ (row) in
                     if row.value! {
-                        self.hiddenMenuItems.remove(at: self.hiddenMenuItems.index(of: item)!)
+                        self.hiddenMenuItems.remove(at: self.hiddenMenuItems.firstIndex(of: item)!)
                     } else {
                         self.hiddenMenuItems.append(item)
                     }
