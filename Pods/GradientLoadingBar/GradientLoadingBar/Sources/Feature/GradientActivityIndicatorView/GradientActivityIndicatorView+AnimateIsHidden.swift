@@ -1,25 +1,23 @@
 //
-//  UIView+AnimateIsHidden.swift
+//  GradientActivityIndicatorView+AnimateIsHidden.swift
 //  GradientLoadingBar
 //
-//  Created by Felix Mau on 12/15/18.
+//  Created by Felix Mau on 15.12.18.
 //  Copyright © 2018 Felix Mau. All rights reserved.
 //
 
 import UIKit
 
-// Source
-// https://gist.github.com/fxm90/723b5def31b46035cd92a641e3b184f6
+/// Helper methods to fade-in and -out the `GradientActivityIndicatorView` and update the `isHidden` flag
+/// accordingly, as the progress-animation is started and stopped based on this flag.
+///
+/// - Note: We add these methods as public extensions on `GradientActivityIndicatorView` instead of `UIView`,
+/// in order to avoid conflicts with other frameworks.
+///
+/// - SeeAlso: [Github Gist – UIView+AnimateIsHidden.swift](https://gist.github.com/fxm90/723b5def31b46035cd92a641e3b184f6)
+public extension GradientActivityIndicatorView {
 
-extension UIView {
-    // MARK: - Config
-
-    /// The default duration for fading-animations, measured in seconds.
-    static let defaultFadingAnimationDuration: TimeInterval = 1.0
-
-    // MARK: - Public methods
-
-    /// Updates the view visiblity.
+    /// Updates the view visibility.
     ///
     /// - Parameters:
     ///   - isHidden: The new view visibility.
@@ -28,7 +26,7 @@ extension UIView {
     ///                 argument that indicates whether or not the animations actually finished before the completion handler was called.
     ///
     /// - SeeAlso: https://developer.apple.com/documentation/uikit/uiview/1622515-animatewithduration
-    func animate(isHidden: Bool, duration: TimeInterval = UIView.defaultFadingAnimationDuration, completion: ((Bool) -> Void)? = nil) {
+    func animate(isHidden: Bool, duration: TimeInterval, completion: ((Bool) -> Void)? = nil) {
         if isHidden {
             fadeOut(duration: duration,
                     completion: completion)
@@ -46,19 +44,19 @@ extension UIView {
     ///                 argument that indicates whether or not the animations actually finished before the completion handler was called.
     ///
     /// - SeeAlso: https://developer.apple.com/documentation/uikit/uiview/1622515-animatewithduration
-    func fadeOut(duration: TimeInterval = UIView.defaultFadingAnimationDuration, completion: ((Bool) -> Void)? = nil) {
+    func fadeOut(duration: TimeInterval = TimeInterval.GradientLoadingBar.fadeOutDuration, completion: ((Bool) -> Void)? = nil) {
         UIView.animate(withDuration: duration,
                        animations: {
-                           self.alpha = 0.0
+                           self.alpha = 0
                        },
                        completion: { isFinished in
                            // Update `isHidden` flag accordingly:
-                           //  - set to `true` in case animation was completly finished.
+                           //  - set to `true` in case animation was completely finished.
                            //  - set to `false` in case animation was interrupted, e.g. due to starting of another animation.
                            self.isHidden = isFinished
 
                            completion?(isFinished)
-        })
+                       })
     }
 
     /// Fade in the current view by setting the `isHidden` flag to `false` and animating the `alpha` to one.
@@ -69,7 +67,7 @@ extension UIView {
     ///                 argument that indicates whether or not the animations actually finished before the completion handler was called.
     ///
     /// - SeeAlso: https://developer.apple.com/documentation/uikit/uiview/1622515-animatewithduration
-    func fadeIn(duration: TimeInterval = UIView.defaultFadingAnimationDuration, completion: ((Bool) -> Void)? = nil) {
+    func fadeIn(duration: TimeInterval = TimeInterval.GradientLoadingBar.fadeInDuration, completion: ((Bool) -> Void)? = nil) {
         if isHidden {
             // Make sure our animation is visible.
             isHidden = false
@@ -77,7 +75,7 @@ extension UIView {
 
         UIView.animate(withDuration: duration,
                        animations: {
-                           self.alpha = 1.0
+                           self.alpha = 1
                        },
                        completion: completion)
     }

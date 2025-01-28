@@ -202,6 +202,7 @@
 		FE35ABC52D26FA5A00FBE20A /* Atributika in Frameworks */ = {isa = PBXBuildFile; productRef = FE35ABC42D26FA5A00FBE20A /* Atributika */; };
 		FE3A83252D26EE5D001B99D9 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83242D26EE5D001B99D9 /* FirebaseCore */; };
 		FE3A83272D26EE5D001B99D9 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83262D26EE5D001B99D9 /* FirebaseRemoteConfig */; };
+		FE82E0E22D49628E001B716D /* GradientLoadingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */; };
 		FEDEC9C120226ECF00250B61 /* PrivateKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEC9C020226ECF00250B61 /* PrivateKeys.swift */; };
 /* End PBXBuildFile section */
 
@@ -404,6 +405,7 @@
 		B92B856F476D54B9B5C6B1E4 /* Pods-KinoPub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoPub.release.xcconfig"; path = "Pods/Target Support Files/Pods-KinoPub/Pods-KinoPub.release.xcconfig"; sourceTree = "<group>"; };
 		D9C7223E45EB1E644C5CA177 /* Pods-KinoPub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoPub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KinoPub/Pods-KinoPub.debug.xcconfig"; sourceTree = "<group>"; };
 		DE4D48B0CD4F6451DBED8C0B /* Pods_KinoPub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinoPub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLoadingBar.swift; sourceTree = "<group>"; };
 		FEDEC9C020226ECF00250B61 /* PrivateKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -803,6 +805,7 @@
 		696D67E21FE94345002EE5B0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */,
 				69512B3C1F7D49B800BF5A89 /* Extensions.swift */,
 				696D67E71FE946D6002EE5B0 /* UIFont+KPAdditions.swift */,
 				696D67E51FE94671002EE5B0 /* UIColor+KPAdditions.swift */,
@@ -1123,7 +1126,6 @@
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/LKAlertController/LKAlertController.framework",
 				"${BUILT_PRODUCTS_DIR}/Letters/Letters.framework",
-				"${BUILT_PRODUCTS_DIR}/LightweightObservable/LightweightObservable.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NDYoutubePlayer/NDYoutubePlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/NTDownload/NTDownload.framework",
@@ -1153,7 +1155,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LKAlertController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Letters.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LightweightObservable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NDYoutubePlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NTDownload.framework",
@@ -1322,6 +1323,7 @@
 				691420532035A686005A5370 /* HiddenMenusService.swift in Sources */,
 				69F1243B2004530A00E37A1F /* HintsView.swift in Sources */,
 				695922111F7D5C0500CE3224 /* TabBarViewController.swift in Sources */,
+				FE82E0E22D49628E001B716D /* GradientLoadingBar.swift in Sources */,
 				695921FE1F7D568100CE3224 /* VideoItemsModel.swift in Sources */,
 				695922661F7DB07B00CE3224 /* ProfileTableViewController.swift in Sources */,
 				694C41501F84FB0800D6BD6F /* DownloadingTableViewCell.swift in Sources */,

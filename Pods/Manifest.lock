@@ -14,12 +14,10 @@ PODS:
   - EasyAbout (1.2.0)
   - Eureka (5.5.0)
   - EZPlayer (1.2.0)
-  - GradientLoadingBar (1.1.17):
-    - LightweightObservable (~> 1.0)
+  - GradientLoadingBar (3.0.0)
   - InteractiveSideMenu (2.3.2)
   - KeychainSwift (20.0.0)
   - Letters (2.1.1)
-  - LightweightObservable (1.0.3)
   - LKAlertController (1.12.2)
   - MarqueeLabel/Swift (3.2.1)
   - NDYoutubePlayer (0.1.8)
@@ -56,7 +54,7 @@ PODS:
   - TMDBSwift (0.7.0)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (~> 4.0)
   - AlamofireImage
   - AlamofireNetworkActivityLogger
   - AlamofireObjectMapper
@@ -67,7 +65,7 @@ DEPENDENCIES:
   - EasyAbout
   - Eureka
   - EZPlayer (from `Dependencies/EZPlayer`)
-  - GradientLoadingBar (~> 1.0)
+  - GradientLoadingBar
   - InteractiveSideMenu (from `https://github.com/handsomecode/InteractiveSideMenu.git`, branch `master`)
   - KeychainSwift
   - Letters (from `Dependencies/Swift-UIImageView-Letters`)
@@ -94,7 +92,6 @@ SPEC REPOS:
     - Eureka
     - GradientLoadingBar
     - KeychainSwift
-    - LightweightObservable
     - LKAlertController
     - MarqueeLabel
     - NotificationBannerSwift
@@ -142,11 +139,10 @@ SPEC CHECKSUMS:
   EasyAbout: 1e3faec7e8ca2a21cdd45852e137f22f51922ced
   Eureka: 1c18c7fcd8f772cc2ca42d6be36292dffa77eecb
   EZPlayer: 590a0e4afd0a58eeecdbaa3e80221bcd526917b2
-  GradientLoadingBar: a0e1855e4ba5051301027d5f4a129f38003cc2b9
+  GradientLoadingBar: 3c4246535efdedaf9b471c05caabfdb4b87b40a2
   InteractiveSideMenu: aab8d5423e688593ca2e9d64de7abdd05945084d
   KeychainSwift: 0ce6a4d13f7228054d1a71bb1b500448fb2ab837
   Letters: 92053e18c2560e836069347cd438517c903c11e5
-  LightweightObservable: 8687e8e1e2940ae2f64d7f71fe78c036d89c966f
   LKAlertController: 10c7e8627e5d4757d03b4f53469f35ded14c378f
   MarqueeLabel: 2daf039bf916937c8a4c9adfc13577cc5e51b4ce
   NDYoutubePlayer: cacca0005e3542d00e3fa25c35b956706aba2b32
@@ -160,6 +156,6 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
   TMDBSwift: 646e42e749b072e007ed936097ae25e0a3e510e4
 
-PODFILE CHECKSUM: 22aae7f4e264f1da07cee5973fe301c3560fa935
+PODFILE CHECKSUM: 4c1661da6af6b4044f3133b170af6b68c165e0d3
 
 COCOAPODS: 1.16.2

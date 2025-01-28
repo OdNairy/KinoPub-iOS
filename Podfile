@@ -4,7 +4,7 @@ target 'KinoPub' do
 
   use_frameworks!
   inhibit_all_warnings!
-  pod 'Alamofire'
+  pod 'Alamofire', '~> 4.0'
   pod 'AlamofireObjectMapper'
   pod 'AlamofireNetworkActivityLogger'
   pod 'AlamofireImage'
@@ -33,9 +33,11 @@ target 'KinoPub' do
   pod 'AZSearchView', path: 'Dependencies/AZSearchView'
   # pod 'AZSearchView', :git => 'https://github.com/hintoz/AZSearchView.git'
   pod 'NDYoutubePlayer', :git => 'https://github.com/hintoz/NDYoutubePlayer.git'
-  pod 'GradientLoadingBar', '~> 1.0'
   pod 'EasyAbout'
   pod 'CircleProgressView'
+
+  # Updated
+  pod 'GradientLoadingBar'
 
 end
 
