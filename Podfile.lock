@@ -16,18 +16,18 @@ PODS:
   - EZPlayer (1.2.0)
   - GradientLoadingBar (3.0.0)
   - InteractiveSideMenu (2.3.2)
-  - KeychainSwift (20.0.0)
+  - KeychainSwift (24.0.0)
   - Letters (2.1.1)
   - LKAlertController (1.12.2)
-  - MarqueeLabel/Swift (3.2.1)
+  - MarqueeLabel (4.3.2)
   - NDYoutubePlayer (0.1.8)
-  - NotificationBannerSwift (2.1.0):
-    - MarqueeLabel/Swift (~> 3.2.1)
-    - SnapKit (~> 4.2.0)
+  - NotificationBannerSwift (3.2.1):
+    - MarqueeLabel (~> 4.3.0)
+    - SnapKit (~> 5.6.0)
   - NTDownload (1.1.0)
   - ObjectMapper (3.5.3)
   - RevealingSplashView (0.6.0)
-  - SnapKit (4.2.0)
+  - SnapKit (5.6.0)
   - SubtleVolume (1.1.0)
   - SwifterSwift (7.0.0):
     - SwifterSwift/AppKit (= 7.0.0)
@@ -151,16 +151,16 @@ SPEC CHECKSUMS:
   EZPlayer: 590a0e4afd0a58eeecdbaa3e80221bcd526917b2
   GradientLoadingBar: 3c4246535efdedaf9b471c05caabfdb4b87b40a2
   InteractiveSideMenu: aab8d5423e688593ca2e9d64de7abdd05945084d
-  KeychainSwift: 0ce6a4d13f7228054d1a71bb1b500448fb2ab837
+  KeychainSwift: 007c4647486e4563adca839cf02cef00deb3b670
   Letters: 92053e18c2560e836069347cd438517c903c11e5
   LKAlertController: 10c7e8627e5d4757d03b4f53469f35ded14c378f
-  MarqueeLabel: 2daf039bf916937c8a4c9adfc13577cc5e51b4ce
+  MarqueeLabel: 15e524a6762552bb279cb17438b8a94990269fb9
   NDYoutubePlayer: cacca0005e3542d00e3fa25c35b956706aba2b32
-  NotificationBannerSwift: 4483919639202bec56d6bfe8f106ebc352d38bc7
+  NotificationBannerSwift: dce54ded532b26e30cd8e7f4d80e124a0f2ba7d1
   NTDownload: 15b7d8a4a527ec36031e851909b7c8f009bcebfe
   ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
   RevealingSplashView: 40c5a770894459736acdc95655eeba0dd30ce91c
-  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SubtleVolume: 101038d203018736bcd1df3ac95bcc0f6b8640ce
   SwifterSwift: e9caf990fc72e835432280755d1f4c43f2a483d5
   SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be

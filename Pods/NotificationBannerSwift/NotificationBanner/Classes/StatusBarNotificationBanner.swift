@@ -18,23 +18,21 @@
 
 import UIKit
 
-#if CARTHAGE_CONFIG
-    import MarqueeLabelSwift
-#else
-    import MarqueeLabel
-#endif
+import MarqueeLabel
 
 @objcMembers
-public class StatusBarNotificationBanner: BaseNotificationBanner {
+open class StatusBarNotificationBanner: BaseNotificationBanner {
 
     public override var bannerHeight: CGFloat {
         get {
             if let customBannerHeight = customBannerHeight {
                 return customBannerHeight
+            } else if shouldAdjustForDynamicIsland() {
+                return 70.0
             } else if shouldAdjustForNotchFeaturedIphone() {
                 return 50.0
             } else {
-                return 20.0
+                return 20.0 + heightAdjustment
             }
         } set {
             customBannerHeight = newValue
@@ -53,7 +51,7 @@ public class StatusBarNotificationBanner: BaseNotificationBanner {
         contentView.addSubview(titleLabel!)
 
         titleLabel!.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(heightAdjustment)
             make.left.equalToSuperview().offset(5)
             make.right.equalToSuperview().offset(-5)
             make.bottom.equalToSuperview()
@@ -62,22 +60,28 @@ public class StatusBarNotificationBanner: BaseNotificationBanner {
         updateMarqueeLabelsDurations()
     }
 
-    public convenience init(title: String,
-                            style: BannerStyle = .info,
-                            colors: BannerColorsProtocol? = nil) {
+    public convenience init(
+        title: String,
+        style: BannerStyle = .info,
+        colors: BannerColorsProtocol? = nil
+    ) {
         self.init(style: style, colors: colors)
         titleLabel!.text = title
     }
 
-    public convenience init(attributedTitle: NSAttributedString,
-                            style: BannerStyle = .info,
-                            colors: BannerColorsProtocol? = nil) {
+    public convenience init(
+        attributedTitle: NSAttributedString,
+        style: BannerStyle = .info,
+        colors: BannerColorsProtocol? = nil
+    ) {
         self.init(style: style, colors: colors)
         titleLabel!.attributedText = attributedTitle
     }
 
     public init(customView: UIView) {
-        super.init(style: .none)
+        super.init(style: .customView)
+        self.customView = customView
+        
         contentView.addSubview(customView)
         customView.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
@@ -94,8 +98,10 @@ public class StatusBarNotificationBanner: BaseNotificationBanner {
 
 public extension StatusBarNotificationBanner {
     
-    func applyStyling(titleColor: UIColor? = nil,
-                      titleTextAlign: NSTextAlignment? = nil) {
+    func applyStyling(
+        titleColor: UIColor? = nil,
+        titleTextAlign: NSTextAlignment? = nil
+    ) {
         
         if let titleColor = titleColor {
             titleLabel!.textColor = titleColor

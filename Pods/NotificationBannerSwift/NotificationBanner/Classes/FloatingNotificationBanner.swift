@@ -19,23 +19,33 @@
 import UIKit
 import SnapKit
 
-public class FloatGrowingNotificationBanner: GrowingNotificationBanner {
+open class FloatingNotificationBanner: GrowingNotificationBanner {
     
-    public init(title: String? = nil,
-                subtitle: String? = nil,
-                titleFont: UIFont? = nil,
-                titleColor: UIColor? = nil,
-                titleTextAlign: NSTextAlignment? = nil,
-                subtitleFont: UIFont? = nil,
-                subtitleColor: UIColor? = nil,
-                subtitleTextAlign: NSTextAlignment? = nil,
-                leftView: UIView? = nil,
-                rightView: UIView? = nil,
-                style: BannerStyle = .info,
-                colors: BannerColorsProtocol? = nil,
-                iconPosition: IconPosition = .center) {
+    public init(
+        title: String? = nil,
+        subtitle: String? = nil,
+        titleFont: UIFont? = nil,
+        titleColor: UIColor? = nil,
+        titleTextAlign: NSTextAlignment? = nil,
+        subtitleFont: UIFont? = nil,
+        subtitleColor: UIColor? = nil,
+        subtitleTextAlign: NSTextAlignment? = nil,
+        leftView: UIView? = nil,
+        rightView: UIView? = nil,
+        style: BannerStyle = .info,
+        colors: BannerColorsProtocol? = nil,
+        iconPosition: IconPosition = .center
+    ) {
 
-        super.init(title: title, subtitle: subtitle, leftView: leftView, rightView: rightView, style: style, colors: colors, iconPosition: iconPosition)
+        super.init(
+            title: title,
+            subtitle: subtitle,
+            leftView: leftView,
+            rightView: rightView,
+            style: style,
+            colors: colors,
+            iconPosition: iconPosition
+        )
         
         if let titleFont = titleFont {
             self.titleFont = titleFont
@@ -64,39 +74,63 @@ public class FloatGrowingNotificationBanner: GrowingNotificationBanner {
         }
     }
     
+    public init(customView: UIView) {
+        super.init(style: .customView)
+        self.customView = customView
+        
+        contentView.addSubview(customView)
+        customView.snp.makeConstraints { (make) in
+            make.edges.equalTo(contentView)
+        }
+        
+        spacerView.backgroundColor = customView.backgroundColor
+    }
+    
     /**
      Convenience function to display banner with non .zero default edge insets
      */
-    public func show(queuePosition: QueuePosition = .back,
-                     bannerPosition: BannerPosition = .top,
-                     queue: NotificationBannerQueue = NotificationBannerQueue.default,
-                     on viewController: UIViewController? = nil,
-                     edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8),
-                     cornerRadius: CGFloat? = nil,
-                     shadowColor: UIColor = .black,
-                     shadowOpacity: CGFloat = 1,
-                     shadowBlurRadius: CGFloat = 0,
-                     shadowCornerRadius: CGFloat = 0,
-                     shadowOffset: UIOffset = .zero,
-                     shadowEdgeInsets: UIEdgeInsets? = nil) {
+    public func show(
+        queuePosition: QueuePosition = .back,
+        bannerPosition: BannerPosition = .top,
+        queue: NotificationBannerQueue = NotificationBannerQueue.default,
+        on viewController: UIViewController? = nil,
+        edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8),
+        cornerRadius: CGFloat? = nil,
+        shadowColor: UIColor = .black,
+        shadowOpacity: CGFloat = 1,
+        shadowBlurRadius: CGFloat = 0,
+        shadowCornerRadius: CGFloat = 0,
+        shadowOffset: UIOffset = .zero,
+        shadowEdgeInsets: UIEdgeInsets? = nil
+    ) {
 
         self.bannerEdgeInsets = edgeInsets
         
         if let cornerRadius = cornerRadius {
             contentView.layer.cornerRadius = cornerRadius
+            contentView.subviews.last?.layer.cornerRadius = cornerRadius
+        }
+        
+        if style == .customView, let customView = contentView.subviews.last {
+           customView.backgroundColor = customView.backgroundColor?.withAlphaComponent(transparency)
         }
 
-        show(queuePosition: queuePosition,
-             bannerPosition: bannerPosition,
-             queue: queue,
-             on: viewController)
+        show(
+            queuePosition: queuePosition,
+            bannerPosition: bannerPosition,
+            queue: queue,
+            on: viewController
+        )
         
-        applyShadow(withColor: shadowColor,
-                    opacity: shadowOpacity,
-                    blurRadius: shadowBlurRadius,
-                    cornerRadius: shadowCornerRadius,
-                    offset: shadowOffset,
-                    edgeInsets: shadowEdgeInsets)
+        applyShadow(
+            withColor: shadowColor,
+            opacity: shadowOpacity,
+            blurRadius: shadowBlurRadius,
+            cornerRadius: shadowCornerRadius,
+            offset: shadowOffset,
+            edgeInsets: shadowEdgeInsets
+        )
+        
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -105,18 +139,22 @@ public class FloatGrowingNotificationBanner: GrowingNotificationBanner {
     
 }
 
-private extension FloatGrowingNotificationBanner {
+private extension FloatingNotificationBanner {
     
     /**
      Add shadow for notification with specified parameters.
      */
-    private func applyShadow(withColor color: UIColor = .black,
-                             opacity: CGFloat = 1,
-                             blurRadius: CGFloat = 0,
-                             cornerRadius: CGFloat = 0,
-                             offset: UIOffset = .zero,
-                             edgeInsets: UIEdgeInsets? = nil) {
-        
+    private func applyShadow(
+        withColor color: UIColor = .black,
+        opacity: CGFloat = 1,
+        blurRadius: CGFloat = 0,
+        cornerRadius: CGFloat = 0,
+        offset: UIOffset = .zero,
+        edgeInsets: UIEdgeInsets? = nil
+    ) {
+
+        guard blurRadius >= 0 else { return }
+
         contentView.layer.shadowColor = color.cgColor
         contentView.layer.shadowOpacity = Float(opacity)
         contentView.layer.shadowRadius = blurRadius
@@ -131,6 +169,9 @@ private extension FloatGrowingNotificationBanner {
             shadowRect.size.height -= (edgeInsets.top + edgeInsets.bottom)
             contentView.layer.shadowPath = UIBezierPath(roundedRect: shadowRect, cornerRadius: cornerRadius).cgPath
         }
+        
+        contentView.layer.rasterizationScale = UIScreen.main.scale
+        contentView.layer.shouldRasterize = true
     }
     
 }
