@@ -1,9 +1,9 @@
 import CustomLoader
+import AVFoundation
 import UIKit
 
 class TrailerTableViewCell: UITableViewCell {
-
-    var youtubeID: String!
+    var trailer: Trailer?
 
     @IBOutlet weak var thumbView: UIView!
     @IBOutlet weak var thumbImageView: UIImageView!
@@ -25,26 +25,18 @@ class TrailerTableViewCell: UITableViewCell {
             UITapGestureRecognizer(target: self, action: #selector(play)))
     }
 
-    func config(withId id: String) {
-        youtubeID = id
-        thumbImageView.af_setImage(
-            withURL: URL(string: "https://img.youtube.com/vi/\(id)/maxresdefault.jpg")!,
-            placeholderImage: UIImage(named: "episode.png"),
-            imageTransition: .crossDissolve(0.2),
-            runImageTransitionIfCached: false
-        ) { [weak self] (response) in
-            if response.result.isFailure {
-                self?.setImage(withId: id)
-            }
-        }
-    }
+    func config(trailer: Trailer, item: Item) {
+        self.trailer = trailer
 
-    func setImage(withId id: String) {
-        thumbImageView.af_setImage(
-            withURL: URL(string: "https://img.youtube.com/vi/\(id)/0.jpg")!,
-            placeholderImage: UIImage(named: "episode.png"),
-            imageTransition: .crossDissolve(0.2),
-            runImageTransitionIfCached: false)
+        if let mediumPosterURL = item.posters?.medium.map(URL.init(string:)) ?? nil {
+            thumbImageView.af_setImage(
+                withURL: mediumPosterURL,
+                placeholderImage: UIImage(named: "episode.png"),
+                imageTransition: .crossDissolve(0.2),
+                runImageTransitionIfCached: false
+            )
+        }
+
     }
 
     @objc func play() {
@@ -54,8 +46,13 @@ class TrailerTableViewCell: UITableViewCell {
             animations: {
                 self.playButtonView.alpha = 1
             })
-        MediaManager.shared.playYouTubeVideo(withID: youtubeID)
-        Helper.hapticGenerate(style: .medium)
+
+        print("Play: \(trailer?.url)")
+        if let trailer = trailer, let trailerURL = URL(string: trailer.url) {
+            let playerItem = AVPlayerItem(url: trailerURL)
+            MediaManager.shared.playWithNativePlayer(mediaItems: [playerItem])
+            Helper.hapticGenerate(style: .medium)
+        }
     }
 
 }

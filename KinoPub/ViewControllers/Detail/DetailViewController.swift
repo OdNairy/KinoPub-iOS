@@ -749,8 +749,8 @@ extension DetailViewController: UITableViewDataSource {
                         for: indexPath) as! TrailerTableViewCell
                 cell.selectionStyle = .none
                 #warning("Cannot parse the trailer data")
-                if let trailerId = model.item.trailer?.id {
-                    cell.config(withId: trailerId)
+                if let trailer = model.item.trailer {
+                    cell.config(trailer: trailer, item: model.item)
                 }
                 return cell
             case 7:
