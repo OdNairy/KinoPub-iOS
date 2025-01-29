@@ -3,7 +3,6 @@ import AVKit
 import EZPlayer
 import LKAlertController
 import MediaPlayer
-import NDYoutubePlayer
 import SubtleVolume
 import SwiftyUserDefaults
 import UIKit
@@ -74,35 +73,6 @@ class MediaManager {
                     NotificationCenter.default.post(
                         name: .DTSPlayerPlaybackTimeDidChange, object: self, userInfo: nil)
                 })
-    }
-
-    func playYouTubeVideo(withID id: String) {
-        releaseNativePlayer()
-        releasePlayer()
-        NDYoutubeClient.shared.getVideoWithIdentifier(videoIdentifier: id) {
-            [weak self] (video, _) in
-            guard let video = video else {
-                Alert(
-                    title: "Ошибка",
-                    message:
-                        "Трейлер не найден. \n По возможности сообщите в стол заказов в Telegram."
-                )
-                .showOkay()
-                return
-            }
-            guard let streamURLs = video.streamURLs else { return }
-            if let videoString = streamURLs[
-                NDYouTubeVideoQuality.NDYouTubeVideoQualityHD720.rawValue] ?? streamURLs[
-                    NDYouTubeVideoQuality.NDYouTubeVideoQualityMedium360.rawValue]
-                ?? streamURLs[NDYouTubeVideoQuality.NDYouTubeVideoQualitySmall240.rawValue] {
-                let mediaItems = [
-                    MediaItem(
-                        url: URL(string: videoString as! String)!, title: nil, video: nil, id: nil,
-                        season: nil, watchingTime: nil)
-                ]
-                self?.playVideo(mediaItems: mediaItems)
-            }
-        }
     }
 
     func playVideo(

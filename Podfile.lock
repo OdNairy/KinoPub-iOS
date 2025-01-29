@@ -20,7 +20,6 @@ PODS:
   - Letters (2.1.1)
   - LKAlertController (1.12.2)
   - MarqueeLabel (4.3.2)
-  - NDYoutubePlayer (0.1.8)
   - NotificationBannerSwift (3.2.1):
     - MarqueeLabel (~> 4.3.0)
     - SnapKit (~> 5.6.0)
@@ -80,7 +79,6 @@ DEPENDENCIES:
   - KeychainSwift
   - Letters (from `Dependencies/Swift-UIImageView-Letters`)
   - LKAlertController
-  - NDYoutubePlayer (from `https://github.com/hintoz/NDYoutubePlayer.git`)
   - NotificationBannerSwift
   - NTDownload (from `Dependencies/NTDownload`)
   - RevealingSplashView
@@ -122,8 +120,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/handsomecode/InteractiveSideMenu.git
   Letters:
     :path: Dependencies/Swift-UIImageView-Letters
-  NDYoutubePlayer:
-    :git: https://github.com/hintoz/NDYoutubePlayer.git
   NTDownload:
     :path: Dependencies/NTDownload
   TMDBSwift:
@@ -133,9 +129,6 @@ CHECKOUT OPTIONS:
   InteractiveSideMenu:
     :commit: 1f563be770c552cfcc695ad633e99410970d53a5
     :git: https://github.com/handsomecode/InteractiveSideMenu.git
-  NDYoutubePlayer:
-    :commit: f14795d41d1015a4f79db55f64b175c9574cf360
-    :git: https://github.com/hintoz/NDYoutubePlayer.git
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
@@ -155,7 +148,6 @@ SPEC CHECKSUMS:
   Letters: 92053e18c2560e836069347cd438517c903c11e5
   LKAlertController: 10c7e8627e5d4757d03b4f53469f35ded14c378f
   MarqueeLabel: 15e524a6762552bb279cb17438b8a94990269fb9
-  NDYoutubePlayer: cacca0005e3542d00e3fa25c35b956706aba2b32
   NotificationBannerSwift: dce54ded532b26e30cd8e7f4d80e124a0f2ba7d1
   NTDownload: 15b7d8a4a527ec36031e851909b7c8f009bcebfe
   ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
@@ -166,6 +158,6 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
   TMDBSwift: 646e42e749b072e007ed936097ae25e0a3e510e4
 
-PODFILE CHECKSUM: 5c511344d14412e9a45d6dc613b5f1c53992e4f0
+PODFILE CHECKSUM: 4724a986cee906b1bfba5ecc3587688b8a82c4c1
 
 COCOAPODS: 1.16.2
