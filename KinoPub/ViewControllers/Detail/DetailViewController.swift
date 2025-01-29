@@ -656,41 +656,56 @@ extension DetailViewController: UIScrollViewDelegate {
 
 // MARK: - UITableViewDataSource
 extension DetailViewController: UITableViewDataSource {
+    enum TableSection: Int, CaseIterable {
+        case rating
+        case buttons
+        case description
+        case trailer
+        case seasonsAndEpisodes
+        case contentQualityDetails
+        case castAndCrew
+        case similarItems
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 8
+        return TableSection.allCases.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 3 {
-            if model.item.trailer == nil {
-                return 0
-            }
+        guard let section = TableSection(rawValue: section) else {
             return 1
-        } else if section == 4 {
+        }
+
+        switch section {
+        case .trailer:
+            return model.item?.trailer == nil ? 0 : 1
+        case .seasonsAndEpisodes:
             if let count = model.item?.seasons?.count {
                 return count
             } else if let count = model.item?.videos?.count, count > 1 {
                 return 1
-            }
-            return 0
-        } else if section == 6 {
-            if model.item?.cast == "", model.item?.director == "" {
+            } else {
                 return 0
             }
-            return 1
-        } else if section == 7 {
-            if model.similarItems.count > 0 {
+        case .castAndCrew:
+            if model.item?.cast == "", model.item?.director == "" {
+                return 0
+            } else {
                 return 1
             }
-            return 0
-        } else {
+        case .similarItems:
+            return model.similarItems.isEmpty ? 0 : 1
+        default:
             return 1
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-            case 0:
+        guard let section = TableSection(rawValue: indexPath.section) else {
+            return UITableViewCell()
+        }
+        switch section {
+        case .rating:
                 let cell =
                     tableView.dequeueReusableCell(
                         withIdentifier: String(describing: RatingTableViewCell.self), for: indexPath
@@ -698,7 +713,7 @@ extension DetailViewController: UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.configure(withItem: model.item!)
                 return cell
-            case 1:
+        case .buttons:
                 let cell =
                     tableView.dequeueReusableCell(
                         withIdentifier: String(describing: ButtonsTableViewCell.self),
@@ -706,7 +721,7 @@ extension DetailViewController: UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.config(withModel: model, bookmarksModel: bookmarksModel)
                 return cell
-            case 2:
+        case .description:
                 let cell =
                     tableView.dequeueReusableCell(
                         withIdentifier: String(describing: DescTableViewCell.self), for: indexPath)
@@ -714,7 +729,7 @@ extension DetailViewController: UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.configure(withItem: model.item!)
                 return cell
-            case 5:
+        case .contentQualityDetails:
                 let cell =
                     tableView.dequeueReusableCell(
                         withIdentifier: String(describing: InfoTableViewCell.self), for: indexPath)
@@ -722,7 +737,7 @@ extension DetailViewController: UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.configure(with: model.item!)
                 return cell
-            case 6:
+        case .castAndCrew:
                 let cell =
                     tableView.dequeueReusableCell(
                         withIdentifier: CastTableViewCell.reuseIdentifier, for: indexPath)
@@ -730,7 +745,7 @@ extension DetailViewController: UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.configure(with: model.item?.cast, directors: model.item?.director)
                 return cell
-            case 4:
+        case .seasonsAndEpisodes:
                 let cell =
                     tableView.dequeueReusableCell(
                         withIdentifier: String(describing: SeasonTableViewCell.self), for: indexPath
@@ -742,18 +757,17 @@ extension DetailViewController: UITableViewDataSource {
                 tap.indexPathRow = indexPath.row
 
                 return cell
-            case 3:
+        case .trailer:
                 let cell =
                     tableView.dequeueReusableCell(
                         withIdentifier: String(describing: TrailerTableViewCell.self),
                         for: indexPath) as! TrailerTableViewCell
                 cell.selectionStyle = .none
-                #warning("Cannot parse the trailer data")
                 if let trailer = model.item.trailer {
                     cell.config(trailer: trailer, item: model.item)
                 }
                 return cell
-            case 7:
+        case .similarItems:
                 let cell =
                     tableView.dequeueReusableCell(
                         withIdentifier: String(describing: SimilarTableViewCell.self),
@@ -761,8 +775,6 @@ extension DetailViewController: UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.config(withModel: model)
                 return cell
-            default:
-                return UITableViewCell()
         }
 
     }
