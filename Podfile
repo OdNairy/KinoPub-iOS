@@ -64,9 +64,9 @@ post_install do |installer|
 
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0' if target.name == 'TMDBSwift'
 
-      if Gem::Version.new(config.build_settings['IPHONEOS_DEPLOYMENT_TARGET']) < Gem::Version.new('11.0')
-        puts "[#{target.name}] Updating IPHONEOS_DEPLOYMENT_TARGET to 11.0"
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+      if Gem::Version.new(config.build_settings['IPHONEOS_DEPLOYMENT_TARGET']) < Gem::Version.new('12.0')
+        puts "[#{target.name}] Updating IPHONEOS_DEPLOYMENT_TARGET to 12.0"
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
       end
 
     end
