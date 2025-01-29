@@ -60,15 +60,15 @@ post_install do |installer|
 			end
 		end
 
-    case target.name
-    when 'TMDBSwift'
-      target.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
-      end
-    end
-
     target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0' if target.name == 'TMDBSwift'
+
+      if Gem::Version.new(config.build_settings['IPHONEOS_DEPLOYMENT_TARGET']) < Gem::Version.new('11.0')
+        puts "[#{target.name}] Updating IPHONEOS_DEPLOYMENT_TARGET to 11.0"
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+      end
+
     end
 
 	end
