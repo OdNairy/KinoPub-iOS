@@ -49,5 +49,5 @@ jobs:
           platform: ${{ 'iOS' }}
         run: |
           set -o pipefail && xcodebuild build -workspace KinoPub.xcworkspace -scheme KinoPub \
-            -destination "generic/platform=$platform" \
+            -destination "generic/platform=$platform" CODE_SIGNING_ALLOWED=NO \
            | xcbeautify --renderer github-actions
