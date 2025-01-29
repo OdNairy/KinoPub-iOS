@@ -11,7 +11,6 @@ target 'KinoPub' do
   pod 'AlamofireImage'
   pod 'AlamofireNetworkActivityLogger'
   pod 'AlamofireObjectMapper'
-  pod 'NDYoutubePlayer', :git => 'https://github.com/hintoz/NDYoutubePlayer.git'
   pod 'NotificationBannerSwift' # outdated
   pod 'SwifterSwift'
   pod 'SwiftyUserDefaults', '~> 3.0'
