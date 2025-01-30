@@ -13,17 +13,7 @@ class BookmarksNetworkService {
         completed: @escaping (_ responseArray: [Bookmarks]?, _ error: Error?) -> Void
     ) {
         requestFactory.receiveBookmarksRequest()
-            .validate()
-            .responseArray(keyPath: "items") { (response: DataResponse<[Bookmarks]>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        completed(nil, error)
-                }
-            }
+            .responseArray(keyPath: "items", completionHandler: completed)
     }
 
     func receiveBookmarkItems(
@@ -31,17 +21,7 @@ class BookmarksNetworkService {
         completed: @escaping (_ responseObject: ItemResponse?, _ error: Error?) -> Void
     ) {
         requestFactory.receiveBookmarkItemsRequest(id: id, page: page)
-            .validate()
-            .responseObject { (response: DataResponse<ItemResponse>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        completed(nil, error)
-                }
-            }
+            .responseObject(completionHandler: completed)
     }
 
     func createBookmarkFolder(
@@ -49,17 +29,7 @@ class BookmarksNetworkService {
         completed: @escaping (_ responseObject: ItemResponse?, _ error: Error?) -> Void
     ) {
         requestFactory.createBookmarkFolderRequest(title: title)
-            .validate()
-            .responseObject { (response: DataResponse<ItemResponse>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        completed(nil, error)
-                }
-            }
+            .responseObject(completionHandler: completed)
     }
 
     func removeBookmarkFolder(
@@ -67,17 +37,7 @@ class BookmarksNetworkService {
         completed: @escaping (_ responseObject: ItemResponse?, _ error: Error?) -> Void
     ) {
         requestFactory.removeBookmarkFolderRequest(folder: folder)
-            .validate()
-            .responseObject { (response: DataResponse<ItemResponse>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        completed(nil, error)
-                }
-            }
+            .responseObject(completionHandler: completed)
     }
 
     func removeItemFromFolder(
@@ -85,17 +45,7 @@ class BookmarksNetworkService {
         completed: @escaping (_ responseObject: ItemResponse?, _ error: Error?) -> Void
     ) {
         requestFactory.removeItemFromFolderRequest(item: item, folder: folder)
-            .validate()
-            .responseObject { (response: DataResponse<ItemResponse>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        completed(nil, error)
-                }
-            }
+            .responseObject(completionHandler: completed)
     }
 
     func addItemToFolder(
@@ -103,17 +53,7 @@ class BookmarksNetworkService {
         completed: @escaping (_ responseObject: ItemResponse?, _ error: Error?) -> Void
     ) {
         requestFactory.addItemToFolderRequest(item: item, folder: folder)
-            .validate()
-            .responseObject { (response: DataResponse<ItemResponse>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        completed(nil, error)
-                }
-            }
+            .responseObject(completionHandler: completed)
     }
 
     func toggleItemToFolder(
@@ -121,17 +61,7 @@ class BookmarksNetworkService {
         completed: @escaping (_ responseObject: BookmarksToggle?, _ error: Error?) -> Void
     ) {
         requestFactory.toggleItemToFolderRequest(item: item, folder: folder)
-            .validate()
-            .responseObject { (response: DataResponse<BookmarksToggle>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        completed(nil, error)
-                }
-            }
+            .responseObject(completionHandler: completed)
     }
 
     func receiveItemFolders(
@@ -139,16 +69,6 @@ class BookmarksNetworkService {
     ) {
         requestFactory.receiveItemFoldersRequest(item: item)
             .validate()
-            .responseArray(keyPath: "folders") { (response: DataResponse<[Bookmarks]>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                        completed(nil, error)
-                }
-            }
+            .responseArray(keyPath: "folders", completionHandler: completed)
     }
 }

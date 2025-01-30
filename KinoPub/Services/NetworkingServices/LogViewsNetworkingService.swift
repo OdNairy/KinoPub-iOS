@@ -16,18 +16,7 @@ class LogViewsNetworkingService {
         requestFactory.changeWatchingStatusRequest(
             id: id, video: video, season: season, status: status
         )
-        .validate()
-        .responseObject { (response: DataResponse<WatchingToggle>) in
-            switch response.result {
-                case .success:
-                    if response.response?.statusCode == 200 {
-                        completed(response.result.value, nil)
-                    }
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    completed(nil, error)
-            }
-        }
+        .responseObject(completionHandler: completed)
     }
 
     func changeWatchlist(
@@ -35,18 +24,7 @@ class LogViewsNetworkingService {
         completed: @escaping (_ responseObject: WatchingToggle?, _ error: Error?) -> Void
     ) {
         requestFactory.changeWatchlistRequest(id: id)
-            .validate()
-            .responseObject { (response: DataResponse<WatchingToggle>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                        completed(nil, error)
-                }
-            }
+            .responseObject(completionHandler: completed)
     }
 
     func changeMarktime(
@@ -54,17 +32,6 @@ class LogViewsNetworkingService {
         completed: @escaping (_ responseObject: WatchingToggle?, _ error: Error?) -> Void
     ) {
         requestFactory.changeMarktimeRequest(id: id, time: time, video: video, season: season)
-            .validate()
-            .responseObject { (response: DataResponse<WatchingToggle>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                        completed(nil, error)
-                }
-            }
+            .responseObject(completionHandler: completed)
     }
 }

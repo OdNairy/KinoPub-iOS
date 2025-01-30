@@ -203,6 +203,7 @@
 		FE3A83252D26EE5D001B99D9 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83242D26EE5D001B99D9 /* FirebaseCore */; };
 		FE3A83272D26EE5D001B99D9 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83262D26EE5D001B99D9 /* FirebaseRemoteConfig */; };
 		FE82E0E22D49628E001B716D /* GradientLoadingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */; };
+		FEABE6132D4BBB9100BA111D /* AlamofireResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEABE6122D4BBB9000BA111D /* AlamofireResponse+Extensions.swift */; };
 		FEDEC9C120226ECF00250B61 /* PrivateKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEC9C020226ECF00250B61 /* PrivateKeys.swift */; };
 /* End PBXBuildFile section */
 
@@ -406,6 +407,7 @@
 		D9C7223E45EB1E644C5CA177 /* Pods-KinoPub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoPub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KinoPub/Pods-KinoPub.debug.xcconfig"; sourceTree = "<group>"; };
 		DE4D48B0CD4F6451DBED8C0B /* Pods_KinoPub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinoPub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLoadingBar.swift; sourceTree = "<group>"; };
+		FEABE6122D4BBB9000BA111D /* AlamofireResponse+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlamofireResponse+Extensions.swift"; sourceTree = "<group>"; };
 		FEDEC9C020226ECF00250B61 /* PrivateKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -805,6 +807,7 @@
 		696D67E21FE94345002EE5B0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FEABE6122D4BBB9000BA111D /* AlamofireResponse+Extensions.swift */,
 				FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */,
 				69512B3C1F7D49B800BF5A89 /* Extensions.swift */,
 				696D67E71FE946D6002EE5B0 /* UIFont+KPAdditions.swift */,
@@ -1306,6 +1309,7 @@
 				6959227E1F7DB1AB00CE3224 /* BookmarksTableViewController.swift in Sources */,
 				694C41481F84560600D6BD6F /* Share.swift in Sources */,
 				69C4F3331F7F057900BCD8F9 /* HeaderView.swift in Sources */,
+				FEABE6132D4BBB9100BA111D /* AlamofireResponse+Extensions.swift in Sources */,
 				69B6D2BE1FFEF98100CB62EE /* TrailerTableViewCell.swift in Sources */,
 				69DA067D201B721700D908E6 /* UINavigationController+KPAdditions.swift in Sources */,
 				69C4F3201F7F053900BCD8F9 /* EpisodesCollectionViewCell.swift in Sources */,

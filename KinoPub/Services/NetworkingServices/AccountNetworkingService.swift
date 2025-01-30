@@ -24,26 +24,12 @@ class AccountNetworkingService {
         completed: @escaping (_ responseObject: DeviceRequest?, _ error: Error?) -> Void
     ) {
         requestFactory.receiveCurrentDeviceRequest()
-            .validate().responseObject { (response: DataResponse<DeviceRequest>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        completed(nil, error)
-                }
-            }
+            .responseObject(completionHandler: completed)
     }
 
     func unlinkDevice(completed: @escaping (_ error: Error?) -> Void) {
-        requestFactory.unlinkDeviceRequest().validate().responseJSON { response in
-            switch response.result {
-                case .success:
-                    completed(nil)
-                case .failure(let error):
-                    completed(error)
-            }
+        requestFactory.unlinkDeviceRequest().validate().response { response in
+            completed(response.error)
         }
     }
 
@@ -51,15 +37,6 @@ class AccountNetworkingService {
         completed: @escaping (_ responseObject: ProfileRequest?, _ error: Error?) -> Void
     ) {
         requestFactory.receiveUserProfileRequest()
-            .validate().responseObject { (response: DataResponse<ProfileRequest>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        completed(nil, error)
-                }
-            }
+            .responseObject(completionHandler: completed)
     }
 }
