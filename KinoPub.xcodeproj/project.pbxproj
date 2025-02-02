@@ -108,7 +108,6 @@
 		696D67E11FE93BB5002EE5B0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696D67E01FE93BB5002EE5B0 /* DetailViewController.swift */; };
 		696D67E61FE94672002EE5B0 /* UIColor+KPAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696D67E51FE94671002EE5B0 /* UIColor+KPAdditions.swift */; };
 		696D67E81FE946D6002EE5B0 /* UIFont+KPAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696D67E71FE946D6002EE5B0 /* UIFont+KPAdditions.swift */; };
-		696D8D241F99712C001F5CCE /* MergeDownloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696D8D231F99712C001F5CCE /* MergeDownloads.swift */; };
 		69731BD12013CF40001B9D81 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69731BD02013CF40001B9D81 /* AboutViewController.swift */; };
 		697E242C1FE98FF10047082E /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697E242B1FE98FF10047082E /* GradientView.swift */; };
 		697E242E1FE9A15A0047082E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697E242D1FE9A15A0047082E /* MainView.swift */; };
@@ -314,7 +313,6 @@
 		696D67E01FE93BB5002EE5B0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		696D67E51FE94671002EE5B0 /* UIColor+KPAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+KPAdditions.swift"; sourceTree = "<group>"; };
 		696D67E71FE946D6002EE5B0 /* UIFont+KPAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+KPAdditions.swift"; sourceTree = "<group>"; };
-		696D8D231F99712C001F5CCE /* MergeDownloads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeDownloads.swift; sourceTree = "<group>"; };
 		69731BD02013CF40001B9D81 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		697E242B1FE98FF10047082E /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		697E242D1FE9A15A0047082E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -480,7 +478,6 @@
 		69512B111F7D2EE400BF5A89 /* KinoPub */ = {
 			isa = PBXGroup;
 			children = (
-				696D8D221F9970F8001F5CCE /* Merge */,
 				69FCF3341F939C9100638A77 /* DTSPlayer */,
 				69512B401F7D4A8600BF5A89 /* DTOs */,
 				69512B271F7D367100BF5A89 /* Infrastructure */,
@@ -831,14 +828,6 @@
 				69DA0680201B726100D908E6 /* UISearchBar+KPAdditions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		696D8D221F9970F8001F5CCE /* Merge */ = {
-			isa = PBXGroup;
-			children = (
-				696D8D231F99712C001F5CCE /* MergeDownloads.swift */,
-			);
-			path = Merge;
 			sourceTree = "<group>";
 		};
 		698D1ABE2009347A00BDE07F /* Home */ = {
@@ -1356,7 +1345,6 @@
 				69512B131F7D2EE400BF5A89 /* AppDelegate.swift in Sources */,
 				6959220F1F7D5C0000CE3224 /* NavigationController.swift in Sources */,
 				69DA0677201B714300D908E6 /* Int+KPAdditions.swift in Sources */,
-				696D8D241F99712C001F5CCE /* MergeDownloads.swift in Sources */,
 				69FCF33A1F939E3800638A77 /* DTSPlayerNotification.swift in Sources */,
 				695922291F7D5C3A00CE3224 /* Seasons.swift in Sources */,
 				6959221F1F7D5C3500CE3224 /* DeviceRequest.swift in Sources */,
