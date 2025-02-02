@@ -64,7 +64,7 @@ class EpisodeTableViewCell: UITableViewCell {
 
         if let thumb = model.getEpisode(indexPathEpisode, forSeason: indexPathSeason)?.thumbnail,
             thumb != "" {
-            thumbnailImageView.af_setImage(
+            thumbnailImageView.af.setImage(
                 withURL: URL(string: thumb)!,
                 placeholderImage: UIImage(named: "episode.png"),
                 imageTransition: .crossDissolve(0.2),

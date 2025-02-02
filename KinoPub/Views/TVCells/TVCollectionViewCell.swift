@@ -40,13 +40,13 @@ class TVCollectionViewCell: UICollectionViewCell {
         }
 
         if let logo = channel.logos?.s, let url = URL(string: logo) {
-            logoImageView.af_setImage(
+            logoImageView.af.setImage(
                 withURL: url,
                 placeholderImage: UIImage(named: "Sports-placeholder"),
                 imageTransition: .crossDissolve(0.2),
                 runImageTransitionIfCached: false
             ) { [weak self] (response) in
-                if response.result.isSuccess {
+                if case .success = response.result {
                     self?.logoImageView.isHidden = false
                 }
             }

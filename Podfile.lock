@@ -1,12 +1,9 @@
 PODS:
-  - Alamofire (4.9.1)
-  - AlamofireImage (3.6.0):
-    - Alamofire (~> 4.9)
-  - AlamofireNetworkActivityLogger (2.4.0):
-    - Alamofire (~> 4.8)
-  - AlamofireObjectMapper (5.2.1):
-    - Alamofire (~> 4.7)
-    - ObjectMapper (~> 3.4)
+  - Alamofire (5.0.5)
+  - AlamofireImage (4.0.3):
+    - Alamofire (< 6.0.0, >= 5.0.2)
+  - AlamofireNetworkActivityLogger (3.0.0):
+    - Alamofire (~> 5.0.0-rc.2)
   - AZSearchView (1.0.3)
   - CircleProgressView (1.2.0)
   - CustomLoader (1.1.0)
@@ -24,7 +21,6 @@ PODS:
     - MarqueeLabel (~> 4.3.0)
     - SnapKit (~> 5.6.0)
   - NTDownload (1.1.0)
-  - ObjectMapper (3.5.3)
   - RevealingSplashView (0.6.0)
   - SnapKit (5.6.0)
   - SubtleVolume (1.1.0)
@@ -63,10 +59,9 @@ PODS:
   - TMDBSwift (0.7.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.0)
+  - Alamofire (~> 5.0)
   - AlamofireImage
   - AlamofireNetworkActivityLogger
-  - AlamofireObjectMapper
   - AZSearchView (from `Dependencies/AZSearchView`)
   - CircleProgressView
   - CustomLoader
@@ -92,7 +87,6 @@ SPEC REPOS:
     - Alamofire
     - AlamofireImage
     - AlamofireNetworkActivityLogger
-    - AlamofireObjectMapper
     - CircleProgressView
     - CustomLoader
     - DGCollectionViewPaginableBehavior
@@ -103,7 +97,6 @@ SPEC REPOS:
     - LKAlertController
     - MarqueeLabel
     - NotificationBannerSwift
-    - ObjectMapper
     - RevealingSplashView
     - SnapKit
     - SubtleVolume
@@ -131,10 +124,9 @@ CHECKOUT OPTIONS:
     :git: https://github.com/handsomecode/InteractiveSideMenu.git
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
-  AlamofireNetworkActivityLogger: 6d3398c692d2c5d83b0c58793537860aca1e383d
-  AlamofireObjectMapper: 1989f690e982b71921b9253f53a4f33a9bc00d88
+  Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
+  AlamofireImage: 3d1a2010519e58675318735580eb856e88840ff7
+  AlamofireNetworkActivityLogger: 94e8a7d454a4a9800cef1d0c1d3699754493684b
   AZSearchView: 4b0b61e576b07bc75b780bca44e80244b74bc436
   CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
   CustomLoader: 9a2d86bc12480d43a10776c59ca1e51474e2a847
@@ -150,7 +142,6 @@ SPEC CHECKSUMS:
   MarqueeLabel: 15e524a6762552bb279cb17438b8a94990269fb9
   NotificationBannerSwift: dce54ded532b26e30cd8e7f4d80e124a0f2ba7d1
   NTDownload: 15b7d8a4a527ec36031e851909b7c8f009bcebfe
-  ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
   RevealingSplashView: 40c5a770894459736acdc95655eeba0dd30ce91c
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SubtleVolume: 101038d203018736bcd1df3ac95bcc0f6b8640ce
@@ -158,6 +149,6 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: 3d273b1739b68ada3145dc754a70ec775bc5c8be
   TMDBSwift: 646e42e749b072e007ed936097ae25e0a3e510e4
 
-PODFILE CHECKSUM: 4724a986cee906b1bfba5ecc3587688b8a82c4c1
+PODFILE CHECKSUM: baac0f908db5c772f69f0fc51b1c4e1a3fd7e662
 
 COCOAPODS: 1.16.2

@@ -44,7 +44,7 @@ class DowloadedTableViewCell: UITableViewCell {
                 }
             }
 
-            posterImageView.af_setImage(
+            posterImageView.af.setImage(
                 withURL: URL(string: (fileInfo?.fileImage)!)!,
                 placeholderImage: UIImage(named: "poster-placeholder.png"),
                 imageTransition: .crossDissolve(0.2),

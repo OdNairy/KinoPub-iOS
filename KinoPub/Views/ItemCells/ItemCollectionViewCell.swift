@@ -101,7 +101,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
         }
 
         if let poster = item.posters?.medium {
-            posterImageView.af_setImage(
+            posterImageView.af.setImage(
                 withURL: URL(string: poster)!,
                 placeholderImage: UIImage(named: "poster-placeholder.png"),
                 imageTransition: .crossDissolve(0.2),
@@ -130,7 +130,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
         }
 
         if let poster = collection.posters?.medium {
-            posterImageView.af_setImage(
+            posterImageView.af.setImage(
                 withURL: URL(string: poster)!,
                 placeholderImage: UIImage(named: "poster-placeholder.png"),
                 imageTransition: .crossDissolve(0.2),

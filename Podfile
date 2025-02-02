@@ -7,10 +7,9 @@ target 'KinoPub' do
   # pod 'Crashlytics'
   # pod 'Fabric'
 
-  pod 'Alamofire', '~> 4.0'
+  pod 'Alamofire', '~> 5.0'
   pod 'AlamofireImage'
   pod 'AlamofireNetworkActivityLogger'
-  pod 'AlamofireObjectMapper'
   pod 'NotificationBannerSwift' # outdated
   pod 'SwifterSwift'
   pod 'SwiftyUserDefaults', '~> 3.0'
@@ -37,18 +36,6 @@ target 'KinoPub' do
 
 end
 
-# post_install do |installer|
-# 	myTargets = ['CustomLoader', 'DGCollectionViewPaginableBehavior']
-
-# 	installer.pods_project.targets.each do |target|
-# 		if myTargets.include? target.name
-# 			target.build_configurations.each do |config|
-# 				config.build_settings['SWIFT_VERSION'] = '3.2'
-# 			end
-# 		end
-# 	end
-# end
-
 post_install do |installer|
 	myTargets = ['InteractiveSideMenu']
 
@@ -62,10 +49,12 @@ post_install do |installer|
     target.build_configurations.each do |config|
 
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0' if target.name == 'TMDBSwift'
+      originalDeploymentTarget = config.build_settings['IPHONEOS_DEPLOYMENT_TARGET']
+      newDeploymentTarget = '12.0'
 
-      if Gem::Version.new(config.build_settings['IPHONEOS_DEPLOYMENT_TARGET']) < Gem::Version.new('12.0')
-        puts "[#{target.name}] Updating IPHONEOS_DEPLOYMENT_TARGET to 12.0"
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+      if Gem::Version.new(config.build_settings['IPHONEOS_DEPLOYMENT_TARGET']) < Gem::Version.new(newDeploymentTarget)
+        puts "Bump from #{originalDeploymentTarget} to #{newDeploymentTarget} \t[#{target.name}]" if config.name == 'Debug'
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = newDeploymentTarget
       end
 
     end

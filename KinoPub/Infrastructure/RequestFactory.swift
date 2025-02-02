@@ -11,7 +11,7 @@ class RequestFactory {
     let baseAPIURL: String
 
     var accountManager: AccountManager?
-    var authorizedSessionManager: SessionManager?
+    var authorizedSessionManager: Session?
 
     init() {
         baseAPIURL = Config.kinopub.base
@@ -24,7 +24,7 @@ class RequestFactory {
             "client_secret": Config.shared.kinopubClientSecret
         ]
         let requestUrl = baseAPIURL + "oauth2/device"
-        return Alamofire.request(
+        return AF.request(
             requestUrl, method: .post, parameters: parameters, encoding: URLEncoding.httpBody)
     }
 
@@ -36,7 +36,7 @@ class RequestFactory {
             "code": code
         ]
         let requestUrl = baseAPIURL + "oauth2/device"
-        return Alamofire.request(
+        return AF.request(
             requestUrl, method: .post, parameters: parameters, encoding: URLEncoding.httpBody)
     }
 
@@ -228,18 +228,17 @@ class RequestFactory {
     }
 
     // MARK: - Session Manager
-    private func sessionManager() -> SessionManager {
+    private func sessionManager() -> Session {
         if authorizedSessionManager != nil {
             return authorizedSessionManager!
         }
 
-        let configuration = URLSessionConfiguration.default
-        let sessionManager = Alamofire.SessionManager(configuration: configuration)
-
         let authHandler = OAuthHandler(accessToken: account!.accessToken)
         authHandler.delegate = self
-        sessionManager.adapter = authHandler
-        sessionManager.retrier = authHandler
+
+        let configuration = URLSessionConfiguration.default
+        let sessionManager = Alamofire.Session(configuration: configuration, interceptor: authHandler)
+
         authorizedSessionManager = sessionManager
         return authorizedSessionManager!
     }
@@ -267,7 +266,7 @@ extension RequestFactory: OAuthHandlerDelegate {
                 "refresh_token": account?.refreshToken
             ] as! [String: String]
         let requestUrl = baseAPIURL + "oauth2/device"
-        return Alamofire.request(
+        return AF.request(
             requestUrl, method: .post, parameters: parameters, encoding: JSONEncoding.default)
     }
 }

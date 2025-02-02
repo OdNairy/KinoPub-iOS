@@ -72,7 +72,7 @@ class ProfileViewController: UITableViewController, ProfileModelDelegate, SideMe
 
     func configureProfile() {
         if let imageUrl = model.user?.profile?.avatar {
-            profileImageView.af_setImage(withURL: URL(string: imageUrl + "?s=200&d=identicon")!)
+            profileImageView.af.setImage(withURL: URL(string: imageUrl + "?s=200&d=identicon")!)
         }
         if let nameString = model.user?.profile?.name {
             profileNameLabel.text = nameString
