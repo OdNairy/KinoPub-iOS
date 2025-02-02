@@ -14,18 +14,9 @@ class VideosNetworkingService {
         completed: @escaping (_ responseObject: ItemResponse?, _ error: Error?) -> Void
     ) {
         if cancelPrevious { stopAllSessions() }
+
         requestFactory.receiveItemsRequest(withParameters: parameters, from: from)
-            .validate()
-            .responseObject { (response: DataResponse<ItemResponse>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        completed(nil, error)
-                }
-            }
+            .responseObject(completionHandler: completed)
     }
 
     func receiveWatchingSeries(
@@ -33,34 +24,14 @@ class VideosNetworkingService {
         completed: @escaping (_ responseObject: ItemResponse?, _ error: Error?) -> Void
     ) {
         requestFactory.receiveWatchingSeriesRequest(subscribed)
-            .validate()
-            .responseObject { (response: DataResponse<ItemResponse>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        completed(nil, error)
-                }
-            }
+            .responseObject(completionHandler: completed)
     }
 
     func receiveWatchingMovie(
         completed: @escaping (_ responseObject: ItemResponse?, _ error: Error?) -> Void
     ) {
         requestFactory.receiveWatchingMovieRequest()
-            .validate()
-            .responseObject { (response: DataResponse<ItemResponse>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        completed(nil, error)
-                }
-            }
+            .responseObject(completionHandler: completed)
     }
 
     func receiveItemsCollection(
@@ -68,36 +39,14 @@ class VideosNetworkingService {
         completed: @escaping (_ responseArray: [Item]?, _ error: Error?) -> Void
     ) {
         requestFactory.receiveItemsCollectionRequest(parameters: parameters)
-            .validate()
-            .responseArray(keyPath: "items") { (response: DataResponse<[Item]>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                        completed(nil, error)
-                }
-            }
+            .responseArray(keyPath: "items", completionHandler: completed)
     }
 
     func receiveSimilarItems(
         id: String, completed: @escaping (_ responseArray: [Item]?, _ error: Error?) -> Void
     ) {
         requestFactory.receiveSimilarItemsRequest(id: id)
-            .validate()
-            .responseArray(keyPath: "items") { (response: DataResponse<[Item]>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                        completed(nil, error)
-                }
-            }
+            .responseArray(keyPath: "items", completionHandler: completed)
     }
 
     private func stopAllSessions() {

@@ -13,16 +13,6 @@ class TVNetworkingService {
         completed: @escaping (_ responseArray: [Channels]?, _ error: Error?) -> Void
     ) {
         requestFactory.receiveTVChanelsRequest()
-            .validate()
-            .responseArray(keyPath: "channels") { (response: DataResponse<[Channels]>) in
-                switch response.result {
-                    case .success:
-                        if response.response?.statusCode == 200 {
-                            completed(response.result.value, nil)
-                        }
-                    case .failure(let error):
-                        completed(nil, error)
-                }
-            }
+            .responseArray(keyPath: "channels", completionHandler: completed)
     }
 }
