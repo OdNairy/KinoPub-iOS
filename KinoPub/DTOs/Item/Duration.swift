@@ -1,7 +1,7 @@
 import Foundation
 import ObjectMapper
 
-public class Duration: Mappable {
+public struct Duration: Mappable {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -13,11 +13,11 @@ public class Duration: Mappable {
     public var total: Double!
     public var average: Double!
 
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         total <- map[SerializationKeys.total]
         average <- map[SerializationKeys.average]
     }

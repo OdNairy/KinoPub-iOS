@@ -1,7 +1,7 @@
 import Foundation
 import ObjectMapper
 
-public class Posters: Mappable {
+public struct Posters: Mappable {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -15,11 +15,11 @@ public class Posters: Mappable {
     public var small: String!
     public var medium: String!
 
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         big <- map[SerializationKeys.big]
         small <- map[SerializationKeys.small]
         medium <- map[SerializationKeys.medium]

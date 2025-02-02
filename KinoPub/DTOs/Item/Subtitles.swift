@@ -2,7 +2,7 @@ import Eureka
 import Foundation
 import ObjectMapper
 
-public class Subtitles: Mappable {
+public struct Subtitles: Mappable {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -18,11 +18,11 @@ public class Subtitles: Mappable {
     public var lang: SubLang!
     public var url: String!
 
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         shift <- map[SerializationKeys.shift]
         embed <- map[SerializationKeys.embed]
         lang <- map[SerializationKeys.lang]

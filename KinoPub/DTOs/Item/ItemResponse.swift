@@ -1,7 +1,7 @@
 import Foundation
 import ObjectMapper
 
-public class ItemResponse: Mappable {
+public struct ItemResponse: Mappable {
 
     private struct SerializationKeys {
         static let status = "status"
@@ -17,11 +17,11 @@ public class ItemResponse: Mappable {
     public var pagination: Pagination!
     public var items: [Item]?
 
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         status <- map[SerializationKeys.status]
         item <- map[SerializationKeys.item]
 

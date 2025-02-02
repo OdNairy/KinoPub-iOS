@@ -1,7 +1,7 @@
 import Foundation
 import ObjectMapper
 
-public class Settings: Mappable {
+public struct Settings: Mappable {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -13,11 +13,11 @@ public class Settings: Mappable {
     public var showErotic: Bool! = false
     public var showUncertain: Bool! = false
 
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         showErotic <- map[SerializationKeys.showErotic]
         showUncertain <- map[SerializationKeys.showUncertain]
     }

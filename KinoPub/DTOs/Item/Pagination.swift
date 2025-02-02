@@ -1,7 +1,7 @@
 import Foundation
 import ObjectMapper
 
-public class Pagination: Mappable {
+public struct Pagination: Mappable {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -17,11 +17,11 @@ public class Pagination: Mappable {
     public var totalItems: Int?
     public var perpage: Int!
 
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         total <- map[SerializationKeys.total]
         current <- map[SerializationKeys.current]
         totalItems <- map[SerializationKeys.totalItems]

@@ -1,7 +1,7 @@
 import Foundation
 import ObjectMapper
 
-public class Collections: Mappable {
+public struct Collections: Mappable {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -27,14 +27,14 @@ public class Collections: Mappable {
     /// Map a JSON object to this class using ObjectMapper.
     ///
     /// - parameter map: A mapping from ObjectMapper.
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
     /// Map a JSON object to this class using ObjectMapper.
     ///
     /// - parameter map: A mapping from ObjectMapper.
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         updated <- map[SerializationKeys.updated]
         posters <- map[SerializationKeys.posters]
         watchers <- map[SerializationKeys.watchers]
