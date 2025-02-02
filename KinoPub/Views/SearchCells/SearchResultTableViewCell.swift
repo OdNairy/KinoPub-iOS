@@ -91,7 +91,7 @@ class SearchResultTableViewCell: UITableViewCell {
         }
 
         if let poster = item.posters?.small {
-            posterImageView.af_setImage(
+            posterImageView.af.setImage(
                 withURL: URL(string: poster)!,
                 placeholderImage: UIImage(named: "poster-placeholder.png"),
                 imageTransition: .crossDissolve(0.2),

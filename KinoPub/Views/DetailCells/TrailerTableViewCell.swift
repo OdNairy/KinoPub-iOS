@@ -29,7 +29,7 @@ class TrailerTableViewCell: UITableViewCell {
         self.trailer = trailer
 
         if let mediumPosterURL = item.posters?.medium.map(URL.init(string:)) ?? nil {
-            thumbImageView.af_setImage(
+            thumbImageView.af.setImage(
                 withURL: mediumPosterURL,
                 placeholderImage: UIImage(named: "episode.png"),
                 imageTransition: .crossDissolve(0.2),
@@ -47,7 +47,6 @@ class TrailerTableViewCell: UITableViewCell {
                 self.playButtonView.alpha = 1
             })
 
-        print("Play: \(trailer?.url)")
         if let trailer = trailer, let trailerURL = URL(string: trailer.url) {
             let playerItem = AVPlayerItem(url: trailerURL)
             MediaManager.shared.playWithNativePlayer(mediaItems: [playerItem])

@@ -52,7 +52,7 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
         mediaItem.id = model.item.id
         if let thumb = model.getEpisode(indexPathEpisode, forSeason: indexPathSeason)?.thumbnail,
             thumb != "" {
-            thumbImageView.af_setImage(
+            thumbImageView.af.setImage(
                 withURL: URL(string: thumb)!,
                 placeholderImage: UIImage(named: "episode.png"),
                 imageTransition: .crossDissolve(0.2),
