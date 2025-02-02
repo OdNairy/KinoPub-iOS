@@ -371,7 +371,7 @@ extension DetailViewController {
             URLRequest(url: url),
             completion: { [weak self] (response) in
                 guard let strongSelf = self else { return }
-                if let image = response.result.value {
+                if case let .success(image) = response.result {
                     strongSelf.configureHeaderImage(with: image)
                     return
                 }
@@ -384,7 +384,7 @@ extension DetailViewController {
                 URLRequest(url: URL(string: poster)!),
                 completion: { [weak self] (response) in
                     guard let strongSelf = self else { return }
-                    if let image = response.result.value {
+                    if case let .success(image) = response.result {
                         strongSelf.posterImageView.image = image
                         strongSelf.configureHeaderImage(with: image)
                     }

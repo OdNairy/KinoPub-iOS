@@ -1,5 +1,4 @@
 import Alamofire
-import AlamofireObjectMapper
 import Foundation
 
 // import Crashlytics
@@ -10,15 +9,15 @@ protocol OAuthHandlerDelegate: AnyObject {
     func refreshTokenRequest() -> DataRequest
 }
 
-class OAuthHandler: RequestAdapter, RequestRetrier {
+class OAuthHandler: RequestInterceptor {
     private typealias RefreshCompletion = (
         _ success: Bool, _ accessToken: String?, _ refreshToken: String?
     ) -> Void
 
-    private let sessionManager: SessionManager = {
+    private let sessionManager: Session = {
         let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
-        return SessionManager(configuration: configuration)
+        configuration.httpAdditionalHeaders = HTTPHeaders.default.dictionary
+        return Session(configuration: configuration)
     }()
 
     private let lock = NSLock()
@@ -26,7 +25,7 @@ class OAuthHandler: RequestAdapter, RequestRetrier {
     private var accessToken: String
 
     private var isRefreshing = false
-    private var requestsToRetry: [RequestRetryCompletion] = []
+    private var requestsToRetry: [(RetryResult) -> Void] = []
 
     weak var delegate: OAuthHandlerDelegate?
 
@@ -35,19 +34,22 @@ class OAuthHandler: RequestAdapter, RequestRetrier {
     }
 
     // MARK: - RequestAdapter
-    func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
+    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+        var urlRequest = urlRequest
+
         if let url = urlRequest.url, !url.path.hasPrefix("oauth2") {
-            var urlRequest = urlRequest
             urlRequest.setValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-            return urlRequest
         }
-        return urlRequest
+
+        completion(.success(urlRequest))
     }
 
     // MARK: - RequestRetrier
-    func should(
-        _ manager: SessionManager, retry request: Request, with error: Error,
-        completion: @escaping RequestRetryCompletion
+    func retry(
+        _ request: Request,
+        for session: Session,
+        dueTo error: any Error,
+        completion: @escaping (RetryResult) -> Void
     ) {
         lock.lock()
         defer { lock.unlock() }
@@ -70,7 +72,7 @@ class OAuthHandler: RequestAdapter, RequestRetrier {
                             accessToken: accessToken, refreshToken: refreshToken)
                     }
 
-                    strongSelf.requestsToRetry.forEach { $0(succeeded, 0.0) }
+                    strongSelf.requestsToRetry.forEach { $0(.retry) }
                     strongSelf.requestsToRetry.removeAll()
 
                     if !succeeded {
@@ -79,7 +81,7 @@ class OAuthHandler: RequestAdapter, RequestRetrier {
                 }
             }
         } else {
-            completion(false, 0.0)
+            completion(.doNotRetry)
         }
     }
 
@@ -89,10 +91,9 @@ class OAuthHandler: RequestAdapter, RequestRetrier {
         isRefreshing = true
         let request = delegate!.refreshTokenRequest()
         request.validate()
-            .responseObject { (response: DataResponse<TokenResponse>) in
+            .responseObject { (response: AFDataResponse<TokenResponse>) in
                 switch response.result {
-                    case .success:
-                        let tokens = response.result.value!
+                    case .success(let tokens):
                         completion(true, tokens.accessToken, tokens.refreshToken)
                     case .failure:
                         completion(false, nil, nil)

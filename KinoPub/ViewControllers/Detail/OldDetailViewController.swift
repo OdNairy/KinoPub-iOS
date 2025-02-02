@@ -295,7 +295,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
             URLRequest(url: url),
             completion: { [weak self] (response) in
                 guard let strongSelf = self else { return }
-                if let image = response.result.value {
+                if case let .success(image) = response.result {
                     strongSelf.configureHeaderImage(with: image)
                     return
                 }
@@ -307,7 +307,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
             downloader.download(
                 URLRequest(url: URL(string: poster)!),
                 completion: { (response) in
-                    if let image = response.result.value {
+                    if case let .success(image) = response.result {
                         self.posterImageView.image = image
                         self.configureHeaderImage(with: image)
                     }

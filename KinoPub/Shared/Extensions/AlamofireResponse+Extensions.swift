@@ -3,15 +3,15 @@ import Alamofire
 
 extension DataRequest {
     @discardableResult
-    func responseObject<T: BaseMappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: @escaping (T?, Error?) -> Void) -> Self {
+    func responseObject<T: BaseMappable>(queue: DispatchQueue = .main, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil, completionHandler: @escaping (T?, Error?) -> Void) -> Self {
         return validate().responseObject(queue: queue, keyPath: keyPath, mapToObject: object, context: context) { (
-            response: DataResponse<T>
+            response: AFDataResponse<T>
         ) in
 
             switch response.result {
-            case .success:
+            case .success(let value):
                 if response.response?.statusCode == 200 {
-                    completionHandler(response.result.value, nil)
+                    completionHandler(value, nil)
                 }
             case .failure(let error):
                 completionHandler(nil, error)
@@ -21,12 +21,12 @@ extension DataRequest {
     }
 
     @discardableResult
-    public func responseArray<T: BaseMappable>(queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil, completionHandler: @escaping ([T]?, Error?) -> Void) -> Self {
-        return validate().responseArray(queue: queue, keyPath: keyPath, context: context) { (response: DataResponse<[T]>) in
+    public func responseArray<T: BaseMappable>(queue: DispatchQueue = .main, keyPath: String? = nil, context: MapContext? = nil, completionHandler: @escaping ([T]?, Error?) -> Void) -> Self {
+        return validate().responseArray(queue: queue, keyPath: keyPath, context: context) { (response: AFDataResponse<[T]>) in
             switch response.result {
-                case .success:
+                case .success(let value):
                     if response.response?.statusCode == 200 {
-                        completionHandler(response.result.value, nil)
+                        completionHandler(value, nil)
                     }
                 case .failure(let error):
                     print(error.localizedDescription)

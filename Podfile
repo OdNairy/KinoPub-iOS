@@ -7,10 +7,9 @@ target 'KinoPub' do
   # pod 'Crashlytics'
   # pod 'Fabric'
 
-  pod 'Alamofire', '~> 4.0'
+  pod 'Alamofire', '~> 5.0'
   pod 'AlamofireImage'
   pod 'AlamofireNetworkActivityLogger'
-  pod 'AlamofireObjectMapper'
   pod 'NotificationBannerSwift' # outdated
   pod 'SwifterSwift'
   pod 'SwiftyUserDefaults', '~> 3.0'

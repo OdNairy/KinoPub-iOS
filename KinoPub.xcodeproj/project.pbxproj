@@ -204,6 +204,8 @@
 		FE3A83272D26EE5D001B99D9 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83262D26EE5D001B99D9 /* FirebaseRemoteConfig */; };
 		FE82E0E22D49628E001B716D /* GradientLoadingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */; };
 		FEABE6132D4BBB9100BA111D /* AlamofireResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEABE6122D4BBB9000BA111D /* AlamofireResponse+Extensions.swift */; };
+		FEABEB2F2D4D184D00BA111D /* AlamofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEABEB2E2D4D184D00BA111D /* AlamofireObjectMapper.swift */; };
+		FEABEB322D4D187800BA111D /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = FEABEB312D4D187800BA111D /* ObjectMapper */; };
 		FEDEC9C120226ECF00250B61 /* PrivateKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEC9C020226ECF00250B61 /* PrivateKeys.swift */; };
 /* End PBXBuildFile section */
 
@@ -408,6 +410,7 @@
 		DE4D48B0CD4F6451DBED8C0B /* Pods_KinoPub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinoPub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLoadingBar.swift; sourceTree = "<group>"; };
 		FEABE6122D4BBB9000BA111D /* AlamofireResponse+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlamofireResponse+Extensions.swift"; sourceTree = "<group>"; };
+		FEABEB2E2D4D184D00BA111D /* AlamofireObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireObjectMapper.swift; sourceTree = "<group>"; };
 		FEDEC9C020226ECF00250B61 /* PrivateKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -417,6 +420,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE3A83272D26EE5D001B99D9 /* FirebaseRemoteConfig in Frameworks */,
+				FEABEB322D4D187800BA111D /* ObjectMapper in Frameworks */,
 				FE3A83252D26EE5D001B99D9 /* FirebaseCore in Frameworks */,
 				FE35ABC52D26FA5A00FBE20A /* Atributika in Frameworks */,
 				4C1BD9AD48AB10D0479622DB /* Pods_KinoPub.framework in Frameworks */,
@@ -500,6 +504,7 @@
 		69512B271F7D367100BF5A89 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				FEABEB2E2D4D184D00BA111D /* AlamofireObjectMapper.swift */,
 				69512B311F7D47CA00BF5A89 /* Defaults.swift */,
 				69512B2F1F7D47CA00BF5A89 /* DelegatesStorage.swift */,
 				69512B2E1F7D47CA00BF5A89 /* ModelsAssembly.swift */,
@@ -1044,6 +1049,7 @@
 			packageReferences = (
 				FE3A83232D26EE5D001B99D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				FE35ABC32D26FA5A00FBE20A /* XCRemoteSwiftPackageReference "Atributika" */,
+				FEABEB302D4D187800BA111D /* XCRemoteSwiftPackageReference "ObjectMapper" */,
 			);
 			productRefGroup = 69512B101F7D2EE400BF5A89 /* Products */;
 			projectDirPath = "";
@@ -1118,7 +1124,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/CircleProgressView/CircleProgressView.framework",
 				"${BUILT_PRODUCTS_DIR}/CustomLoader/CustomLoader.framework",
 				"${BUILT_PRODUCTS_DIR}/DGCollectionViewPaginableBehavior/DGCollectionViewPaginableBehavior.framework",
@@ -1132,7 +1137,6 @@
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NTDownload/NTDownload.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/RevealingSplashView/RevealingSplashView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SubtleVolume/SubtleVolume.framework",
@@ -1146,7 +1150,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireNetworkActivityLogger.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CustomLoader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGCollectionViewPaginableBehavior.framework",
@@ -1160,7 +1163,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NTDownload.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealingSplashView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SubtleVolume.framework",
@@ -1239,6 +1241,7 @@
 				695922251F7D5C3A00CE3224 /* Item.swift in Sources */,
 				69676D242013A1A70046F4D2 /* Helper.swift in Sources */,
 				692CF6C31F901969007E539D /* LogViewsManager.swift in Sources */,
+				FEABEB2F2D4D184D00BA111D /* AlamofireObjectMapper.swift in Sources */,
 				695922351F7D9C6900CE3224 /* VideosNetworkingService.swift in Sources */,
 				695922161F7D5C2800CE3224 /* CollectionsResponse.swift in Sources */,
 				695921FF1F7D5BA700CE3224 /* AccountManager.swift in Sources */,
@@ -1603,6 +1606,14 @@
 				minimumVersion = 11.6.0;
 			};
 		};
+		FEABEB302D4D187800BA111D /* XCRemoteSwiftPackageReference "ObjectMapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tristanhimmelman/ObjectMapper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1620,6 +1631,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FE3A83232D26EE5D001B99D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		FEABEB312D4D187800BA111D /* ObjectMapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FEABEB302D4D187800BA111D /* XCRemoteSwiftPackageReference "ObjectMapper" */;
+			productName = ObjectMapper;
 		};
 /* End XCSwiftPackageProductDependency section */
 
