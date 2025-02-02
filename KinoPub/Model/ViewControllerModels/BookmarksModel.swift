@@ -22,8 +22,8 @@ extension BookmarksModelDelegate {
 
 class BookmarksModel {
     weak var delegate: BookmarksModelDelegate?
-    var bookmarks = [Bookmarks]()
-    var items = [Item]()
+    var bookmarks: [Bookmarks] = []
+    var items: [Item] = []
     var folder: Bookmarks?
     var page: Int = 1
 
