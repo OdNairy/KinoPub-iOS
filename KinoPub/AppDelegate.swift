@@ -8,6 +8,7 @@ import SwifterSwift
 import SwiftyUserDefaults
 import UIKit
 import UserNotifications
+import OSLog
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -53,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         application.registerForRemoteNotifications()
+
+        DownloadManager.shared.resumeDownloads()
 
         return true
     }
@@ -169,6 +172,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Messaging.messaging().apnsToken = deviceToken
     }
 
+
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        Logger().log("AppDelegate: handleEventsForBackgroundURLSession: \(identifier)")
+
+        sendLocalNotification(title: "Background download complete", body: "Downloading has finished.")
+
+
+        completionHandler()
+    }
+
 }
 
 // [START ios_10_message_handling]
@@ -196,7 +209,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         print(userInfo)
 
         // Change this to your preferred presentation option
-        completionHandler([])
+        completionHandler([.banner, .sound])
     }
 
     func userNotificationCenter(
@@ -215,6 +228,25 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
         completionHandler()
     }
+}
+
+func sendLocalNotification(title: String, body: String) {
+    let content = UNMutableNotificationContent()
+    content.title = title
+    content.body = body
+//    content.body = "Это тестовое локальное уведомление"
+    content.sound = .default
+
+    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false) // через 3 секунды
+
+    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+    UNUserNotificationCenter.current().add(request) { error in
+        if let error = error {
+            print("Ошибка при отправке уведомления: \(error)")
+        }
+    }
+
 }
 // [END ios_10_message_handling]
 

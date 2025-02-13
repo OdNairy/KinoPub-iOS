@@ -195,7 +195,7 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
                         strongSelf.playVideo()
                     } else {
                         strongSelf.showDownloadAction(
-                            with: (file.url?.http)!, quality: file.quality!)
+                            with: (file.url?.hls4)!, quality: file.quality!)
                     }
                 })
         }

@@ -44,11 +44,13 @@ class DowloadedTableViewCell: UITableViewCell {
                 }
             }
 
-            posterImageView.af.setImage(
-                withURL: URL(string: (fileInfo?.fileImage)!)!,
-                placeholderImage: UIImage(named: "poster-placeholder.png"),
-                imageTransition: .crossDissolve(0.2),
-                runImageTransitionIfCached: false)
+            if let posterURL = fileInfo?.fileImage {
+                posterImageView.af.setImage(
+                    withURL: URL(string: posterURL)!,
+                    placeholderImage: UIImage(named: "poster-placeholder.png"),
+                    imageTransition: .crossDissolve(0.2),
+                    runImageTransitionIfCached: false)
+            }
             //            fileInfo?.delegate = self
             guard let fileSize = fileInfo?.fileSize else {
                 return

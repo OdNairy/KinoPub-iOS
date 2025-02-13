@@ -4,6 +4,7 @@ import LKAlertController
 import NTDownload
 import NotificationBannerSwift
 import UIKit
+import OSLog
 
 class DownloadTableViewController: UITableViewController, SideMenuItemContent {
     fileprivate let mediaManager = Container.Manager.media
@@ -69,10 +70,33 @@ class DownloadTableViewController: UITableViewController, SideMenuItemContent {
     }
 
     @objc func initdata() {
-        self.downed = NTDownloadManager.shared.finishedList
-        self.downing = NTDownloadManager.shared.unFinishedList
+//        self.downed = NTDownloadManager.shared.finishedList
+//        self.downing = NTDownloadManager.shared.unFinishedList
+        self.downed = downloadedItems()
+        self.downing = []
+
         tableView.reloadData()
         control.endRefreshing()
+    }
+
+    func downloadedItems() -> [NTDownloadTask] {
+        let downloaded = DownloadManager.shared.knownDownloads
+        let downloadedURLs = downloaded.compactMapValues { bookmarkData in
+            var isStale = false
+            do {
+                let url = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isStale)
+                return isStale ? nil : url
+            } catch {
+                Logger().error("Error resolving bookmark data: \(error)")
+                return nil
+            }
+        }
+
+        let downloadedTasks = downloadedURLs.map { (key: String, value: URL) in
+            return NTDownloadTask(fileURL: value, fileName: key)
+        }
+
+        return downloadedTasks
     }
 
     @objc func showMenu() {
@@ -300,8 +324,9 @@ extension DownloadTableViewController {
 
     func openInPlayer() {
         var mediaItem = MediaItem()
-        mediaItem.url = URL(
-            fileURLWithPath: "\(NTDocumentPath)/\(self.downed[selectedIndexPath.row].fileName)")
+//        mediaItem.url = URL(
+//            fileURLWithPath: "\(NTDocumentPath)/\(self.downed[selectedIndexPath.row].fileName)")
+        mediaItem.url = self.downed[selectedIndexPath.row].fileURL
         mediaItem.title = downed[selectedIndexPath.row].fileName.replacingOccurrences(
             of: ".mp4", with: ""
         ).replacingOccurrences(of: ";", with: "").replacingOccurrences(of: ".", with: " ")
