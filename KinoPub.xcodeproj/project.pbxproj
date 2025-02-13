@@ -201,7 +201,9 @@
 		FE35ABC52D26FA5A00FBE20A /* Atributika in Frameworks */ = {isa = PBXBuildFile; productRef = FE35ABC42D26FA5A00FBE20A /* Atributika */; };
 		FE3A83252D26EE5D001B99D9 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83242D26EE5D001B99D9 /* FirebaseCore */; };
 		FE3A83272D26EE5D001B99D9 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83262D26EE5D001B99D9 /* FirebaseRemoteConfig */; };
+		FE585D992D57CC4400E49A29 /* Foil in Frameworks */ = {isa = PBXBuildFile; productRef = FE585D982D57CC4400E49A29 /* Foil */; };
 		FE82E0E22D49628E001B716D /* GradientLoadingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */; };
+		FE9793ED2D4F59F400A012ED /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9793EC2D4F59EB00A012ED /* DownloadManager.swift */; };
 		FEABE6132D4BBB9100BA111D /* AlamofireResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEABE6122D4BBB9000BA111D /* AlamofireResponse+Extensions.swift */; };
 		FEABEB2F2D4D184D00BA111D /* AlamofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEABEB2E2D4D184D00BA111D /* AlamofireObjectMapper.swift */; };
 		FEABEB322D4D187800BA111D /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = FEABEB312D4D187800BA111D /* ObjectMapper */; };
@@ -407,6 +409,7 @@
 		D9C7223E45EB1E644C5CA177 /* Pods-KinoPub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoPub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KinoPub/Pods-KinoPub.debug.xcconfig"; sourceTree = "<group>"; };
 		DE4D48B0CD4F6451DBED8C0B /* Pods_KinoPub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinoPub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLoadingBar.swift; sourceTree = "<group>"; };
+		FE9793EC2D4F59EB00A012ED /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		FEABE6122D4BBB9000BA111D /* AlamofireResponse+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlamofireResponse+Extensions.swift"; sourceTree = "<group>"; };
 		FEABEB2E2D4D184D00BA111D /* AlamofireObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireObjectMapper.swift; sourceTree = "<group>"; };
 		FEDEC9C020226ECF00250B61 /* PrivateKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeys.swift; sourceTree = "<group>"; };
@@ -421,6 +424,7 @@
 				FEABEB322D4D187800BA111D /* ObjectMapper in Frameworks */,
 				FE3A83252D26EE5D001B99D9 /* FirebaseCore in Frameworks */,
 				FE35ABC52D26FA5A00FBE20A /* Atributika in Frameworks */,
+				FE585D992D57CC4400E49A29 /* Foil in Frameworks */,
 				4C1BD9AD48AB10D0479622DB /* Pods_KinoPub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +505,7 @@
 		69512B271F7D367100BF5A89 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				FE9793EC2D4F59EB00A012ED /* DownloadManager.swift */,
 				FEABEB2E2D4D184D00BA111D /* AlamofireObjectMapper.swift */,
 				69512B311F7D47CA00BF5A89 /* Defaults.swift */,
 				69512B2F1F7D47CA00BF5A89 /* DelegatesStorage.swift */,
@@ -1039,6 +1044,7 @@
 				FE3A83232D26EE5D001B99D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				FE35ABC32D26FA5A00FBE20A /* XCRemoteSwiftPackageReference "Atributika" */,
 				FEABEB302D4D187800BA111D /* XCRemoteSwiftPackageReference "ObjectMapper" */,
+				FE585D972D57CC4400E49A29 /* XCRemoteSwiftPackageReference "Foil" */,
 			);
 			productRefGroup = 69512B101F7D2EE400BF5A89 /* Products */;
 			projectDirPath = "";
@@ -1232,6 +1238,7 @@
 				692CF6C31F901969007E539D /* LogViewsManager.swift in Sources */,
 				FEABEB2F2D4D184D00BA111D /* AlamofireObjectMapper.swift in Sources */,
 				695922351F7D9C6900CE3224 /* VideosNetworkingService.swift in Sources */,
+				FE9793ED2D4F59F400A012ED /* DownloadManager.swift in Sources */,
 				695922161F7D5C2800CE3224 /* CollectionsResponse.swift in Sources */,
 				695921FF1F7D5BA700CE3224 /* AccountManager.swift in Sources */,
 				694C414E1F84FB0800D6BD6F /* DowloadedTableViewCell.swift in Sources */,
@@ -1514,7 +1521,7 @@
 				DEVELOPMENT_TEAM = GJZR2MEM28;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = KinoPub/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1540,7 +1547,7 @@
 				DEVELOPMENT_TEAM = GJZR2MEM28;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = KinoPub/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1594,6 +1601,14 @@
 				minimumVersion = 11.6.0;
 			};
 		};
+		FE585D972D57CC4400E49A29 /* XCRemoteSwiftPackageReference "Foil" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jessesquires/Foil.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		FEABEB302D4D187800BA111D /* XCRemoteSwiftPackageReference "ObjectMapper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/tristanhimmelman/ObjectMapper.git";
@@ -1619,6 +1634,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FE3A83232D26EE5D001B99D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		FE585D982D57CC4400E49A29 /* Foil */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE585D972D57CC4400E49A29 /* XCRemoteSwiftPackageReference "Foil" */;
+			productName = Foil;
 		};
 		FEABEB312D4D187800BA111D /* ObjectMapper */ = {
 			isa = XCSwiftPackageProductDependency;

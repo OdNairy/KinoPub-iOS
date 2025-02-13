@@ -1,7 +1,9 @@
 import LKAlertController
+import AVFoundation
 import NTDownload
 import NotificationBannerSwift
 import UIKit
+import AlamofireImage
 
 class Share {
     enum PlayerApplication: String {
@@ -37,6 +39,17 @@ class Share {
 
     let pasteboard = UIPasteboard.general
 
+    func startDownloading(url: URL?, title: String, poster: URL?) {
+        guard let url, let poster else { return }
+
+        let downloadItem = DownloadMediaItem(title: title,
+                                             sourceURL: url,
+                                             posterURL: poster,
+                                             season: nil,
+                                             episode: nil)
+        DownloadManager.shared.startDownloading(item: downloadItem)
+    }
+
     func showActions(
         url: String, title: String, quality: String, poster: String, inView view: UIView? = nil,
         forButton button: UIBarButtonItem? = nil
@@ -46,8 +59,12 @@ class Share {
             .addAction(
                 "Скачать", style: .default,
                 handler: { (_) in
+
                     NTDownloadManager.shared.addDownloadTask(
                         urlString: url, fileName: title, fileImage: poster)
+                    self.startDownloading(url: URL(string: url),
+                                     title: title,
+                                     poster: URL(string: poster))
                     let banner = StatusBarNotificationBanner(
                         title: "Добавлено в загрузки", style: .success)
                     banner.duration = 1

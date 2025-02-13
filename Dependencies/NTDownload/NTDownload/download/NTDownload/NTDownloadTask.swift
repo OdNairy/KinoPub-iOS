@@ -50,7 +50,7 @@ open class NTDownloadTask: NSObject {
     open var task: URLSessionDownloadTask?
     private(set) var destinationPath: String?
     
-    init(fileURL: URL, fileName: String, fileImage: String? = nil) {
+    public init(fileURL: URL, fileName: String, fileImage: String? = nil) {
         self.fileURL = fileURL
         self.fileName = fileName
         self.fileImage = fileImage

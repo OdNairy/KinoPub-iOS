@@ -1,5 +1,5 @@
 {
-  "originHash" : "0c25cab633d948a4b926bef21897656221f2150aead080fa14d0318a67add314",
+  "originHash" : "d857b755f04e02c68d26a7262347a2b1a3245038c52b618e1f162db5d856e2ad",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "2e02253fd1ce99145bcbf1bb367ccf61bd0ca46b",
         "version" : "11.6.0"
+      }
+    },
+    {
+      "identity" : "foil",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jessesquires/Foil.git",
+      "state" : {
+        "revision" : "b7839568d23a05614d97d053a450ca88541fe4a5",
+        "version" : "6.0.0"
       }
     },
     {
