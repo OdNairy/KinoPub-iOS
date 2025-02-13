@@ -1,7 +1,7 @@
 import Foundation
 import ObjectMapper
 
-public class Url: Mappable {
+public struct Url: Mappable {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -15,11 +15,11 @@ public class Url: Mappable {
     public var hls: String!
     public var http: String!
 
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         hls4 <- map[SerializationKeys.hls4]
         hls <- map[SerializationKeys.hls]
         http <- map[SerializationKeys.http]

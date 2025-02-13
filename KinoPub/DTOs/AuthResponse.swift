@@ -1,7 +1,7 @@
 import Foundation
 import ObjectMapper
 
-public class AuthResponse: Mappable {
+public struct AuthResponse: Mappable {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -23,14 +23,14 @@ public class AuthResponse: Mappable {
     /// Map a JSON object to this class using ObjectMapper.
     ///
     /// - parameter map: A mapping from ObjectMapper.
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
     /// Map a JSON object to this class using ObjectMapper.
     ///
     /// - parameter map: A mapping from ObjectMapper.
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         userCode <- map[SerializationKeys.userCode]
         verificationUri <- map[SerializationKeys.verificationUri]
         interval <- map[SerializationKeys.interval]

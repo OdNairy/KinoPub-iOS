@@ -1,7 +1,7 @@
 import Foundation
 import ObjectMapper
 
-public class Watching: Mappable {
+public struct Watching: Mappable {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -13,11 +13,11 @@ public class Watching: Mappable {
     public var status: Status!
     public var time: Double?
 
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         status <- map[SerializationKeys.status]
         time <- map[SerializationKeys.time]
     }

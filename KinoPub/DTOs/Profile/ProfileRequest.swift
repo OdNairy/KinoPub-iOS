@@ -1,7 +1,7 @@
 import Foundation
 import ObjectMapper
 
-public class ProfileRequest: Mappable {
+public struct ProfileRequest: Mappable {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -13,11 +13,11 @@ public class ProfileRequest: Mappable {
     public var status: Int!
     public var user: User!
 
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         status <- map[SerializationKeys.status]
         user <- map[SerializationKeys.user]
     }

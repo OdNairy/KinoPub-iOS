@@ -1,7 +1,7 @@
 import Foundation
 import ObjectMapper
 
-public class Countries: Mappable, Hashable, Equatable, CustomStringConvertible {
+public struct Countries: Mappable, Hashable, Equatable, CustomStringConvertible {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -20,11 +20,11 @@ public class Countries: Mappable, Hashable, Equatable, CustomStringConvertible {
         return title!
     }
 
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         id <- map[SerializationKeys.id]
         title <- map[SerializationKeys.title]
     }

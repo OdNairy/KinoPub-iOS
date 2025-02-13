@@ -1,7 +1,7 @@
 import Foundation
 import ObjectMapper
 
-public class Device: Mappable {
+public struct Device: Mappable {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -23,11 +23,11 @@ public class Device: Mappable {
     public var title: String!
     public var software: String!
 
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         updated <- map[SerializationKeys.updated]
         hardware <- map[SerializationKeys.hardware]
         lastSeen <- map[SerializationKeys.lastSeen]

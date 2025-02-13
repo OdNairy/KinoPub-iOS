@@ -1,7 +1,7 @@
 import Foundation
 import ObjectMapper
 
-public class Subscription: Mappable {
+public struct Subscription: Mappable {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
     private struct SerializationKeys {
@@ -15,11 +15,11 @@ public class Subscription: Mappable {
     public var endTime: Int!
     public var active: Bool! = false
 
-    public required init?(map: Map) {
+    public init?(map: Map) {
 
     }
 
-    public func mapping(map: Map) {
+    public mutating func mapping(map: Map) {
         days <- map[SerializationKeys.days]
         endTime <- map[SerializationKeys.endTime]
         active <- map[SerializationKeys.active]
