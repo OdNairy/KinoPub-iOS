@@ -1,33 +1,17 @@
 import Foundation
-import ObjectMapper
 
-public struct User: Mappable {
-
-    // MARK: Declaration for string constants to be used to decode and also serialize.
-    private struct SerializationKeys {
-        static let regDate = "reg_date"
-        static let subscription = "subscription"
-        static let settings = "settings"
-        static let username = "username"
-        static let profile = "profile"
-    }
-
-    // MARK: Properties
+public class User: Codable {
     public var regDate: Int!
     public var subscription: Subscription!
     public var settings: Settings!
     public var username: String!
     public var profile: Profile!
 
-    public init?(map: Map) {
-
-    }
-
-    public mutating func mapping(map: Map) {
-        regDate <- map[SerializationKeys.regDate]
-        subscription <- map[SerializationKeys.subscription]
-        settings <- map[SerializationKeys.settings]
-        username <- map[SerializationKeys.username]
-        profile <- map[SerializationKeys.profile]
+    private enum CodingKeys: String, CodingKey {
+        case regDate = "reg_date"
+        case subscription
+        case settings
+        case username
+        case profile
     }
 }
