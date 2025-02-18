@@ -1,7 +1,7 @@
 import Foundation
 import Eureka
 
-public class Subtitles: Codable {
+public struct Subtitles: Codable {
     public var shift: Int!
     public var embed: Bool! = false
     public var lang: SubLang!

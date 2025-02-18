@@ -1,11 +1,11 @@
 import Foundation
 
-public class Watching: Codable {
+public struct Watching: Codable {
     public var status: Status!
     public var time: Double?
 }
 
-public class WatchingToggle: Codable {
+public struct WatchingToggle: Codable {
 
 //    private struct SerializationKeys {
 //        static let status = "status"

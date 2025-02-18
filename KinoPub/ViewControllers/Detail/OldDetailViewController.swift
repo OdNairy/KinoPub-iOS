@@ -341,7 +341,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
 
     func configPosterWatched() {
         posterImageView?.removeSubviews()
-        if let watch = model.item?.videos?.first?.watching?.status, watch == Status.watched {
+        if let watch = model.item?.videos?.first?.watching.status, watch == Status.watched {
             let posterWatchedImageView = UIImageView(image: UIImage(named: "poster_watched"))
             posterWatchedImageView.frame = CGRect(
                 x: posterImageView.bounds.origin.x, y: posterImageView.bounds.origin.y,
@@ -357,7 +357,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
             : setButtonImage(watchlistButton, "btn-watch")
         watchlistButton.isEnabled = true
 
-        if let watch = model.item?.videos?.first?.watching?.status {
+        if let watch = model.item?.videos?.first?.watching.status {
             switch watch {
                 case Status.watched:
                     setButtonImage(watchlistButton, "btn-unwatch")
@@ -376,7 +376,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
         if let _itemFolders = model.item.bookmarks, _itemFolders.count > 0 {
             setButtonImage(bookmarkButton, "Bookmark Ribbon Filled-50")
             let str = _itemFolders.count > 1 ? "... " : " "
-            bookmarkButton?.setTitle(" " + _itemFolders[0].title! + str, for: .normal)
+            bookmarkButton?.setTitle(" " + _itemFolders[0].title + str, for: .normal)
 
             bookmarkButton?.titleLabel?.layer.borderWidth = 1.0
             bookmarkButton?.titleLabel?.layer.cornerRadius = 8
@@ -435,7 +435,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
             guard let strongSelf = self else { return }
             let action = ActionSheet(message: "Выберите папку")
             for folder in bookmarks! {
-                var folderTitle = folder.title!
+                var folderTitle = folder.title
                 var style: UIAlertAction.Style = .default
                 for itemFolder in strongSelf.model.item.bookmarks! {
                     if itemFolder.title == folder.title {
@@ -447,7 +447,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
                     folderTitle, style: style,
                     handler: { (_) in
                         strongSelf.bookmarksModel.toggleItemToFolder(
-                            item: String((strongSelf.model.item.id)!), folder: String((folder.id)!))
+                            item: String((strongSelf.model.item.id)!), folder: String(folder.id))
                     })
             }
             action.addAction("Отмена", style: .cancel)
@@ -486,7 +486,7 @@ class OldDetailViewController: UIViewController, SideMenuItemContent {
 
     func playVideo() {
         if model.mediaItem.url != nil {
-            if let _watchingTime = model.item?.videos?.first?.watching?.time,
+            if let _watchingTime = model.item?.videos?.first?.watching.time,
                 model.item?.subtype != ItemType.ItemSubtype.multi.rawValue {
                 model.watchingTime = _watchingTime
             }

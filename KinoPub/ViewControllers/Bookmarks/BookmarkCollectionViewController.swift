@@ -94,11 +94,11 @@ class BookmarkCollectionViewController: ContentCollectionViewController {
             for folder in bookmarks! {
                 if folder.title == strongSelf.title { continue }
                 action.addAction(
-                    folder.title!, style: .default,
+                    folder.title, style: .default,
                     handler: { (_) in
                         strongSelf.viewModel.toggleItemToFolder(
                             item: String((strongSelf.viewModel.items[indexPath.row].id)!),
-                            folder: String((folder.id)!))
+                            folder: String(folder.id))
                         strongSelf.removeFromBookmark(
                             item: strongSelf.viewModel.items[indexPath.row], indexPath: indexPath)
                     })

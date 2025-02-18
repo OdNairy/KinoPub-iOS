@@ -1,9 +1,9 @@
 import Foundation
 
-public class TokenResponse: Codable {
-    public var refreshToken: String!
-    public var accessToken: String!
-    public var expiresIn: Int!
+public struct TokenResponse: Codable {
+    public var refreshToken: String
+    public var accessToken: String
+    public var expiresIn: Int
 
     private enum CodingKeys: String, CodingKey {
         case refreshToken = "refresh_token"

@@ -124,10 +124,10 @@ class SeasonTableViewController: UITableViewController {
         for episode in (model.getSeason(indexPathSeason)?.episodes)! {
             let name =
                 (self.model.item?.title?.replacingOccurrences(of: "/ ", with: "("))!
-                + ") (s\(self.model.getSeason(indexPathSeason)?.number ?? 0)e\(episode.number ?? 0))"
+            + ") (s\(self.model.getSeason(indexPathSeason)?.number ?? 0)e\(episode.number))"
                 + " (\(quality)).mp4"
             let poster = self.model.item?.posters?.small
-            let url = episode.files?[index].url?.http
+            let url = episode.files[index].url?.http
             NTDownloadManager.shared.addDownloadTask(
                 urlString: url!, fileName: name, fileImage: poster)
         }
@@ -154,8 +154,7 @@ class SeasonTableViewController: UITableViewController {
             }
             actionVC.setPresentingSource(self.tableView.cellForRow(at: indexPath!)!)
         } else if season {
-            for (index, file)
-                in (self.model.getSeason(indexPathSeason)?.episodes?.first?.files?.enumerated())! {
+            for (index, file) in (self.model.getSeason(indexPathSeason)?.episodes?.first?.files.enumerated())! {
                 actionVC.addAction(
                     file.quality!, style: .default,
                     handler: { (_) in
@@ -174,7 +173,7 @@ class SeasonTableViewController: UITableViewController {
     ) {
         let name =
             (self.model.item?.title?.replacingOccurrences(of: " /", with: ";"))!
-            + "; Сезон \(self.model.getSeason(indexPathSeason)?.number ?? 0), Эпизод \(episode.number ?? 0)."
+        + "; Сезон \(self.model.getSeason(indexPathSeason)?.number ?? 0), Эпизод \(episode.number)."
             + "\(quality).mp4"
         let poster = self.model.item?.posters?.small
         Share().showActions(

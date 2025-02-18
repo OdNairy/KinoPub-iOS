@@ -31,6 +31,8 @@ class LogViewsNetworkingService {
         completed: @escaping (_ responseObject: WatchingToggle?, _ error: Error?) -> Void
     ) {
         requestFactory.changeMarktimeRequest(id: id, time: time, video: video, season: season)
-            .responseObject(completionHandler: completed)
+            .responseObject { (value: WatchingToggle??, error) in
+                completed(nil, error)
+            }
     }
 }

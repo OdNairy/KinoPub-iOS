@@ -59,10 +59,10 @@ class AccountManagerImp: AccountManager {
     }
 
     func createAccount(tokenData: TokenResponse) {
-        keychain.set(tokenData.accessToken!, forKey: "accessToken")
-        keychain.set(tokenData.refreshToken!, forKey: "refreshToken")
+        keychain.set(tokenData.accessToken, forKey: "accessToken")
+        keychain.set(tokenData.refreshToken, forKey: "refreshToken")
         self.account = KinopubAccount(
-            accessToken: tokenData.accessToken!, refreshToken: tokenData.refreshToken!)
+            accessToken: tokenData.accessToken, refreshToken: tokenData.refreshToken)
         self.authAndNotifyDelegates()
     }
 

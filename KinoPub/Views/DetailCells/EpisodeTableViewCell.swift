@@ -70,7 +70,7 @@ class EpisodeTableViewCell: UITableViewCell {
                 imageTransition: .crossDissolve(0.2),
                 runImageTransitionIfCached: false)
         }
-        if var title = model.getEpisode(indexPathEpisode, forSeason: indexPathSeason)?.title?
+        if var title = model.getEpisode(indexPathEpisode, forSeason: indexPathSeason)?.title
             .components(separatedBy: " / "),
             let number = model.getEpisode(indexPathEpisode, forSeason: indexPathSeason)?.number {
             if title[0] == "" {
@@ -85,7 +85,7 @@ class EpisodeTableViewCell: UITableViewCell {
             mediaItem.video = number
             mediaItem.season = model.getSeason(indexPathSeason)?.number ?? 0
         }
-        if let url = model.getEpisode(indexPathEpisode, forSeason: indexPathSeason)?.files?.first?
+        if let url = model.getEpisode(indexPathEpisode, forSeason: indexPathSeason)?.files.first?
             .url?.hls4 {
             mediaItem.url = URL(string: url)
         }

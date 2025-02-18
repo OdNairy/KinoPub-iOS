@@ -1,13 +1,15 @@
 import Foundation
 
-public class Channels: Codable {
+public struct Channels: Codable {
     // MARK: Properties
-    public var current: String?
-    public var name: String?
-    public var id: Int?
-    public var logos: Logos?
+    public var id: Int
+    public var name: String
+    public var title: String
+    public var logos: Logos
+    public var stream: String
+
+    @EmptyStringAsNil
+    public var current: String? // empty instead of nil
     public var embed: String?
-    public var title: String?
-    public var stream: String?
     public var playlist: String?
 }

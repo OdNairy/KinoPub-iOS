@@ -1,8 +1,8 @@
 import Foundation
 
-public class Genres: Codable, Hashable, Equatable, CustomStringConvertible {
-    public var id: Int!
-    public var title: String!
+public struct Genres: Codable, Hashable, Equatable, CustomStringConvertible {
+    public var id: Int
+    public var title: String
     public var type: String?
     
     public func hash(into hasher: inout Hasher) {
@@ -13,7 +13,7 @@ public class Genres: Codable, Hashable, Equatable, CustomStringConvertible {
         return title
     }
     
-    init(id: Int?, title: String?) {
+    init(id: Int, title: String) {
         self.id = id
         self.title = title
     }

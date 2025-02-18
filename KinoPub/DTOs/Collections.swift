@@ -1,6 +1,6 @@
 import Foundation
 
-public class Collections: Codable {
+public struct Collections: Codable {
     public var updated: Int?
     public var posters: Posters?
     public var watchers: Int?

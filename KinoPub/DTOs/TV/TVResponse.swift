@@ -1,6 +1,6 @@
 import Foundation
 
-public class TVRequest: Codable {
-    public var status: Int?
-    public var channels: [Channels]?
+public struct TVRequest: Codable {
+    public var status: Int
+    public var channels: [Channels]
 }

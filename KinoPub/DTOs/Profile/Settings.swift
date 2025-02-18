@@ -1,8 +1,8 @@
 import Foundation
 
-public class Settings: Codable {
-    public var showErotic: Bool! = false
-    public var showUncertain: Bool! = false
+public struct Settings: Codable {
+    public var showErotic: Bool
+    public var showUncertain: Bool
 
     private enum CodingKeys: String, CodingKey {
         case showErotic = "show_erotic"

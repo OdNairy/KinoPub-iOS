@@ -1,6 +1,6 @@
 import Foundation
 
-public class DeviceRequest: Codable {
-    public var device: Device!
-    public var status: Int!
+public struct DeviceRequest: Codable {
+    public var device: Device
+    public var status: Int
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public class Videos: Codable {
+public struct Videos: Codable {
     public var files: [Files]!
     public var subtitles: [Subtitles]!
     public var id: Int!

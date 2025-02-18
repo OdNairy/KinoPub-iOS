@@ -1,15 +1,15 @@
 import Foundation
 
-public class Countries: Codable, Hashable, Equatable, CustomStringConvertible {
-    public var id: Int!
-    public var title: String!
+public struct Countries: Codable, Hashable, Equatable, CustomStringConvertible {
+    public let id: Int
+    public let title: String
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
 
     public var description: String {
-        return title!
+        return title
     }
 }
 

@@ -1,6 +1,6 @@
 import Foundation
 
-public class Networks: Codable {
+public struct Networks: Codable {
     public var id: Int?
     public var name: String?
 }

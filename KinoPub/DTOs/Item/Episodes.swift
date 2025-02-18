@@ -1,14 +1,14 @@
 import Foundation
 
-public class Episodes: Codable {
-    public var id: Int!
-    public var title: String!
-    public var files: [Files]!
-    public var subtitles: [Subtitles]!
-    public var thumbnail: String!
-    public var tracks: Int
-    public var number: Int!
-    public var duration: Double!
-    public var watched: Int!
-    public var watching: Watching!
+public struct Episodes: Codable {
+    public let id: Int
+    public let title: String
+    public let files: [Files]
+    public let subtitles: [Subtitles]
+    public let thumbnail: String
+    public let tracks: Int
+    public let number: Int
+    public let duration: Double
+    public let watched: Int
+    public let watching: Watching
 }
