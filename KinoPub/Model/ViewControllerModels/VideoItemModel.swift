@@ -50,16 +50,12 @@ class VideoItemModel {
     }
 
     func checkDefaults() {
+        // TODO: Reevaluate if we are actually needing to sort seasons and episodes
         if Config.shared.canSortSeasons, let seasons = item.seasons {
-            item.seasons = seasons.sorted { $0.number! > $1.number! }
+            item.seasons = seasons.sorted { $0.number > $1.number }
         }
         if Config.shared.canSortEpisodes, let seasons = item.seasons {
-            var _seasons = [Seasons]()
-            for season in seasons {
-                season.episodes = season.episodes?.sorted { $0.number > $1.number }
-                _seasons.append(season)
-            }
-            item.seasons = seasons
+            item.seasons = seasons.map({ $0.sortedEpisodes() })
         }
     }
 
@@ -153,7 +149,7 @@ class VideoItemModel {
                                 title = "Episode \(number)"
                             }
                             mediaItem.video = number
-                            mediaItem.title = "s\(season.number ?? 0)e\(number) - \(title)"
+                            mediaItem.title = "s\(season.number)e\(number) - \(title)"
                             mediaItem.season = season.number
                             mediaItem.url = URL(string: url)
                             mediaItems.append(mediaItem)

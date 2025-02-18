@@ -1,6 +1,6 @@
 import Foundation
 
 public struct ProfileRequest: Codable {
-    public var status: Int
-    public var user: User
+    public let status: Int
+    public let user: User
 }

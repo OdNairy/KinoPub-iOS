@@ -1,10 +1,10 @@
 import Foundation
 
 public struct Pagination: Codable {
-    public var total: Int
-    public var current: Int
-    public var totalItems: Int?
-    public var perpage: Int
+    public let total: Int
+    public let current: Int
+    public let totalItems: Int?
+    public let perpage: Int
 
     private enum CodingKeys: String, CodingKey {
         case total

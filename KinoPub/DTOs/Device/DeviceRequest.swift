@@ -1,6 +1,6 @@
 import Foundation
 
 public struct DeviceRequest: Codable {
-    public var device: Device
-    public var status: Int
+    public let device: Device
+    public let status: Int
 }

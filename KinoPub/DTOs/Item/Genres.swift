@@ -1,9 +1,9 @@
 import Foundation
 
 public struct Genres: Codable, Hashable, Equatable, CustomStringConvertible {
-    public var id: Int
-    public var title: String
-    public var type: String?
+    public let id: Int
+    public let title: String
+    public let type: String?
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
@@ -16,6 +16,7 @@ public struct Genres: Codable, Hashable, Equatable, CustomStringConvertible {
     init(id: Int, title: String) {
         self.id = id
         self.title = title
+        self.type = nil
     }
 }
 

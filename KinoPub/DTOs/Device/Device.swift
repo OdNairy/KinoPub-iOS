@@ -3,13 +3,13 @@ import Foundation
 public struct Device: Codable {
 
     // MARK: Properties
-    public var updated: Int
-    public var hardware: String
-    public var lastSeen: Int
-    public var id: Int
-    public var created: Int
-    public var title: String
-    public var software: String
+    public let updated: Int
+    public let hardware: String
+    public let lastSeen: Int
+    public let id: Int
+    public let created: Int
+    public let title: String
+    public let software: String
 
     enum CodingKeys: String, CodingKey {
         case updated

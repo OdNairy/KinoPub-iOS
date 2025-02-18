@@ -2,9 +2,9 @@ import Foundation
 
 public struct ItemResponse: Codable {
     
-    public var status: Int
-    public var item: Item?
+    public let status: Int
+    public let item: Item?
     
-    public var pagination: Pagination?
-    public var items: [Item]?
+    public let pagination: Pagination?
+    public let items: [Item]?
 }

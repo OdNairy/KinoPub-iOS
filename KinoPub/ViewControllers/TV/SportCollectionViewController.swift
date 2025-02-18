@@ -57,10 +57,6 @@ class SportCollectionViewController: UICollectionViewController, SideMenuItemCon
         }
     }
 
-    func test(input: Data) {
-        input.string(encoding: .utf8)
-    }
-
     // MARK: - Navigation
     @objc func openChannel(_ sender: UITapGestureRecognizer) {
         if let indexPath = self.collectionView?.indexPathForItem(

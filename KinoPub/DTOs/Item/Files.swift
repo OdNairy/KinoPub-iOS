@@ -1,8 +1,8 @@
 import Foundation
 
 public struct Files: Codable {
-    public var quality: String!
-    public var w: Int!
-    public var url: Url!
-    public var h: Int!
+    public let quality: String!
+    public let w: Int!
+    public let url: Url!
+    public let h: Int!
 }

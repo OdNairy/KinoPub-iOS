@@ -2,10 +2,10 @@ import Foundation
 import Eureka
 
 public struct Subtitles: Codable {
-    public var shift: Int!
-    public var embed: Bool! = false
-    public var lang: SubLang!
-    public var url: String!
+    public let shift: Int!
+    public let embed: Bool! //= false
+    public let lang: SubLang!
+    public let url: String!
 }
 
 public class SubtitlesList: Codable, Equatable, CustomStringConvertible, InputTypeInitiable {

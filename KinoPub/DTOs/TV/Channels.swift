@@ -2,14 +2,14 @@ import Foundation
 
 public struct Channels: Codable {
     // MARK: Properties
-    public var id: Int
-    public var name: String
-    public var title: String
-    public var logos: Logos
-    public var stream: String
+    public let id: Int
+    public let name: String
+    public let title: String
+    public let logos: Logos
+    public let stream: String
 
     @EmptyStringAsNil
     public var current: String? // empty instead of nil
-    public var embed: String?
-    public var playlist: String?
+    public let embed: String?
+    public let playlist: String?
 }

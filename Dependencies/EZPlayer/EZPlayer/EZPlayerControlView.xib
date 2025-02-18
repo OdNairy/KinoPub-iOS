@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -51,10 +49,10 @@
                     <rect key="frame" x="0.0" y="310" width="640" height="50"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wUq-7Y-r9U">
-                            <rect key="frame" x="0.0" y="8" width="640" height="42"/>
+                            <rect key="frame" x="0.0" y="9" width="640" height="41"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btt-NP-HOU">
-                                    <rect key="frame" x="540" y="17" width="50" height="22"/>
+                                    <rect key="frame" x="540" y="16" width="50" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="9U3-R8-TRL"/>
                                     </constraints>
@@ -64,13 +62,13 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FJM-T1-mP9">
-                                    <rect key="frame" x="8" y="18.5" width="227" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <rect key="frame" x="8" y="17.5" width="227" height="20.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EMB-MH-1gD">
-                                    <rect key="frame" x="490" y="13" width="50" height="26"/>
+                                    <rect key="frame" x="490" y="12" width="50" height="26"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="PqH-Mf-V9D"/>
                                     </constraints>
@@ -80,14 +78,14 @@
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W05-DL-zOG">
-                                    <rect key="frame" x="440" y="13" width="50" height="26"/>
+                                    <rect key="frame" x="440" y="12" width="50" height="26"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="vaB-qY-krT"/>
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BE0-Nr-DXL">
-                                    <rect key="frame" x="347" y="14" width="50" height="25"/>
+                                    <rect key="frame" x="347" y="13" width="50" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="awu-ek-E85"/>
                                     </constraints>
@@ -97,7 +95,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X52-3R-0k9">
-                                    <rect key="frame" x="243" y="14" width="50" height="25"/>
+                                    <rect key="frame" x="243" y="13" width="50" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="472-aH-2Ar"/>
                                     </constraints>
@@ -107,7 +105,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnc-pm-iVo">
-                                    <rect key="frame" x="590" y="14" width="50" height="25"/>
+                                    <rect key="frame" x="590" y="13" width="50" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="dfw-Ls-AfS"/>
                                     </constraints>
@@ -117,7 +115,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gtW-nP-Fol">
-                                    <rect key="frame" x="295" y="17" width="50" height="22"/>
+                                    <rect key="frame" x="295" y="16" width="50" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="UpG-0f-7pc"/>
                                     </constraints>
@@ -150,7 +148,7 @@
                             </constraints>
                         </view>
                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hQE-RR-3tG">
-                            <rect key="frame" x="0.0" y="6" width="640" height="2"/>
+                            <rect key="frame" x="0.0" y="5" width="640" height="4"/>
                             <color key="progressTintColor" red="1" green="1" blue="0.1239963108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </progressView>
@@ -185,7 +183,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2wv-Bw-wLE" userLabel="slidePreview">
-                    <rect key="frame" x="163" y="241" width="106" height="60"/>
+                    <rect key="frame" x="163" y="242" width="106" height="60"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B3R-ow-cTT">
                             <rect key="frame" x="0.0" y="0.0" width="106" height="60"/>
@@ -248,7 +246,7 @@
                 <outlet property="videoshotPreview" destination="2wv-Bw-wLE" id="agq-RL-tyc"/>
                 <outlet property="videoshotPreviewLeadingConstraint" destination="I0R-JY-IEZ" id="ceo-mT-A1f"/>
             </connections>
-            <point key="canvasLocation" x="-130" y="-56"/>
+            <point key="canvasLocation" x="-208" y="-50.374812593703155"/>
         </view>
     </objects>
     <resources>

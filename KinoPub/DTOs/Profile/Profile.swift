@@ -1,6 +1,6 @@
 import Foundation
 
 public struct Profile: Codable {
-    public var avatar: String
-    public var name: String
+    public let avatar: String
+    public let name: String
 }

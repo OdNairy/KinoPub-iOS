@@ -1,6 +1,6 @@
 import Foundation
 
 public struct Logos: Codable {
-    public var s: String
-    public var m: String
+    public let s: String
+    public let m: String
 }

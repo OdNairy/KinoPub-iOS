@@ -1,8 +1,14 @@
 import Foundation
 
-public class Seasons: Codable {
+public struct Seasons: Codable {
     public var episodes: [Episodes]!
-    public var number: Int!
-    public var title: String!
-    public var watching: Watching!
+    public let number: Int
+    public let title: String!
+    public let watching: Watching!
+
+    func sortedEpisodes() -> Seasons {
+        var sortedSeason = self
+        sortedSeason.episodes.sort { $0.number < $1.number }
+        return sortedSeason
+    }
 }

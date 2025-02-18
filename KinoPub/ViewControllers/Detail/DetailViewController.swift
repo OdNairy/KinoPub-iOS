@@ -510,7 +510,7 @@ extension DetailViewController {
 
         for (index, season) in seasons.enumerated() {
             actionVC.addAction(
-                "Сезон \(season.number ?? 00)", style: .default,
+                "Сезон \(season.number)", style: .default,
                 handler: { [weak self] (_) in
                     guard let strongSelf = self else { return }
                     strongSelf.showQualitySelectAction(

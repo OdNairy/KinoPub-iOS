@@ -1,11 +1,11 @@
 import Foundation
 
 public struct User: Codable {
-    public var regDate: Int
-    public var subscription: Subscription
-    public var settings: Settings
-    public var username: String
-    public var profile: Profile
+    public let regDate: Int
+    public let subscription: Subscription
+    public let settings: Settings
+    public let username: String
+    public let profile: Profile
 
     private enum CodingKeys: String, CodingKey {
         case regDate = "reg_date"
