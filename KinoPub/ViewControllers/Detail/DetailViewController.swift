@@ -599,7 +599,8 @@ extension DetailViewController {
 
 // MARK: - UIScrollViewDelegate
 extension DetailViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    #warning("TODO - fix")
+    func scrollViewDidScroll__disabled(_ scrollView: UIScrollView) {
         if #available(iOS 11.0, *) {
             scrollView.contentInsetAdjustmentBehavior = .never
         } else {
