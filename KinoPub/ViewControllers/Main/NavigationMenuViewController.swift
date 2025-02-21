@@ -88,20 +88,20 @@ class NavigationMenuViewController: MenuViewController {
     }
 
     func configureProfile() {
-        if let imageUrl = model.user?.profile?.avatar {
+        if let imageUrl = model.user?.profile.avatar {
             profileImageView.af.setImage(withURL: URL(string: imageUrl + "?s=200&d=identicon")!)
         }
         if let usernameString = model.user?.username {
             userNameLabel.text = usernameString
         }
 
-        if let days = model.user?.subscription?.days, days != 0.0 {
+        if let days = model.user?.subscription.days, days != 0.0 {
             daysLabel.text =
                 "Подписка на \(Int(days)) "
                 + Int(days).getNumEnding(fromArray: ["день", "дня", "дней"])
-        } else if model.user?.subscription?.endTime == 0 {
+        } else if model.user?.subscription.endTime == 0 {
             daysLabel.text = "Бесконечная подписка"
-        } else if model.user?.subscription?.days == 0.0 {
+        } else if model.user?.subscription.days == 0.0 {
             daysLabel.text = "Нет подписки"
         }
     }

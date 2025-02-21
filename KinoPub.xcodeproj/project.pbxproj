@@ -204,9 +204,9 @@
 		FE7C35342D651DFC00A24D6D /* UICollectionView+Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7C35332D651DFC00A24D6D /* UICollectionView+Movies.swift */; };
 		FE82E0E22D49628E001B716D /* GradientLoadingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */; };
 		FEABE6132D4BBB9100BA111D /* AlamofireResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEABE6122D4BBB9000BA111D /* AlamofireResponse+Extensions.swift */; };
-		FEABEB2F2D4D184D00BA111D /* AlamofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEABEB2E2D4D184D00BA111D /* AlamofireObjectMapper.swift */; };
 		FEABEB322D4D187800BA111D /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = FEABEB312D4D187800BA111D /* ObjectMapper */; };
 		FEDEC9C120226ECF00250B61 /* PrivateKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDEC9C020226ECF00250B61 /* PrivateKeys.swift */; };
+		FEF66B3E2D60C1950052EDFA /* EmptyStringAsNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF66B3D2D60C1950052EDFA /* EmptyStringAsNil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -410,8 +410,8 @@
 		FE7C35332D651DFC00A24D6D /* UICollectionView+Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Movies.swift"; sourceTree = "<group>"; };
 		FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLoadingBar.swift; sourceTree = "<group>"; };
 		FEABE6122D4BBB9000BA111D /* AlamofireResponse+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlamofireResponse+Extensions.swift"; sourceTree = "<group>"; };
-		FEABEB2E2D4D184D00BA111D /* AlamofireObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireObjectMapper.swift; sourceTree = "<group>"; };
 		FEDEC9C020226ECF00250B61 /* PrivateKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeys.swift; sourceTree = "<group>"; };
+		FEF66B3D2D60C1950052EDFA /* EmptyStringAsNil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStringAsNil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -503,7 +503,7 @@
 		69512B271F7D367100BF5A89 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
-				FEABEB2E2D4D184D00BA111D /* AlamofireObjectMapper.swift */,
+				FEF66B3D2D60C1950052EDFA /* EmptyStringAsNil.swift */,
 				69512B311F7D47CA00BF5A89 /* Defaults.swift */,
 				69512B2F1F7D47CA00BF5A89 /* DelegatesStorage.swift */,
 				69512B2E1F7D47CA00BF5A89 /* ModelsAssembly.swift */,
@@ -1224,6 +1224,7 @@
 				69F124342002E71700E37A1F /* SafariActivity.swift in Sources */,
 				6959221E1F7D5C3500CE3224 /* Device.swift in Sources */,
 				698D1ABB2006C07100BDE07F /* ActorCollectionViewController.swift in Sources */,
+				FEF66B3E2D60C1950052EDFA /* EmptyStringAsNil.swift in Sources */,
 				69C4E18A202FA201003048D5 /* TVCollectionViewCell.swift in Sources */,
 				695922101F7D5C0200CE3224 /* NavigationMenuViewController.swift in Sources */,
 				69FCF3381F939DFB00638A77 /* AVPlayerExtension.swift in Sources */,
@@ -1233,7 +1234,6 @@
 				695922251F7D5C3A00CE3224 /* Item.swift in Sources */,
 				69676D242013A1A70046F4D2 /* Helper.swift in Sources */,
 				692CF6C31F901969007E539D /* LogViewsManager.swift in Sources */,
-				FEABEB2F2D4D184D00BA111D /* AlamofireObjectMapper.swift in Sources */,
 				695922351F7D9C6900CE3224 /* VideosNetworkingService.swift in Sources */,
 				695922161F7D5C2800CE3224 /* CollectionsResponse.swift in Sources */,
 				695921FF1F7D5BA700CE3224 /* AccountManager.swift in Sources */,

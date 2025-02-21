@@ -35,14 +35,13 @@ class TVCollectionViewCell: UICollectionViewCell {
     }
 
     func config(withChannel channel: Channels) {
-        if let title = channel.title {
-            titleLabel.text = title
-        }
+        titleLabel.text = channel.title
 
-        if let logo = channel.logos?.s, let url = URL(string: logo) {
+        let logo = channel.logos.s
+        if let url = URL(string: logo) {
             logoImageView.af.setImage(
                 withURL: url,
-                placeholderImage: UIImage(named: "Sports-placeholder"),
+                placeholderImage: UIImage(resource: .sportsPlaceholder),
                 imageTransition: .crossDissolve(0.2),
                 runImageTransitionIfCached: false
             ) { [weak self] (response) in

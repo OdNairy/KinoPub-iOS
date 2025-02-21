@@ -71,10 +71,10 @@ class ProfileViewController: UITableViewController, ProfileModelDelegate, SideMe
     }
 
     func configureProfile() {
-        if let imageUrl = model.user?.profile?.avatar {
+        if let imageUrl = model.user?.profile.avatar {
             profileImageView.af.setImage(withURL: URL(string: imageUrl + "?s=200&d=identicon")!)
         }
-        if let nameString = model.user?.profile?.name {
+        if let nameString = model.user?.profile.name {
             profileNameLabel.text = nameString
         } else {
             profileNameLabel.text = nil
@@ -82,13 +82,13 @@ class ProfileViewController: UITableViewController, ProfileModelDelegate, SideMe
         if let usernameString = model.user?.username {
             usernameLabel.text = usernameString
         }
-        if let isUncertain = model.user?.settings?.showUncertain {
+        if let isUncertain = model.user?.settings.showUncertain {
             uncertainDetailLabel.text = isUncertain ? "Вкл." : "Выкл."
         }
-        if let isErotic = model.user?.settings?.showErotic {
+        if let isErotic = model.user?.settings.showErotic {
             eroticDetailLabel.text = isErotic ? "Вкл." : "Выкл."
         }
-        if let days = model.user?.subscription?.days, days != 0.0 {
+        if let days = model.user?.subscription.days, days != 0.0 {
             let tapDaysLabel = UITapGestureRecognizer(
                 target: self, action: #selector(openSafariVC(_:)))
             daySubscriptionDetailLabel.isUserInteractionEnabled = true
@@ -96,17 +96,17 @@ class ProfileViewController: UITableViewController, ProfileModelDelegate, SideMe
             //            daySubscriptionDetailLabel.underlineTextStyle()
             //            daySubscriptionDetailLabel.textColor = UIColor.kpLightGreen
             daySubscriptionDetailLabel.text = String(days)
-        } else if model.user?.subscription?.endTime == 0 {
+        } else if model.user?.subscription.endTime == 0 {
             daySubscriptionDetailLabel.text = "∞"
-        } else if model.user?.subscription?.days == 0.0 {
+        } else if model.user?.subscription.days == 0.0 {
             daySubscriptionDetailLabel.text = "0"
         }
-        if let endTime = model.user?.subscription?.endTime, endTime != 0 {
+        if let endTime = model.user?.subscription.endTime, endTime != 0 {
             let format = DateFormatter()
             format.dateFormat = "dd.MM.yyyy"
             endTimeDetailLabel.text = format.string(
                 from: Date(timeIntervalSince1970: TimeInterval(exactly: endTime)!))
-        } else if model.user?.subscription?.endTime == 0 {
+        } else if model.user?.subscription.endTime == 0 {
             endTimeDetailLabel.text = "∞"
         }
     }

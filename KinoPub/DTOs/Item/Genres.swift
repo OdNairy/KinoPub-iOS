@@ -1,46 +1,25 @@
 import Foundation
-import ObjectMapper
 
-public struct Genres: Mappable, Hashable, Equatable, CustomStringConvertible {
-
-    // MARK: Declaration for string constants to be used to decode and also serialize.
-    private struct SerializationKeys {
-        static let id = "id"
-        static let title = "title"
-
-        static let type = "type"
-    }
-
-    // MARK: Properties
-    public var id: Int!
-    public var title: String!
-    public var type: String?
-
+public struct Genres: Codable, Hashable, Equatable, CustomStringConvertible {
+    public let id: Int
+    public let title: String
+    public let type: String?
+    
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-
+    
     public var description: String {
         return title
     }
-
-    init(id: Int?, title: String?) {
+    
+    init(id: Int, title: String) {
         self.id = id
         self.title = title
-    }
-
-    public init?(map: Map) {
-
-    }
-
-    public mutating func mapping(map: Map) {
-        id <- map[SerializationKeys.id]
-        title <- map[SerializationKeys.title]
-
-        type <- map[SerializationKeys.type]
+        self.type = nil
     }
 }
 
-public func == (lhs: Genres, rhs: Genres) -> Bool {
+public func ==(lhs: Genres, rhs: Genres) -> Bool {
     return lhs.id == rhs.id
 }

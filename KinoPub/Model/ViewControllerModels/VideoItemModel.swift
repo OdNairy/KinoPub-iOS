@@ -50,16 +50,12 @@ class VideoItemModel {
     }
 
     func checkDefaults() {
+        // TODO: Reevaluate if we are actually needing to sort seasons and episodes
         if Config.shared.canSortSeasons, let seasons = item.seasons {
-            item.seasons = seasons.sorted { $0.number! > $1.number! }
+            item.seasons = seasons.sorted { $0.number > $1.number }
         }
         if Config.shared.canSortEpisodes, let seasons = item.seasons {
-            var _seasons = [Seasons]()
-            for season in seasons {
-                season.episodes = season.episodes?.sorted { $0.number! > $1.number! }
-                _seasons.append(season)
-            }
-            item.seasons = seasons
+            item.seasons = seasons.map({ $0.sortedEpisodes() })
         }
     }
 
@@ -80,14 +76,14 @@ class VideoItemModel {
     private func setLinks() {
         var mediaItem = MediaItem()
         mediaItem.id = item.id
-        if let url = item.videos?.first?.files?.first?.url?.hls4,
+        if let url = item.videos?.first?.files.first?.url?.hls4,
             item.subtype != ItemType.ItemSubtype.multi.rawValue {
             files = item.videos?.first?.files
             mediaItem.title = item.title
             mediaItem.video = item.videos?.first?.number
             mediaItem.url = URL(string: url)
-            if item.videos?.first?.watching?.status == Status.watching {
-                mediaItem.watchingTime = item.videos?.first?.watching?.time ?? 0
+            if item.videos?.first?.watching.status == Status.watching {
+                mediaItem.watchingTime = item.videos?.first?.watching.time ?? 0
             }
             mediaItems.append(mediaItem)
         } else {
@@ -109,19 +105,20 @@ class VideoItemModel {
         if item.subtype == ItemType.ItemSubtype.multi.rawValue {
             guard let videos = item.videos else { return }
             for episode in videos {
-                if episode.watching?.status == Status.watching {
-                    mediaItem.watchingTime = episode.watching?.time ?? 0
+                if episode.watching.status == Status.watching {
+                    mediaItem.watchingTime = episode.watching.time ?? 0
                 }
-                if episode.watching?.status == Status.unwatched
-                    || episode.watching?.status == Status.watching {
-                    guard let url = episode.files?.first?.url?.hls4 else { return }
-                    if var title = episode.title, let number = episode.number {
-                        if title == "" {
-                            title = "Episode \(number)"
-                        }
-                        mediaItem.video = number
-                        mediaItem.title = "e\(number) - \(title)"
+                if episode.watching.status == Status.unwatched
+                    || episode.watching.status == Status.watching {
+                    guard let url = episode.files.first?.url?.hls4 else { return }
+
+                    var title = episode.title
+                    let number = episode.number
+                    if title == "" {
+                        title = "Episode \(number)"
                     }
+                    mediaItem.video = number
+                    mediaItem.title = "e\(number) - \(title)"
                     mediaItem.season = 0
                     mediaItem.url = URL(string: url)
                     mediaItems.append(mediaItem)
@@ -140,19 +137,19 @@ class VideoItemModel {
                     foundSeason = true
                     guard let episodes = season.episodes else { return }
                     for episode in episodes {
-                        if episode.watching?.status == Status.watching {
-                            mediaItem.watchingTime = episode.watching?.time ?? 0
+                        if episode.watching.status == Status.watching {
+                            mediaItem.watchingTime = episode.watching.time ?? 0
                         }
-                        if episode.watching?.status == Status.unwatched
-                            || episode.watching?.status == Status.watching {
-                            guard let url = episode.files?.first?.url?.hls4 else { return }
-                            if var title = episode.title, let number = episode.number {
-                                if title == "" {
-                                    title = "Episode \(number)"
-                                }
-                                mediaItem.video = number
-                                mediaItem.title = "s\(season.number ?? 0)e\(number) - \(title)"
+                        if episode.watching.status == Status.unwatched
+                            || episode.watching.status == Status.watching {
+                            guard let url = episode.files.first?.url?.hls4 else { return }
+                            var title = episode.title
+                            let number = episode.number
+                            if title == "" {
+                                title = "Episode \(number)"
                             }
+                            mediaItem.video = number
+                            mediaItem.title = "s\(season.number)e\(number) - \(title)"
                             mediaItem.season = season.number
                             mediaItem.url = URL(string: url)
                             mediaItems.append(mediaItem)

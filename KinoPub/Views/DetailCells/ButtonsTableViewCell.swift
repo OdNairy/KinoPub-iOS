@@ -33,7 +33,7 @@ class ButtonsTableViewCell: UITableViewCell {
     func configBookmarksButton() {
         if let _itemFolders = model.item.bookmarks, _itemFolders.count > 0 {
             bookmarkButton.setImage(UIImage(named: "Ok"), for: .normal)
-            bookmarkButton.setTitle(_itemFolders[0].title!, for: .normal)
+            bookmarkButton.setTitle(_itemFolders[0].title, for: .normal)
             bookmarkButton.layerBorderColor = .kpMarigold
         } else {
             bookmarkButton.setImage(nil, for: .normal)
@@ -49,7 +49,7 @@ class ButtonsTableViewCell: UITableViewCell {
             || model.item.type == ItemType.tvshows.rawValue {
             watchlistAndDownloadButton.addTarget(
                 self, action: #selector(changeWatchlist), for: .touchUpInside)
-            if model.item.inWatchlist! {
+            if model.item.inWatchlist == true {
                 watchlistAndDownloadButton.setImage(UIImage(named: "Ok"), for: .normal)
                 watchlistAndDownloadButton.setTitle("Смотрю", for: .normal)
                 watchlistAndDownloadButton.layerBorderColor = .kpMarigold
@@ -82,7 +82,7 @@ class ButtonsTableViewCell: UITableViewCell {
             let action = ActionSheet(message: "Выберите папку").tint(.kpBlack)
 
             for folder in bookmarks! {
-                var folderTitle = folder.title!
+                var folderTitle = folder.title
                 var style: UIAlertAction.Style = .default
                 for itemFolder in strongSelf.model.item.bookmarks! {
                     if itemFolder.title == folder.title {
@@ -94,7 +94,7 @@ class ButtonsTableViewCell: UITableViewCell {
                     folderTitle, style: style,
                     handler: { (_) in
                         strongSelf.bookmarksModel.toggleItemToFolder(
-                            item: String((strongSelf.model.item.id)!), folder: String((folder.id)!))
+                            item: String((strongSelf.model.item.id)!), folder: String(folder.id))
                     })
             }
             action.addAction("Отмена", style: .cancel)
@@ -106,7 +106,7 @@ class ButtonsTableViewCell: UITableViewCell {
     }
 
     @objc func showWatchAction() {
-        guard let watch = model.item?.videos?.first?.watching?.status else { return }
+        guard let watch = model.item?.videos?.first?.watching.status else { return }
         let actionVC = ActionSheet().tint(.kpBlack)
 
         actionVC.addAction(

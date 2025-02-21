@@ -1,54 +1,51 @@
 import Foundation
-import ObjectMapper
 
-public class Item: Mappable {
+public class Item: Codable {
 
     // MARK: Declaration for string constants to be used to decode and also serialize.
-    private struct SerializationKeys {
-        static let countries = "countries"
-        static let bookmarks = "bookmarks"
-        static let imdb = "imdb"
-        static let posters = "posters"
-        static let langs = "langs"
-        static let finished = "finished"
-        static let imdbVotes = "imdb_votes"
-        static let type = "type"
-        static let voice = "voice"
-        static let subtitles = "subtitles"
-        static let id = "id"
-        static let ac3 = "ac3"
-        static let director = "director"
-        static let videos = "videos"
-        static let quality = "quality"
-        static let qualitySeries = "quality"
-        static let imdbRating = "imdb_rating"
-        static let duration = "duration"
-        static let title = "title"
-        static let cast = "cast"
-        static let poorQuality = "poor_quality"
-        static let subtype = "subtype"
-        static let ratingPercentage = "rating_percentage"
-        static let genres = "genres"
-        static let kinopoiskVotes = "kinopoisk_votes"
-        static let rating = "rating"
-        static let advert = "advert"
-        static let tracklist = "tracklist"
-        static let views = "views"
-        static let kinopoiskRating = "kinopoisk_rating"
-        static let year = "year"
-        static let ratingVotes = "rating_votes"
-        static let kinopoisk = "kinopoisk"
-        static let comments = "comments"
-        static let trailer = "trailer"
-        static let plot = "plot"
-
-        static let inWatchlist = "in_watchlist"
-        static let subscribed = "subscribed"
-        static let seasons = "seasons"
-
-        static let total = "total"
-        static let watched = "watched"
-        static let new = "new"
+    private enum CodingKeys: String, CodingKey {
+        case countries = "countries"
+        case bookmarks = "bookmarks"
+        case imdb = "imdb"
+        case posters = "posters"
+        case langs = "langs"
+        case finished = "finished"
+        case imdbVotes = "imdb_votes"
+        case type = "type"
+        case voice = "voice"
+        case subtitles = "subtitles"
+        case id = "id"
+        case ac3 = "ac3"
+        case director = "director"
+        case videos = "videos"
+        case quality = "quality"
+        case qualitySeries// = "quality"
+        case imdbRating = "imdb_rating"
+        case duration = "duration"
+        case title = "title"
+        case cast = "cast"
+        case poorQuality = "poor_quality"
+        case subtype = "subtype"
+        case ratingPercentageValue = "rating_percentage"
+        case genres = "genres"
+        case kinopoiskVotes = "kinopoisk_votes"
+        case rating = "rating"
+        case advert = "advert"
+//        case tracklist = "tracklist"
+        case views = "views"
+        case kinopoiskRating = "kinopoisk_rating"
+        case year = "year"
+        case ratingVotesValue = "rating_votes"
+        case kinopoisk = "kinopoisk"
+        case comments = "comments"
+        case trailer = "trailer"
+        case plot = "plot"
+        case inWatchlist = "in_watchlist"
+        case subscribed = "subscribed"
+        case seasons = "seasons"
+        case total = "total"
+        case watched = "watched"
+        case new = "new"
     }
 
     // MARK: Properties
@@ -74,16 +71,22 @@ public class Item: Mappable {
     public var cast: String?
     public var poorQuality: Bool? = false
     public var subtype: String?
-    public var ratingPercentage: String?
+    private var ratingPercentageValue: Double?
+    public var ratingPercentage: String? {
+        return ratingPercentageValue.map { String(format: "%.1f%%", $0 * 100) } ?? ""
+    }
     public var genres: [Genres]?
     public var kinopoiskVotes: Int?
     public var rating: Int?
     public var advert: Bool? = false
-    public var tracklist: [Any]?
+//    public var tracklist: [Any]?
     public var views: Int?
     public var kinopoiskRating: Double?
     public var year: Int?
-    public var ratingVotes: String?
+    private var ratingVotesValue: Double?
+    public var ratingVotes: String? {
+        ratingVotesValue.map { String(format: "%.1f", $0) } ?? ""
+    }
     public var kinopoisk: Int?
     public var comments: Int?
     public var trailer: Trailer?
@@ -95,58 +98,43 @@ public class Item: Mappable {
 
     public var networks: String?
 
-    public var total: Int?
+    public var total: String?
     public var watched: Int?
+    @IntOrString
     public var new: Int?
+}
 
-    public required init?(map: Map) {
+@propertyWrapper
+public struct IntOrString: Codable {
+    public var wrappedValue: Int?
 
+    public init() {
+        self.wrappedValue = nil
     }
 
-    public func mapping(map: Map) {
-        countries <- map[SerializationKeys.countries]
-        bookmarks <- map[SerializationKeys.bookmarks]
-        imdb <- map[SerializationKeys.imdb]
-        posters <- map[SerializationKeys.posters]
-        langs <- map[SerializationKeys.langs]
-        finished <- map[SerializationKeys.finished]
-        imdbVotes <- map[SerializationKeys.imdbVotes]
-        type <- map[SerializationKeys.type]
-        voice <- map[SerializationKeys.voice]
-        subtitles <- map[SerializationKeys.subtitles]
-        id <- map[SerializationKeys.id]
-        ac3 <- map[SerializationKeys.ac3]
-        director <- map[SerializationKeys.director]
-        videos <- map[SerializationKeys.videos]
-        quality <- map[SerializationKeys.quality]
-        qualitySeries <- map[SerializationKeys.qualitySeries]
-        imdbRating <- map[SerializationKeys.imdbRating]
-        duration <- map[SerializationKeys.duration]
-        title <- map[SerializationKeys.title]
-        cast <- map[SerializationKeys.cast]
-        poorQuality <- map[SerializationKeys.poorQuality]
-        subtype <- map[SerializationKeys.subtype]
-        ratingPercentage <- map[SerializationKeys.ratingPercentage]
-        genres <- map[SerializationKeys.genres]
-        kinopoiskVotes <- map[SerializationKeys.kinopoiskVotes]
-        rating <- map[SerializationKeys.rating]
-        advert <- map[SerializationKeys.advert]
-        tracklist <- map[SerializationKeys.tracklist]
-        views <- map[SerializationKeys.views]
-        kinopoiskRating <- map[SerializationKeys.kinopoiskRating]
-        year <- map[SerializationKeys.year]
-        ratingVotes <- map[SerializationKeys.ratingVotes]
-        kinopoisk <- map[SerializationKeys.kinopoisk]
-        comments <- map[SerializationKeys.comments]
-        trailer <- map[SerializationKeys.trailer]
-        plot <- map[SerializationKeys.plot]
+    public init(from decoder: Decoder) throws {
+        let container = try? decoder.singleValueContainer()
+        if let intValue = try? container?.decode(Int.self) {
+            wrappedValue = intValue
+        } else if let stringValue = try? container?.decode(String.self), let intValue = Int(stringValue) {
+            wrappedValue = intValue
+        } else {
+            wrappedValue = nil
+        }
+    }
 
-        inWatchlist <- map[SerializationKeys.inWatchlist]
-        subscribed <- map[SerializationKeys.subscribed]
-        seasons <- map[SerializationKeys.seasons]
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        if let value = wrappedValue {
+            try container.encode(value)
+        } else {
+            try container.encodeNil()
+        }
+    }
+}
 
-        total <- map[SerializationKeys.total]
-        watched <- map[SerializationKeys.watched]
-        new <- map[SerializationKeys.new]
+extension KeyedDecodingContainer {
+    func decode(_ type: IntOrString.Type, forKey key: Key) throws -> IntOrString {
+        return (try? decodeIfPresent(IntOrString.self, forKey: key)) ?? IntOrString()
     }
 }

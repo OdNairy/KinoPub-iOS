@@ -91,14 +91,13 @@ class OAuthHandler: RequestInterceptor {
         isRefreshing = true
         let request = delegate!.refreshTokenRequest()
         request.validate()
-            .responseObject { (response: AFDataResponse<TokenResponse>) in
-                switch response.result {
-                    case .success(let tokens):
-                        completion(true, tokens.accessToken, tokens.refreshToken)
-                    case .failure:
-                        completion(false, nil, nil)
-                //                    Answers.logCustomEvent(withName: "refreshTokens", customAttributes: ["Error": response.error ?? "unknown"])
+            .responseObject { (value: TokenResponse?, error) in
+                if let value {
+                    completion(true, value.accessToken, value.refreshToken)
+                } else {
+                    completion(false, nil, nil)
                 }
+//                    Answers.logCustomEvent(withName: "refreshTokens", customAttributes: ["Error": response.error ?? "unknown"])
             }
     }
 }

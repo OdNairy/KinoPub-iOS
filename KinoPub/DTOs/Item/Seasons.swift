@@ -1,30 +1,14 @@
 import Foundation
-import ObjectMapper
 
-public class Seasons: Mappable {
-
-    // MARK: Declaration for string constants to be used to decode and also serialize.
-    private struct SerializationKeys {
-        static let episodes = "episodes"
-        static let number = "number"
-        static let title = "title"
-        static let watching = "watching"
-    }
-
-    // MARK: Properties
+public struct Seasons: Codable {
     public var episodes: [Episodes]!
-    public var number: Int!
-    public var title: String!
-    public var watching: Watching!
+    public let number: Int
+    public let title: String!
+    public let watching: Watching!
 
-    public required init?(map: Map) {
-
-    }
-
-    public func mapping(map: Map) {
-        episodes <- map[SerializationKeys.episodes]
-        number <- map[SerializationKeys.number]
-        title <- map[SerializationKeys.title]
-        watching <- map[SerializationKeys.watching]
+    func sortedEpisodes() -> Seasons {
+        var sortedSeason = self
+        sortedSeason.episodes.sort { $0.number < $1.number }
+        return sortedSeason
     }
 }

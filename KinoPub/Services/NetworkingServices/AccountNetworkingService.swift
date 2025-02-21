@@ -23,7 +23,9 @@ class AccountNetworkingService {
         completed: @escaping (_ responseObject: DeviceRequest?, _ error: Error?) -> Void
     ) {
         requestFactory.receiveCurrentDeviceRequest()
-            .responseObject(completionHandler: completed)
+            .responseDecodable(completionHandler: { (resp: AFDataResponse<DeviceRequest>) in
+                completed(resp.value, resp.error)
+            })
     }
 
     func unlinkDevice(completed: @escaping (_ error: Error?) -> Void) {

@@ -67,7 +67,7 @@ class BookmarksModel {
     }
 
     func loadBookmarkItems(completed: @escaping (_ count: Int?) -> Void) {
-        networkingService.receiveBookmarkItems(id: (folder?.id?.string)!, page: page.string) {
+        networkingService.receiveBookmarkItems(id: (folder?.id.string)!, page: page.string) {
             [weak self] (response, error) in
             guard let strongSelf = self else { return }
             if let itemsData = response {

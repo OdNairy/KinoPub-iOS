@@ -65,7 +65,7 @@ class AuthViewController: UIViewController {
         viewModel.loadDeviceCode { [weak self] (authResponse) in
             guard let strongSelf = self else { return }
             strongSelf.codeLabel.text = authResponse.userCode
-            strongSelf.pasteboard.string = authResponse.userCode ?? ""
+            strongSelf.pasteboard.string = authResponse.userCode
         }
     }
 

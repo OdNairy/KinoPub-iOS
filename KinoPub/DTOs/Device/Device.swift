@@ -1,39 +1,23 @@
 import Foundation
-import ObjectMapper
 
-public struct Device: Mappable {
-
-    // MARK: Declaration for string constants to be used to decode and also serialize.
-    private struct SerializationKeys {
-        static let updated = "updated"
-        static let hardware = "hardware"
-        static let lastSeen = "last_seen"
-        static let id = "id"
-        static let created = "created"
-        static let title = "title"
-        static let software = "software"
-    }
+public struct Device: Codable {
 
     // MARK: Properties
-    public var updated: Int!
-    public var hardware: String!
-    public var lastSeen: Int!
-    public var id: Int!
-    public var created: Int!
-    public var title: String!
-    public var software: String!
+    public let updated: Int
+    public let hardware: String
+    public let lastSeen: Int
+    public let id: Int
+    public let created: Int
+    public let title: String
+    public let software: String
 
-    public init?(map: Map) {
-
-    }
-
-    public mutating func mapping(map: Map) {
-        updated <- map[SerializationKeys.updated]
-        hardware <- map[SerializationKeys.hardware]
-        lastSeen <- map[SerializationKeys.lastSeen]
-        id <- map[SerializationKeys.id]
-        created <- map[SerializationKeys.created]
-        title <- map[SerializationKeys.title]
-        software <- map[SerializationKeys.software]
+    enum CodingKeys: String, CodingKey {
+        case updated
+        case hardware
+        case lastSeen = "last_seen"
+        case id
+        case created
+        case title
+        case software
     }
 }

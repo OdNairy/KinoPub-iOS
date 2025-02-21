@@ -217,7 +217,7 @@ class DetailViewController: UIViewController, SideMenuItemContent {
             yearAndCountriesLabel.isHidden = false
             var yearAndCountries = "\(year)"
             for country in countries {
-                yearAndCountries += ", \(country.title ?? "")"
+                yearAndCountries += ", \(country.title)"
             }
             yearAndCountriesLabel.attributedText = yearAndCountries.attributedString
             yearAndCountriesLabel.numberOfLines = 0
@@ -238,7 +238,7 @@ class DetailViewController: UIViewController, SideMenuItemContent {
     }
 
     func configPosterWatched() {
-        if let watch = model.item?.videos?.first?.watching?.status, watch == Status.watched {
+        if let watch = model.item?.videos?.first?.watching.status, watch == Status.watched {
             watchedView.isHidden = false
         } else {
             watchedView.isHidden = true
@@ -252,7 +252,7 @@ class DetailViewController: UIViewController, SideMenuItemContent {
                 || model.item.type == ItemType.docuserial.rawValue
                 || model.item.type == ItemType.tvshows.rawValue
         else { return }
-        inAirView.isHidden = model.item.finished! ? true : false
+        inAirView.isHidden = !(model.item.finished == false)
     }
 
     func configPlayButton() {
@@ -446,7 +446,7 @@ extension DetailViewController {
         let actionVC = ActionSheet(message: "Выберите качество").tint(.kpBlack)
 
         if let season = season {
-            for (index, file) in (model.getSeason(season)?.episodes?.first?.files?.enumerated())! {
+            for (index, file) in (model.getSeason(season)?.episodes?.first?.files.enumerated())! {
                 actionVC.addAction(
                     file.quality!, style: .default,
                     handler: { [weak self] (_) in
@@ -510,7 +510,7 @@ extension DetailViewController {
 
         for (index, season) in seasons.enumerated() {
             actionVC.addAction(
-                "Сезон \(season.number ?? 00)", style: .default,
+                "Сезон \(season.number)", style: .default,
                 handler: { [weak self] (_) in
                     guard let strongSelf = self else { return }
                     strongSelf.showQualitySelectAction(
@@ -531,10 +531,10 @@ extension DetailViewController {
         for episode in (model.getSeason(season)?.episodes)! {
             let name =
                 (self.model.item?.title?.replacingOccurrences(of: " /", with: ";"))!
-                + "; Сезон \(self.model.getSeason(season)?.number ?? 0), Эпизод \(episode.number ?? 0)."
+            + "; Сезон \(self.model.getSeason(season)?.number ?? 0), Эпизод \(episode.number)."
                 + "\(quality).mp4"
             let poster = self.model.item?.posters?.small
-            let url = episode.files?[index].url?.http
+            let url = episode.files[index].url?.http
             NTDownloadManager.shared.addDownloadTask(
                 urlString: url!, fileName: name, fileImage: poster)
         }

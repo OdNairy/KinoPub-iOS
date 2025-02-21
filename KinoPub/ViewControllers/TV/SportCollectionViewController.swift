@@ -61,7 +61,7 @@ class SportCollectionViewController: UICollectionViewController, SideMenuItemCon
     @objc func openChannel(_ sender: UITapGestureRecognizer) {
         if let indexPath = self.collectionView?.indexPathForItem(
             at: sender.location(in: self.collectionView)) {
-            guard let stream = model.sportChannels[indexPath.row].stream else { return }
+            let stream = model.sportChannels[indexPath.row].stream
             guard let url = URL(string: stream) else { return }
             var mediaItem = MediaItem()
             mediaItem.url = url

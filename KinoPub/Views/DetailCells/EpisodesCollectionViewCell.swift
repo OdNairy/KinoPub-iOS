@@ -72,7 +72,7 @@ class EpisodesCollectionViewCell: UICollectionViewCell {
             mediaItem.season = model.getSeason(indexPathSeason)?.number ?? 0
         }
 
-        if let url = model.getEpisode(indexPathEpisode, forSeason: indexPathSeason)?.files?.first?
+        if let url = model.getEpisode(indexPathEpisode, forSeason: indexPathSeason)?.files.first?
             .url?.hls4 {
             mediaItem.url = URL(string: url)
         }
