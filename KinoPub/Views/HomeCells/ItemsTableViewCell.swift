@@ -36,7 +36,7 @@ class ItemsTableViewCell: UITableViewCell {
     }
 
     func setLayout() {
-        let orientation = UIApplication.shared.statusBarOrientation
+        let orientation = window?.windowScene?.interfaceOrientation ?? .portrait
         if orientation == .landscapeLeft || orientation == .landscapeRight,
             UIDevice.current.userInterfaceIdiom == .pad {
             heightCollectionViewConstraint.constant = ScreenSize.SCREEN_WIDTH * 0.274

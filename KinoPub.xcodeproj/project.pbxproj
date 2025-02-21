@@ -201,6 +201,7 @@
 		FE35ABC52D26FA5A00FBE20A /* Atributika in Frameworks */ = {isa = PBXBuildFile; productRef = FE35ABC42D26FA5A00FBE20A /* Atributika */; };
 		FE3A83252D26EE5D001B99D9 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83242D26EE5D001B99D9 /* FirebaseCore */; };
 		FE3A83272D26EE5D001B99D9 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83262D26EE5D001B99D9 /* FirebaseRemoteConfig */; };
+		FE7C35342D651DFC00A24D6D /* UICollectionView+Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7C35332D651DFC00A24D6D /* UICollectionView+Movies.swift */; };
 		FE82E0E22D49628E001B716D /* GradientLoadingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */; };
 		FEABE6132D4BBB9100BA111D /* AlamofireResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEABE6122D4BBB9000BA111D /* AlamofireResponse+Extensions.swift */; };
 		FEABEB2F2D4D184D00BA111D /* AlamofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEABEB2E2D4D184D00BA111D /* AlamofireObjectMapper.swift */; };
@@ -406,6 +407,7 @@
 		B92B856F476D54B9B5C6B1E4 /* Pods-KinoPub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoPub.release.xcconfig"; path = "Pods/Target Support Files/Pods-KinoPub/Pods-KinoPub.release.xcconfig"; sourceTree = "<group>"; };
 		D9C7223E45EB1E644C5CA177 /* Pods-KinoPub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinoPub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KinoPub/Pods-KinoPub.debug.xcconfig"; sourceTree = "<group>"; };
 		DE4D48B0CD4F6451DBED8C0B /* Pods_KinoPub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinoPub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE7C35332D651DFC00A24D6D /* UICollectionView+Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Movies.swift"; sourceTree = "<group>"; };
 		FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientLoadingBar.swift; sourceTree = "<group>"; };
 		FEABE6122D4BBB9000BA111D /* AlamofireResponse+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AlamofireResponse+Extensions.swift"; sourceTree = "<group>"; };
 		FEABEB2E2D4D184D00BA111D /* AlamofireObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireObjectMapper.swift; sourceTree = "<group>"; };
@@ -809,6 +811,7 @@
 		696D67E21FE94345002EE5B0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FE7C35332D651DFC00A24D6D /* UICollectionView+Movies.swift */,
 				FEABE6122D4BBB9000BA111D /* AlamofireResponse+Extensions.swift */,
 				FE82E0E12D49628E001B716D /* GradientLoadingBar.swift */,
 				69512B3C1F7D49B800BF5A89 /* Extensions.swift */,
@@ -1291,6 +1294,7 @@
 				698D1AC4200935B200BDE07F /* ItemsTableViewCell.swift in Sources */,
 				6959220D1F7D5BF900CE3224 /* HostViewController.swift in Sources */,
 				69C4E1A32033222A003048D5 /* SwitchCustomTableViewCell.swift in Sources */,
+				FE7C35342D651DFC00A24D6D /* UICollectionView+Movies.swift in Sources */,
 				69C4E19C2032FC93003048D5 /* Storage.swift in Sources */,
 				69F1243820041E4800E37A1F /* MenuTableViewCell.swift in Sources */,
 				695922221F7D5C3A00CE3224 /* Episodes.swift in Sources */,
