@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,20 +19,20 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="358"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="357.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="358"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="pkd-iz-xbY">
-                        <rect key="frame" x="0.0" y="11" width="320" height="337"/>
+                        <rect key="frame" x="0.0" y="11" width="320" height="337.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="СОВЕТУЕМ ПОСМОТРЕТЬ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppm-LC-lRa">
-                                <rect key="frame" x="15" y="0.0" width="305" height="20"/>
+                                <rect key="frame" x="15" y="0.0" width="305" height="20.5"/>
                                 <fontDescription key="fontDescription" name="UniSansSemiBold" family="Uni Sans" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qdU-Dk-nS9">
-                                <rect key="frame" x="0.0" y="22" width="320" height="315"/>
+                                <rect key="frame" x="0.0" y="22.5" width="320" height="315"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="315" id="r0N-UZ-A3n"/>
@@ -61,7 +58,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="pkd-iz-xbY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="3Wt-1C-mYz"/>
-                    <constraint firstItem="pkd-iz-xbY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="6b5-Db-IDd"/>
+                    <constraint firstItem="pkd-iz-xbY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="6b5-Db-IDd"/>
                     <constraint firstAttribute="bottom" secondItem="pkd-iz-xbY" secondAttribute="bottom" constant="9.5" id="ZyW-Qd-rgK"/>
                     <constraint firstAttribute="trailing" secondItem="pkd-iz-xbY" secondAttribute="trailing" id="doY-E8-64e"/>
                 </constraints>
@@ -71,7 +68,7 @@
                 <outlet property="collectionView" destination="qdU-Dk-nS9" id="rWa-tv-fqk"/>
                 <outlet property="titleLabel" destination="ppm-LC-lRa" id="kBl-06-dUX"/>
             </connections>
-            <point key="canvasLocation" x="34" y="212.5"/>
+            <point key="canvasLocation" x="54.399999999999999" y="191.1544227886057"/>
         </tableViewCell>
     </objects>
 </document>

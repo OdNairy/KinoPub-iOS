@@ -67,6 +67,8 @@ class DetailViewController: UIViewController, SideMenuItemContent {
         configAfterRefresh()
         loadData()
         model.loadSimilarsVideo()
+
+        tableView.contentInsetAdjustmentBehavior = .never
     }
 
     deinit {
@@ -599,13 +601,7 @@ extension DetailViewController {
 
 // MARK: - UIScrollViewDelegate
 extension DetailViewController: UIScrollViewDelegate {
-    #warning("TODO - fix")
-    func scrollViewDidScroll__disabled(_ scrollView: UIScrollView) {
-        if #available(iOS 11.0, *) {
-            scrollView.contentInsetAdjustmentBehavior = .never
-        } else {
-            // Fallback on earlier versions
-        }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
         let offset = scrollView.contentOffset.y
         var headerTransform = CATransform3DIdentity

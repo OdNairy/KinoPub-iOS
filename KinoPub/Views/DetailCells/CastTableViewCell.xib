@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -21,23 +18,23 @@
             <rect key="frame" x="0.0" y="0.0" width="339" height="175"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="339" height="174.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="339" height="175"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="XjT-xD-njy">
-                        <rect key="frame" x="0.0" y="11" width="339" height="154"/>
+                        <rect key="frame" x="0.0" y="11" width="339" height="154.5"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KJQ-dS-Dgo">
-                                <rect key="frame" x="0.0" y="0.0" width="339" height="67"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KJQ-dS-Dgo">
+                                <rect key="frame" x="0.0" y="0.0" width="339" height="67.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="РЕЖИССЕР" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0q-rP-K0l">
-                                        <rect key="frame" x="15" y="0.0" width="324" height="12"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="РЕЖИССЕР" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0q-rP-K0l">
+                                        <rect key="frame" x="15" y="0.0" width="324" height="12.5"/>
                                         <fontDescription key="fontDescription" name="UniSansSemiBold" family="Uni Sans" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="gzW-YU-eCj">
-                                        <rect key="frame" x="0.0" y="17" width="339" height="50"/>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="gzW-YU-eCj">
+                                        <rect key="frame" x="0.0" y="17.5" width="339" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="y27-a5-dBF"/>
@@ -60,16 +57,16 @@
                                     <constraint firstItem="S0q-rP-K0l" firstAttribute="leading" secondItem="KJQ-dS-Dgo" secondAttribute="leading" constant="15" id="xQA-nz-pA0"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Bqs-3t-SyZ">
-                                <rect key="frame" x="0.0" y="87" width="339" height="67"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Bqs-3t-SyZ">
+                                <rect key="frame" x="0.0" y="87.5" width="339" height="67"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="АКТЕРСКИЙ СОСТАВ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PvP-mm-c9M">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="АКТЕРСКИЙ СОСТАВ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PvP-mm-c9M">
                                         <rect key="frame" x="15" y="0.0" width="324" height="12"/>
                                         <fontDescription key="fontDescription" name="UniSansSemiBold" family="Uni Sans" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="idZ-jB-07U">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="idZ-jB-07U">
                                         <rect key="frame" x="0.0" y="17" width="339" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -97,7 +94,7 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="XjT-xD-njy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="4Aq-uG-PWT"/>
+                    <constraint firstItem="XjT-xD-njy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="4Aq-uG-PWT"/>
                     <constraint firstItem="XjT-xD-njy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Wsp-fo-ZAr"/>
                     <constraint firstAttribute="bottom" secondItem="XjT-xD-njy" secondAttribute="bottom" constant="9.5" id="hHx-dW-Vmi"/>
                     <constraint firstAttribute="trailing" secondItem="XjT-xD-njy" secondAttribute="trailing" id="l2u-Lo-x2D"/>
@@ -114,7 +111,7 @@
                 <outlet property="directorStackView" destination="KJQ-dS-Dgo" id="Cyt-HA-iML"/>
                 <outlet property="directorsTitleLabel" destination="S0q-rP-K0l" id="zq5-Qo-dKj"/>
             </connections>
-            <point key="canvasLocation" x="44.5" y="121.5"/>
+            <point key="canvasLocation" x="71.200000000000003" y="109.29535232383809"/>
         </tableViewCell>
     </objects>
 </document>

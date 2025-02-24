@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,8 +18,8 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TrailerTableViewCell" rowHeight="223" id="KGk-i7-Jjw" customClass="TrailerTableViewCell" customModule="KinoPub" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="330" height="215"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="330" height="214.5"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="330" height="215"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tMd-76-uaK">
@@ -40,7 +37,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epd-YL-rAK">
-                                <rect key="frame" x="56" y="79" width="189" height="36"/>
+                                <rect key="frame" x="55.5" y="79" width="189" height="36"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Views" translatesAutoresizingMaskIntoConstraints="NO" id="2Tf-f7-dYy">
                                         <rect key="frame" x="15" y="11" width="14" height="14"/>
@@ -89,7 +86,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="tMd-76-uaK" secondAttribute="trailing" constant="15" id="BgR-XN-fgV"/>
-                    <constraint firstItem="tMd-76-uaK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Gnq-6u-J5n"/>
+                    <constraint firstItem="tMd-76-uaK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="Gnq-6u-J5n"/>
                     <constraint firstItem="tMd-76-uaK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="U6J-BR-v1w"/>
                     <constraint firstAttribute="bottom" secondItem="tMd-76-uaK" secondAttribute="bottom" constant="9" id="VGF-lC-SVt"/>
                 </constraints>
@@ -100,7 +97,7 @@
                 <outlet property="thumbImageView" destination="lTZ-AV-Dw8" id="lYP-EH-GcF"/>
                 <outlet property="thumbView" destination="tMd-76-uaK" id="V9u-cN-7t3"/>
             </connections>
-            <point key="canvasLocation" x="39" y="150.5"/>
+            <point key="canvasLocation" x="62.399999999999999" y="135.38230884557723"/>
         </tableViewCell>
     </objects>
     <resources>
