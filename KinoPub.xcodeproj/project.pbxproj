@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		FE3A83252D26EE5D001B99D9 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83242D26EE5D001B99D9 /* FirebaseCore */; };
 		FE3A83272D26EE5D001B99D9 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83262D26EE5D001B99D9 /* FirebaseRemoteConfig */; };
 		FEABEB322D4D187800BA111D /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = FEABEB312D4D187800BA111D /* ObjectMapper */; };
+		FED71EE42D7106F8008C9266 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = FED71EE32D7106F8008C9266 /* DeviceKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +25,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		FED71EDF2D70F901008C9266 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		FED71EDF2D70F901008C9266 /* Exceptions for "KinoPub" folder in "KinoPub" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -35,7 +36,14 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		FED71E192D70F900008C9266 /* KinoPub */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (FED71EDF2D70F901008C9266 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = KinoPub; sourceTree = "<group>"; };
+		FED71E192D70F900008C9266 /* KinoPub */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FED71EDF2D70F901008C9266 /* Exceptions for "KinoPub" folder in "KinoPub" target */,
+			);
+			path = KinoPub;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +56,7 @@
 				FE3A83252D26EE5D001B99D9 /* FirebaseCore in Frameworks */,
 				FE35ABC52D26FA5A00FBE20A /* Atributika in Frameworks */,
 				4C1BD9AD48AB10D0479622DB /* Pods_KinoPub.framework in Frameworks */,
+				FED71EE42D7106F8008C9266 /* DeviceKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +150,6 @@
 				};
 			};
 			buildConfigurationList = 69512B0A1F7D2EE400BF5A89 /* Build configuration list for PBXProject "KinoPub" */;
-			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -153,7 +161,9 @@
 				FE3A83232D26EE5D001B99D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				FE35ABC32D26FA5A00FBE20A /* XCRemoteSwiftPackageReference "Atributika" */,
 				FEABEB302D4D187800BA111D /* XCRemoteSwiftPackageReference "ObjectMapper" */,
+				FED71EE22D7106F8008C9266 /* XCRemoteSwiftPackageReference "DeviceKit" */,
 			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 69512B101F7D2EE400BF5A89 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -180,57 +190,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KinoPub/Pods-KinoPub-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AZSearchView/AZSearchView.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkActivityLogger/AlamofireNetworkActivityLogger.framework",
-				"${BUILT_PRODUCTS_DIR}/CircleProgressView/CircleProgressView.framework",
-				"${BUILT_PRODUCTS_DIR}/CustomLoader/CustomLoader.framework",
-				"${BUILT_PRODUCTS_DIR}/DGCollectionViewPaginableBehavior/DGCollectionViewPaginableBehavior.framework",
-				"${BUILT_PRODUCTS_DIR}/EZPlayer/EZPlayer.framework",
-				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
-				"${BUILT_PRODUCTS_DIR}/GradientLoadingBar/GradientLoadingBar.framework",
-				"${BUILT_PRODUCTS_DIR}/InteractiveSideMenu/InteractiveSideMenu.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/LKAlertController/LKAlertController.framework",
-				"${BUILT_PRODUCTS_DIR}/Letters/Letters.framework",
-				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
-				"${BUILT_PRODUCTS_DIR}/NTDownload/NTDownload.framework",
-				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/RevealingSplashView/RevealingSplashView.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SubtleVolume/SubtleVolume.framework",
-				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyUserDefaults/SwiftyUserDefaults.framework",
-				"${BUILT_PRODUCTS_DIR}/TMDBSwift/TMDBSwift.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KinoPub/Pods-KinoPub-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AZSearchView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireNetworkActivityLogger.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CircleProgressView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CustomLoader.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGCollectionViewPaginableBehavior.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZPlayer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GradientLoadingBar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InteractiveSideMenu.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LKAlertController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Letters.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NTDownload.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealingSplashView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SubtleVolume.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyUserDefaults.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TMDBSwift.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KinoPub/Pods-KinoPub-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -242,13 +207,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KinoPub/Pods-KinoPub-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/EasyAbout/Settings.bundle",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KinoPub/Pods-KinoPub-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Settings.bundle",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KinoPub/Pods-KinoPub-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -504,6 +468,14 @@
 				minimumVersion = 4.4.3;
 			};
 		};
+		FED71EE22D7106F8008C9266 /* XCRemoteSwiftPackageReference "DeviceKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devicekit/DeviceKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -526,6 +498,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FEABEB302D4D187800BA111D /* XCRemoteSwiftPackageReference "ObjectMapper" */;
 			productName = ObjectMapper;
+		};
+		FED71EE32D7106F8008C9266 /* DeviceKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FED71EE22D7106F8008C9266 /* XCRemoteSwiftPackageReference "DeviceKit" */;
+			productName = DeviceKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

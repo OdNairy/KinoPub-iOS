@@ -15,12 +15,7 @@ class AboutViewController: UIViewController {
     @IBOutlet weak var designerNameLabel: UILabel!
     @IBOutlet weak var designerInfoLabel: UILabel!
 
-    @IBOutlet weak var donateButton: UIButton!
     @IBOutlet weak var copyLabel: UILabel!
-
-    @IBAction func donateButtonPressed(_ sender: Any) {
-        openSafariVC(url: "http://dats.xyz/donate.html")
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,20 +44,9 @@ class AboutViewController: UIViewController {
         designerNameLabel.textColor = .kpMarigold
         designerInfoLabel.textColor = .kpGreyishTwo
 
-        donateButton.layerBorderColor = .kpGreyishBrown
-        donateButton.tintColor = .kpGreyishTwo
-
         copyLabel.textColor = .kpGreyishBrown
 
         versionLabel.text = Config.shared.appVersion
-
-        let tap1 = UITapGestureRecognizer(target: self, action: #selector(openDevSite))
-        devNameLabel.isUserInteractionEnabled = true
-        devNameLabel.addGestureRecognizer(tap1)
-
-        let tap2 = UITapGestureRecognizer(target: self, action: #selector(openDesSite))
-        designerNameLabel.isUserInteractionEnabled = true
-        designerNameLabel.addGestureRecognizer(tap2)
     }
 
     // MARK: - Navigation
@@ -71,19 +55,6 @@ class AboutViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: String(describing: self))
             as? AboutViewController
-    }
-
-    func openSafariVC(url: String) {
-        let svc = SFSafariViewController(url: URL(string: url)!)
-        self.present(svc, animated: true, completion: nil)
-    }
-
-    @objc func openDevSite() {
-        openSafariVC(url: "http://dats.xyz")
-    }
-
-    @objc func openDesSite() {
-        openSafariVC(url: "http://www.alexmarco.ru")
     }
 
 }

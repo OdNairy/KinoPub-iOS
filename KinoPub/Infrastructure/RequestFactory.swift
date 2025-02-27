@@ -41,11 +41,11 @@ class RequestFactory {
     }
 
     func notifyAboutDeviceRequest() -> DataRequest {
+        let device = UIDevice.current
         let parameters = [
             "title": Config.shared.clientTitle,
-            "hardware": UIDevice().model,
-            "software": UIDevice().systemName + "/" + UIDevice().systemVersion
-                + " KinoPub-iOS/dats.xyz"
+            "hardware": device.wellKnownModelName,
+            "software": device.systemName + "/" + device.systemVersion + " KinoPub-iOS"
         ]
         let requestUrl = baseAPIURL + "v1/device/notify"
         return sessionManager().request(

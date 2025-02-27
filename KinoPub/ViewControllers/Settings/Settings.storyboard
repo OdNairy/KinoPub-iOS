@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -107,7 +103,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="51" translatesAutoresizingMaskIntoConstraints="NO" id="gZZ-hT-UDO">
-                                <rect key="frame" x="15" y="67.5" width="345" height="532.5"/>
+                                <rect key="frame" x="15" y="95.5" width="345" height="476.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ZEG-ok-eEQ">
                                         <rect key="frame" x="0.0" y="0.0" width="345" height="209.5"/>
@@ -126,7 +122,7 @@
                                                         <rect key="frame" x="86.5" y="0.0" width="132.5" height="41"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kinopub iOS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9MN-Ja-YMh">
-                                                                <rect key="frame" x="9" y="0.0" width="114" height="24"/>
+                                                                <rect key="frame" x="9.5" y="0.0" width="113.5" height="24"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -209,37 +205,15 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Gvl-ge-qMA">
-                                        <rect key="frame" x="0.0" y="459.5" width="345" height="73"/>
+                                        <rect key="frame" x="0.0" y="459.5" width="345" height="17"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H42-XR-yry">
-                                                <rect key="frame" x="0.0" y="0.0" width="345" height="36"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="8b2-ou-fMQ"/>
-                                                </constraints>
-                                                <state key="normal" title="Поблагодарить разработчиков"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="6"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="donateButtonPressed:" destination="HVi-jT-SS6" eventType="touchUpInside" id="7UM-7F-hjN"/>
-                                                </connections>
-                                            </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017 - 2018 © Kinopub iOS Application" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFy-jG-k2e">
-                                                <rect key="frame" x="46" y="56" width="253" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017 - 2025 © KinoPub iOS Application" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFy-jG-k2e">
+                                                <rect key="frame" x="45" y="0.0" width="255.5" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="H42-XR-yry" firstAttribute="leading" secondItem="Gvl-ge-qMA" secondAttribute="leading" id="1eg-MI-wri"/>
-                                            <constraint firstAttribute="trailing" secondItem="H42-XR-yry" secondAttribute="trailing" id="R10-1R-r6W"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
@@ -257,7 +231,6 @@
                         <outlet property="designerNameLabel" destination="8d5-aa-I56" id="VKu-XR-YDX"/>
                         <outlet property="devInfoLabel" destination="39N-0J-422" id="K4N-zu-poi"/>
                         <outlet property="devNameLabel" destination="uJO-C4-zmO" id="3kN-px-T9E"/>
-                        <outlet property="donateButton" destination="H42-XR-yry" id="ZMa-bI-1wm"/>
                         <outlet property="iconImageView" destination="ALo-n9-zXo" id="UfX-LU-TrN"/>
                         <outlet property="infoLabel" destination="vLZ-Vt-R3O" id="oGa-M6-267"/>
                         <outlet property="titleLabel" destination="9MN-Ja-YMh" id="oKH-oq-g8b"/>
