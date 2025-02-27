@@ -45,7 +45,7 @@ class RequestFactory {
             "title": Config.shared.clientTitle,
             "hardware": UIDevice().model,
             "software": UIDevice().systemName + "/" + UIDevice().systemVersion
-                + " KinoPub-iOS/dats.xyz"
+                + " KinoPub-iOS"
         ]
         let requestUrl = baseAPIURL + "v1/device/notify"
         return sessionManager().request(
