@@ -13,6 +13,7 @@
 		FE3A83252D26EE5D001B99D9 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83242D26EE5D001B99D9 /* FirebaseCore */; };
 		FE3A83272D26EE5D001B99D9 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = FE3A83262D26EE5D001B99D9 /* FirebaseRemoteConfig */; };
 		FEABEB322D4D187800BA111D /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = FEABEB312D4D187800BA111D /* ObjectMapper */; };
+		FED71EE42D7106F8008C9266 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = FED71EE32D7106F8008C9266 /* DeviceKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 				FE3A83252D26EE5D001B99D9 /* FirebaseCore in Frameworks */,
 				FE35ABC52D26FA5A00FBE20A /* Atributika in Frameworks */,
 				4C1BD9AD48AB10D0479622DB /* Pods_KinoPub.framework in Frameworks */,
+				FED71EE42D7106F8008C9266 /* DeviceKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +155,7 @@
 				FE3A83232D26EE5D001B99D9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				FE35ABC32D26FA5A00FBE20A /* XCRemoteSwiftPackageReference "Atributika" */,
 				FEABEB302D4D187800BA111D /* XCRemoteSwiftPackageReference "ObjectMapper" */,
+				FED71EE22D7106F8008C9266 /* XCRemoteSwiftPackageReference "DeviceKit" */,
 			);
 			productRefGroup = 69512B101F7D2EE400BF5A89 /* Products */;
 			projectDirPath = "";
@@ -504,6 +507,14 @@
 				minimumVersion = 4.4.3;
 			};
 		};
+		FED71EE22D7106F8008C9266 /* XCRemoteSwiftPackageReference "DeviceKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devicekit/DeviceKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -526,6 +537,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FEABEB302D4D187800BA111D /* XCRemoteSwiftPackageReference "ObjectMapper" */;
 			productName = ObjectMapper;
+		};
+		FED71EE32D7106F8008C9266 /* DeviceKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FED71EE22D7106F8008C9266 /* XCRemoteSwiftPackageReference "DeviceKit" */;
+			productName = DeviceKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
